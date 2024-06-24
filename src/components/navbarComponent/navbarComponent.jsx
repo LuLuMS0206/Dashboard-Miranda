@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { TbMessage } from "react-icons/tb";
-import { NavbarStyles } from "../navbarStyles";
+import { DivLeftStyles, NavbarStyles, PStyles } from "../navbarStyles";
 
 
 
@@ -12,20 +12,24 @@ export const NavbarComponent = () => {
     return (
 
         <NavbarStyles>
-            <TfiAlignLeft />
-            <p>Dashboard</p>
+
+            <DivLeftStyles>
+                <TfiAlignLeft />
+                <PStyles>Dashboard</PStyles>
+            </DivLeftStyles>
+
 
             <div>
-            <IoIosSearch />
-            
-            <IoMdHeartEmpty />
-            
-            
-            <MdOutlineMail />
+                <IoIosSearch />
 
-            <TbMessage />
-            <img src=""  alt="Profile icon"/>
-    
+                <IoMdHeartEmpty />
+
+
+                <MdOutlineMail />
+
+                <TbMessage />
+                <img src="" alt="Profile icon" />
+
             </div>
         </NavbarStyles>
     )
