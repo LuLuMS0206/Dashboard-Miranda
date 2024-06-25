@@ -8,9 +8,10 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
-import {FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+import { FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
 import { useState } from 'react';
 import './stylesNavbar.css';
+import { CardComponent } from "../cardComponent/cardComponent";
 
 
 export const NavbarComponent = () => {
@@ -23,7 +24,7 @@ export const NavbarComponent = () => {
     };
 
     return (
-
+<> 
         <NavbarStyles>
             <DivLeftStyles>
                 {menuOpen && (
@@ -103,5 +104,8 @@ export const NavbarComponent = () => {
 
             </div>
         </NavbarStyles>
+        <CardComponent/>
+   </>
+
     )
 }
