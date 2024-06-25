@@ -3,7 +3,12 @@ import { IoIosSearch } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineMail } from "react-icons/md";
 import { TbMessage } from "react-icons/tb";
-import { MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles } from "./navbarStyles";
+import { RiDashboardLine } from "react-icons/ri";
+import { SlKey } from "react-icons/sl";
+import { TbCalendarCheck } from "react-icons/tb";
+import { BsPerson } from "react-icons/bs";
+import { GrContactInfo } from "react-icons/gr";
+import { MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
 import { useState } from 'react';
 import './stylesNavbar.css';
 
@@ -32,6 +37,36 @@ export const NavbarComponent = () => {
                             </div>
                                 
                             </LogoContentStyles>
+
+                            <UlStyles>
+                                <LiStyles>
+                                <RiDashboardLine />
+                                <p>Dashboard</p>
+                                </LiStyles>
+
+                                <LiStyles>
+                                <TbCalendarCheck /> 
+                                <p>Bookings</p>
+                                </LiStyles>
+
+                                <LiStyles>
+                                <SlKey />
+                                <p>Room</p>
+                                </LiStyles>
+
+                                <LiStyles>
+                                <GrContactInfo />
+                                <p>Contact</p>
+                                </LiStyles>
+
+                                <LiStyles>
+                                <BsPerson />
+                                <p>Users</p>
+                                </LiStyles>
+
+                            
+                            </UlStyles>
+
 
                         </div>
                     </MenuLeftStyles>
