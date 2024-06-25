@@ -31,6 +31,20 @@ export const LogoContentStyles = styled.div`
     align-items: center;
 `
 
+export const UlStyles = styled.ul`
+    list-style: none;
+    margin-top: 3rem;
+    color: #799283;
+}
+`
+export const LiStyles = styled.li`
+    display: flex;
+    align-items: center;
+        margin-bottom: 3rem;
+}
+`
+
+
 
 export const DivLeftStyles = styled.div`
 display: flex;
