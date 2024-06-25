@@ -43,6 +43,19 @@ export const LiStyles = styled.li`
         margin-bottom: 3rem;
 }
 `
+export const PLiStyles = styled.p`
+    margin-left: 1rem;
+}
+`
+export const FooterStyles = styled.form`
+    
+}
+`
+
+export const UserStyles = styled.div`
+    
+}
+`
 
 
 
