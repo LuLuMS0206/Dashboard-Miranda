@@ -8,7 +8,7 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
-import { MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+import {FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
 import { useState } from 'react';
 import './stylesNavbar.css';
 
@@ -28,45 +28,54 @@ export const NavbarComponent = () => {
             <DivLeftStyles>
                 {menuOpen && (
                     <MenuLeftStyles>
-                        <div className="NavbarOpen">
+                        <div >
                             <LogoContentStyles>
-                            <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
-                            <div>
-                            <TravelStyles>travl</TravelStyles>
-                            <HotelStyles>Hotel Admin Dashboard</HotelStyles>
-                            </div>
-                                
+                                <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
+                                <div>
+                                    <TravelStyles>travl</TravelStyles>
+                                    <HotelStyles>Hotel Admin Dashboard</HotelStyles>
+                                </div>
+
                             </LogoContentStyles>
 
                             <UlStyles>
                                 <LiStyles>
-                                <RiDashboardLine />
-                                <p>Dashboard</p>
+                                    <RiDashboardLine />
+                                    <PLiStyles>Dashboard</PLiStyles>
                                 </LiStyles>
 
                                 <LiStyles>
-                                <TbCalendarCheck /> 
-                                <p>Bookings</p>
+                                    <TbCalendarCheck />
+                                    <PLiStyles>Bookings</PLiStyles>
                                 </LiStyles>
 
                                 <LiStyles>
-                                <SlKey />
-                                <p>Room</p>
+                                    <SlKey />
+                                    <PLiStyles>Room</PLiStyles>
                                 </LiStyles>
 
                                 <LiStyles>
-                                <GrContactInfo />
-                                <p>Contact</p>
+                                    <GrContactInfo />
+                                    <PLiStyles>Contact</PLiStyles>
                                 </LiStyles>
 
                                 <LiStyles>
-                                <BsPerson />
-                                <p>Users</p>
+                                    <BsPerson />
+                                    <PLiStyles>Users</PLiStyles>
                                 </LiStyles>
-
-                            
                             </UlStyles>
 
+                            <UserStyles>
+                                <img src="/assets/user.jpeg" />
+                                <p>Lucia Macho Sánchez</p>
+                                <p>luciamacho00@gmail.com</p>
+                                <button>Contact Us</button>
+                            </UserStyles>
+                            <FooterStyles>
+                                <p>Travl Hotel Admin Dashboard</p>
+                                <p>© 2020 All Rights Reserved</p>
+                                <p>Made by Lucia Macho</p>
+                            </FooterStyles>
 
                         </div>
                     </MenuLeftStyles>
