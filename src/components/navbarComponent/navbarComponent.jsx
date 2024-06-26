@@ -8,16 +8,14 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
+
 import { IconStyles, DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+
 import { useState } from 'react';
 import './stylesNavbar.css';
 
-
-
 export const NavbarComponent = () => {
-
     const [menuOpen, setIsMenulOpen] = useState(false);
-
 
     const handleClick = () => {
         setIsMenulOpen(!menuOpen);
@@ -29,14 +27,13 @@ export const NavbarComponent = () => {
                 <DivLeftStyles className="b">
                     {menuOpen && (
                         <MenuLeftStyles className="c">
-                            <div >
+                            <div>
                                 <LogoContentStyles>
                                     <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
                                     <div>
                                         <TravelStyles>travl</TravelStyles>
                                         <HotelStyles>Hotel Admin Dashboard</HotelStyles>
                                     </div>
-
                                 </LogoContentStyles>
 
                                 <UlStyles>
@@ -44,22 +41,18 @@ export const NavbarComponent = () => {
                                         <RiDashboardLine />
                                         <PLiStyles>Dashboard</PLiStyles>
                                     </LiStyles>
-
                                     <LiStyles>
                                         <TbCalendarCheck />
                                         <PLiStyles>Bookings</PLiStyles>
                                     </LiStyles>
-
                                     <LiStyles>
                                         <SlKey />
                                         <PLiStyles>Room</PLiStyles>
                                     </LiStyles>
-
                                     <LiStyles>
                                         <GrContactInfo />
                                         <PLiStyles>Contact</PLiStyles>
                                     </LiStyles>
-
                                     <LiStyles>
                                         <BsPerson />
                                         <PLiStyles>Users</PLiStyles>
@@ -77,11 +70,9 @@ export const NavbarComponent = () => {
                                     <p>© 2020 All Rights Reserved</p>
                                     <p>Made by Lucia Macho</p>
                                 </FooterStyles>
-
                             </div>
                         </MenuLeftStyles>
                     )}
-
                 </DivLeftStyles>
 
                 <NavbarTopStyles className="d">
@@ -89,27 +80,15 @@ export const NavbarComponent = () => {
                         <TfiAlignLeft onClick={handleClick} />
                         <PStyles>Dashboard</PStyles>
                     </DashboarStyles>
-
-
-
                     <IconStyles>
                         <IoIosSearch className="icons" />
-
                         <IoMdHeartEmpty className="icons" />
-
-
                         <MdOutlineMail className="icons" />
-
                         <TbMessage className="icons" />
-
                         <img src="" alt="Profile icon" />
-
                     </IconStyles>
                 </NavbarTopStyles>
-
             </NavbarStyles>
-
         </>
-
-    )
-}
+    );
+};
