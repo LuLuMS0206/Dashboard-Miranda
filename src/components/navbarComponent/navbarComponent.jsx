@@ -13,6 +13,8 @@ import { IconStyles, DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, 
 
 import { useState } from 'react';
 import './stylesNavbar.css';
+import { ButtonStyles } from "../buttonComponent/buttonComponent";
+
 
 export const NavbarComponent = () => {
     const [menuOpen, setIsMenulOpen] = useState(false);
@@ -60,10 +62,12 @@ export const NavbarComponent = () => {
                                 </UlStyles>
 
                                 <UserStyles>
-                                    <img src="/assets/user.jpeg" />
+                                <img src="src/assets/img/foto.jpg" alt=""/>
                                     <p>Lucia Macho Sánchez</p>
                                     <p>luciamacho00@gmail.com</p>
-                                    <button>Contact Us</button>
+                                    <ButtonStyles styled="contact">Contact Us</ButtonStyles>
+
+
                                 </UserStyles>
                                 <FooterStyles>
                                     <p>Travl Hotel Admin Dashboard</p>
@@ -85,7 +89,7 @@ export const NavbarComponent = () => {
                         <IoMdHeartEmpty className="icons" />
                         <MdOutlineMail className="icons" />
                         <TbMessage className="icons" />
-                        <img src="" alt="Profile icon" />
+                        <img src="src/assets/img/foto.jpg" alt=""/>
                     </IconStyles>
                 </NavbarTopStyles>
             </NavbarStyles>
