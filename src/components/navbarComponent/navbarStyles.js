@@ -74,10 +74,16 @@ export const UserStyles = styled.div`
 }
 `
 
-
-
 export const DivLeftStyles = styled.div`
+    
+}
+`
 
+
+export const IconStyles = styled.div`
+    display: flex;
+    gap: 3rem;
+    align-items: center;
 
 `
 

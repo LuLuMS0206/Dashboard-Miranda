@@ -8,7 +8,7 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
-import { DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+import { IconStyles, DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
 import { useState } from 'react';
 import './stylesNavbar.css';
 
@@ -92,7 +92,7 @@ export const NavbarComponent = () => {
 
 
 
-                    <div>
+                    <IconStyles>
                         <IoIosSearch className="icons" />
 
                         <IoMdHeartEmpty className="icons" />
@@ -104,7 +104,7 @@ export const NavbarComponent = () => {
 
                         <img src="" alt="Profile icon" />
 
-                    </div>
+                    </IconStyles>
                 </NavbarTopStyles>
 
             </NavbarStyles>
