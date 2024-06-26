@@ -33,8 +33,9 @@ export const ButtonStyles = styled.button`
 
         case "view":
                 return `
-        border-color:#799283;
+        border: 1px solid #799283;
         color: #799283;
+            background: transparent;
         `
 
         case "refund":
@@ -65,6 +66,34 @@ export const ButtonStyles = styled.button`
         border: none;
         `
 
+
+        case "roomAvailable":
+                return `
+        background-color: #5AD07A;
+        color: #FFFFFF;
+        border: none;
+        `
+
+        case "roomBooked":
+                return `
+        background-color: #E23428;
+        color: #FFFFFF;
+        border: none;
+        `
+
+        case "prev":
+            return `
+    background-color: #FFFFFF;
+color: #135846;
+   border: 1px solid #135846;
+    `
+
+    case "next":
+        return `
+background-color: #FFFFFF;
+color: #135846;
+border: 1px solid #135846;
+`
         
         }
     }}
