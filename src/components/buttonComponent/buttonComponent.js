@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const ButtonStyles = styled.button`
   font-size: 1rem;
-  padding: 1em 0.6em;
-  border-radius: 0.4em;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
   cursor: pointer;
   width: 100%;
 

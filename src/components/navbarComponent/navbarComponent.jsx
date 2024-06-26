@@ -9,7 +9,7 @@ import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
 
-import { IconStyles, DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+import { MadebyFooterStyles, CopyFooterStyles, TravelFooterStyles, NameStyles, EmailStyles, PhotoStyles, IconStyles, DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
 
 import { useState } from 'react';
 import './stylesNavbar.css';
@@ -25,10 +25,10 @@ export const NavbarComponent = () => {
 
     return (
         <>
-            <NavbarStyles className="a">
-                <DivLeftStyles className="b">
+            <NavbarStyles>
+                <DivLeftStyles>
                     {menuOpen && (
-                        <MenuLeftStyles className="c">
+                        <MenuLeftStyles>
                             <div>
                                 <LogoContentStyles>
                                     <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
@@ -62,24 +62,24 @@ export const NavbarComponent = () => {
                                 </UlStyles>
 
                                 <UserStyles>
-                                    <img src="/assets/user.jpeg" />
-                                    <p>Lucia Macho Sánchez</p>
-                                    <p>luciamacho00@gmail.com</p>
-                                    <ButtonStyles styled="contact">Contact Us</ButtonStyles>
+                                <PhotoStyles  src="src/assets/img/photo.jpg" alt=""/>
+                                    <NameStyles>Lucia Macho Sánchez</NameStyles>
+                                    <EmailStyles>luciamacho00@gmail.com</EmailStyles>
+                                    <ButtonStyles styled="contact">Edit User</ButtonStyles>
 
 
                                 </UserStyles>
                                 <FooterStyles>
-                                    <p>Travl Hotel Admin Dashboard</p>
-                                    <p>© 2020 All Rights Reserved</p>
-                                    <p>Made by Lucia Macho</p>
+                                    <TravelFooterStyles>Travl Hotel Admin Dashboard</TravelFooterStyles>
+                                    <CopyFooterStyles>© 2020 All Rights Reserved</CopyFooterStyles>
+                                    <MadebyFooterStyles>Made by Lucia Macho</MadebyFooterStyles>
                                 </FooterStyles>
                             </div>
                         </MenuLeftStyles>
                     )}
                 </DivLeftStyles>
 
-                <NavbarTopStyles className="d">
+                <NavbarTopStyles>
                     <DashboarStyles>
                         <TfiAlignLeft onClick={handleClick} />
                         <PStyles>Dashboard</PStyles>
@@ -89,7 +89,7 @@ export const NavbarComponent = () => {
                         <IoMdHeartEmpty className="icons" />
                         <MdOutlineMail className="icons" />
                         <TbMessage className="icons" />
-                        <img src="" alt="Profile icon" />
+                        {/* <PhotoStyles src="src/assets/img/photo.jpg" alt=""/> */}
                     </IconStyles>
                 </NavbarTopStyles>
             </NavbarStyles>

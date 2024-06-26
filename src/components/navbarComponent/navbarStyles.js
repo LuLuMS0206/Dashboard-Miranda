@@ -35,7 +35,7 @@ export const TravelStyles = styled.p`
 `;
 
 export const HotelStyles = styled.p`
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #5D5449;
 `;
 
@@ -60,9 +60,18 @@ export const PLiStyles = styled.p`
     margin-left: 1rem;
 `;
 
-export const FooterStyles = styled.form``;
+export const FooterStyles = styled.form`
+text-align: center;
+    margin-top: 0.8rem;
+`;
 
-export const UserStyles = styled.div``;
+export const UserStyles = styled.div`
+text-align:center;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
+    padding:1rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+`;
 
 export const DivLeftStyles = styled.div``;
 
@@ -95,4 +104,49 @@ export const NavbarTopStyles = styled.div`
 
 export const DashboarStyles = styled.div`
     display: flex;
+`;
+
+
+export const PhotoStyles = styled.img`
+            width: 40%;
+        
+`;
+
+export const NameStyles = styled.p`
+            font-size: 0.9375rem;
+    font-weight: bold;
+        
+`;
+
+export const EmailStyles = styled.p`
+            color: rgb(136, 136, 136);
+    font-size: 0.75rem;
+    font-weight: normal;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+        
+`;
+
+export const TravelFooterStyles = styled.p`
+        font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0rem;
+    color: rgb(59, 59, 59);
+    margin-bottom: 0.2rem;
+
+        
+`;
+
+export const CopyFooterStyles = styled.p`
+        color: rgb(121, 146, 131);
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+
+        
+`;
+
+export const MadebyFooterStyles = styled.p`
+            color: rgb(121, 146, 131);
+    font-size: 0.8125rem;
+        
 `;
