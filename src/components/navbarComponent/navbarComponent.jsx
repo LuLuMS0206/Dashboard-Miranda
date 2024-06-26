@@ -9,178 +9,98 @@ import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
 
-import { DashboarStyles, NavbarTopStyles, FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
-import { FooterStyles, UserStyles, PLiStyles, MenuLeftStyles, NavbarStyles, PStyles, DivLeftStyles, LogoContentStyles, ImgLogoStyles, TravelStyles, HotelStyles, LiStyles, UlStyles } from "./navbarStyles";
+import {
+    DashboarStyles,
+    NavbarTopStyles,
+    FooterStyles,
+    UserStyles,
+    PLiStyles,
+    MenuLeftStyles,
+    NavbarStyles,
+    PStyles,
+    DivLeftStyles,
+    LogoContentStyles,
+    ImgLogoStyles,
+    TravelStyles,
+    HotelStyles,
+    LiStyles,
+    UlStyles
+} from "./navbarStyles";
 
 import { useState } from 'react';
 import './stylesNavbar.css';
 
-
-
 export const NavbarComponent = () => {
-
-    const [menuOpen, setIsMenulOpen] = useState(false);
-
+    const [menuOpen, setIsMenuOpen] = useState(false);
 
     const handleClick = () => {
-        setIsMenulOpen(!menuOpen);
+        setIsMenuOpen(!menuOpen);
     };
 
     return (
-        <>
+        <NavbarStyles className="navbar">
+            <DivLeftStyles className="menu">
+                {menuOpen && (
+                    <MenuLeftStyles className="menu-content">
+                        <div>
+                            <LogoContentStyles>
+                                <ImgLogoStyles src="src/assets/img/logo.png" alt="Logo" />
+                                <div>
+                                    <TravelStyles>Travl</TravelStyles>
+                                    <HotelStyles>Hotel Admin Dashboard</HotelStyles>
+                                </div>
+                            </LogoContentStyles>
+                            <UlStyles>
+                                <LiStyles>
+                                    <RiDashboardLine />
+                                    <PLiStyles>Dashboard</PLiStyles>
+                                </LiStyles>
+                                <LiStyles>
+                                    <TbCalendarCheck />
+                                    <PLiStyles>Bookings</PLiStyles>
+                                </LiStyles>
+                                <LiStyles>
+                                    <SlKey />
+                                    <PLiStyles>Room</PLiStyles>
+                                </LiStyles>
+                                <LiStyles>
+                                    <GrContactInfo />
+                                    <PLiStyles>Contact</PLiStyles>
+                                </LiStyles>
+                                <LiStyles>
+                                    <BsPerson />
+                                    <PLiStyles>Users</PLiStyles>
+                                </LiStyles>
+                            </UlStyles>
+                            <UserStyles>
+                                <img src="/assets/user.jpeg" alt="User" />
+                                <p>Lucia Macho Sánchez</p>
+                                <p>luciamacho00@gmail.com</p>
+                                <button>Contact Us</button>
+                            </UserStyles>
+                            <FooterStyles>
+                                <p>Travl Hotel Admin Dashboard</p>
+                                <p>© 2020 All Rights Reserved</p>
+                                <p>Made by Lucia Macho</p>
+                            </FooterStyles>
+                        </div>
+                    </MenuLeftStyles>
+                )}
+            </DivLeftStyles>
 
-            <NavbarStyles className="a">
-                <DivLeftStyles className="b">
-                    {menuOpen && (
-                        <MenuLeftStyles className="c">
-
-            <NavbarStyles>
-                <DivLeftStyles>
-                    {menuOpen && (
-                        <MenuLeftStyles>
-
-                            <div >
-                                <LogoContentStyles>
-                                    <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
-                                    <div>
-                                        <TravelStyles>travl</TravelStyles>
-                                        <HotelStyles>Hotel Admin Dashboard</HotelStyles>
-                                    </div>
-
-                                </LogoContentStyles>
-
-
-                                <UlStyles>
-                                    <LiStyles>
-                                        <RiDashboardLine />
-                                        <PLiStyles>Dashboard</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <TbCalendarCheck />
-                                        <PLiStyles>Bookings</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <SlKey />
-                                        <PLiStyles>Room</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <GrContactInfo />
-                                        <PLiStyles>Contact</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <BsPerson />
-                                        <PLiStyles>Users</PLiStyles>
-                                    </LiStyles>
-                                </UlStyles>
-
-                                <UserStyles>
-                                    <img src="/assets/user.jpeg" />
-                                    <p>Lucia Macho Sánchez</p>
-                                    <p>luciamacho00@gmail.com</p>
-                                    <button>Contact Us</button>
-                                </UserStyles>
-                                <FooterStyles>
-                                    <p>Travl Hotel Admin Dashboard</p>
-                                    <p>© 2020 All Rights Reserved</p>
-                                    <p>Made by Lucia Macho</p>
-                                </FooterStyles>
-
-                            </div>
-                        </MenuLeftStyles>
-                    )}
-
-                </DivLeftStyles>
-
-                <NavbarTopStyles className="d">
-                    <DashboarStyles>
-                        <TfiAlignLeft onClick={handleClick} />
-                        <PStyles>Dashboard</PStyles>
-                    </DashboarStyles>
-
-
-                                <UlStyles>
-                                    <LiStyles>
-                                        <RiDashboardLine />
-                                        <PLiStyles>Dashboard</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <TbCalendarCheck />
-                                        <PLiStyles>Bookings</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <SlKey />
-                                        <PLiStyles>Room</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <GrContactInfo />
-                                        <PLiStyles>Contact</PLiStyles>
-                                    </LiStyles>
-
-                                    <LiStyles>
-                                        <BsPerson />
-                                        <PLiStyles>Users</PLiStyles>
-                                    </LiStyles>
-                                </UlStyles>
-
-                                <UserStyles>
-                                    <img src="/assets/user.jpeg" />
-                                    <p>Lucia Macho Sánchez</p>
-                                    <p>luciamacho00@gmail.com</p>
-                                    <button>Contact Us</button>
-                                </UserStyles>
-                                <FooterStyles>
-                                    <p>Travl Hotel Admin Dashboard</p>
-                                    <p>© 2020 All Rights Reserved</p>
-                                    <p>Made by Lucia Macho</p>
-                                </FooterStyles>
-
-                            </div>
-                        </MenuLeftStyles>
-                    )}
-
-
-
-
-                </DivLeftStyles>
-
-                <div>
-                    <div>
-                        <TfiAlignLeft onClick={handleClick} />
-                        <PStyles>Dashboard</PStyles>
-                    </div>
-
-
-
-
-                    <div>
-                        <IoIosSearch className="icons" />
-
-                        <IoMdHeartEmpty className="icons" />
-
-
-                        <MdOutlineMail className="icons" />
-
-                        <TbMessage className="icons" />
-
-                        <img src="" alt="Profile icon" />
-
-                    </div>
-
-                </NavbarTopStyles>
-
+            <NavbarTopStyles className="top-bar">
+                <DashboarStyles>
+                    <TfiAlignLeft onClick={handleClick} />
+                    <PStyles>Dashboard</PStyles>
+                </DashboarStyles>
+                <div className="icons">
+                    <IoIosSearch className="icon" />
+                    <IoMdHeartEmpty className="icon" />
+                    <MdOutlineMail className="icon" />
+                    <TbMessage className="icon" />
+                    <img src="" alt="Profile" />
                 </div>
-
-
-            </NavbarStyles>
-
-        </>
-
-    )
-}
+            </NavbarTopStyles>
+        </NavbarStyles>
+    );
+};
