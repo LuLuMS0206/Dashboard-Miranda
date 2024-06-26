@@ -62,7 +62,7 @@ export const NavbarComponent = () => {
                                 </UlStyles>
 
                                 <UserStyles>
-                                    <img src="/assets/user.jpeg" />
+                                <img src="src/assets/img/foto.jpg" alt=""/>
                                     <p>Lucia Macho Sánchez</p>
                                     <p>luciamacho00@gmail.com</p>
                                     <ButtonStyles styled="contact">Contact Us</ButtonStyles>
@@ -89,7 +89,7 @@ export const NavbarComponent = () => {
                         <IoMdHeartEmpty className="icons" />
                         <MdOutlineMail className="icons" />
                         <TbMessage className="icons" />
-                        <img src="" alt="Profile icon" />
+                        <img src="src/assets/img/foto.jpg" alt=""/>
                     </IconStyles>
                 </NavbarTopStyles>
             </NavbarStyles>
