@@ -1,4 +1,4 @@
-// src/components/navbarComponent/navbarStyles.js
+
 import styled from "styled-components";
 
 export const NavbarStyles = styled.nav`
