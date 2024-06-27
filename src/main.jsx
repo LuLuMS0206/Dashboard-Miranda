@@ -47,6 +47,7 @@ export const MainApp = () => {
         <Routes>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/navbarComponent' element={<NavbarComponent />} />
+          
           <Route element={<ProtectedRoutes canActive={!!user} redirectPath = '/login'/>}>
             <Route path='/' element={<DashboardPage />} />
           </Route>
