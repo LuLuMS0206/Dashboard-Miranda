@@ -10,7 +10,7 @@ export const KpisComponent = () => {
 
 
     return(
-        <KpisComponentStyled>
+        <KpisComponentStyled >
             <KpisCardStyled>
                 <IconStyled className="iconBackground">
                 <IoBedOutline className="icon" />

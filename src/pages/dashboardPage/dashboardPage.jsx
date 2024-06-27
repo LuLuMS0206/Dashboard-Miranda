@@ -1,10 +1,12 @@
-import { KpisComponent } from "../../components/kpisComponent/kpisComponent"
+
+import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
 
 
 export const DashboardPage = () => {
     return(
         <div>
-            <KpisComponent/>
+            <NavbarComponent/>
+
         </div>
     )
 }

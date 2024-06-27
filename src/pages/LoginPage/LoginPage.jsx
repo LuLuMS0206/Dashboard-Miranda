@@ -17,7 +17,7 @@ export const LoginPage = () => {
 
         if (username === event.target.username.value && password === event.target.password.value) {
             localStorage.setItem('login', 'true');
-            navigate('/navbarComponent');
+            navigate('/');
         } else {
             alert('username or password incorrect');
         } 

@@ -8,6 +8,7 @@ export const KpisComponentStyled = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1.5rem;
+    
 `;
 
 
