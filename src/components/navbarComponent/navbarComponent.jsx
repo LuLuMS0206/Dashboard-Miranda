@@ -1,5 +1,3 @@
-
-
 import { TfiAlignLeft } from "react-icons/tfi";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -10,6 +8,7 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
+import { NavLink } from "react-router-dom";
 
 import {
     MadebyFooterStyles,
@@ -66,24 +65,34 @@ export const NavbarComponent = ({ children }) => {
 
                                 <UlStyles>
                                     <LiStyles>
-                                        <RiDashboardLine />
-                                        <PLiStyles>Dashboard</PLiStyles>
+                                        <NavLink to="/" activeClassName="active">
+                                            <RiDashboardLine />
+                                            <PLiStyles>Dashboard</PLiStyles>
+                                        </NavLink>
                                     </LiStyles>
                                     <LiStyles>
-                                        <TbCalendarCheck />
-                                        <PLiStyles>Bookings</PLiStyles>
+                                        <NavLink to="/bookings" activeClassName="active">
+                                            <TbCalendarCheck />
+                                            <PLiStyles>Bookings</PLiStyles>
+                                        </NavLink>
                                     </LiStyles>
                                     <LiStyles>
-                                        <SlKey />
-                                        <PLiStyles>Room</PLiStyles>
+                                        <NavLink to="/rooms" activeClassName="active">
+                                            <SlKey />
+                                            <PLiStyles>Room</PLiStyles>
+                                        </NavLink>
                                     </LiStyles>
                                     <LiStyles>
-                                        <GrContactInfo />
-                                        <PLiStyles>Contact</PLiStyles>
+                                        <NavLink to="/contact" activeClassName="active">
+                                            <GrContactInfo />
+                                            <PLiStyles>Contact</PLiStyles>
+                                        </NavLink>
                                     </LiStyles>
                                     <LiStyles>
-                                        <BsPerson />
-                                        <PLiStyles>Users</PLiStyles>
+                                        <NavLink to="/users" activeClassName="active">
+                                            <BsPerson />
+                                            <PLiStyles>Users</PLiStyles>
+                                        </NavLink>
                                     </LiStyles>
                                 </UlStyles>
 

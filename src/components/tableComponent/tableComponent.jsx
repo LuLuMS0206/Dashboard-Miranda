@@ -1,4 +1,3 @@
-
 import { Table, Thead, Th, Tbody, Tr, Td } from './tableStyles';
 
 const columns = [
@@ -13,37 +12,34 @@ const columns = [
 
 const data = [
     {
-        id: 1,
+        id: 'RES123456',
         guest: 'John Doe',
         orderDate: '2024-06-15',
         checkIn: '2024-06-20',
         checkOut: '2024-06-25',
         specialRequest: 'Late check-in',
-        roomType: 'Deluxe',
-        status: 'Confirmed',
-
+        roomType: 'Deluxe - Room 101',
+        status: 'Check In',
     },
     {
-        id: 2,
+        id: 'RES654321',
         guest: 'Jane Smith',
         orderDate: '2024-06-10',
         checkIn: '2024-06-18',
         checkOut: '2024-06-22',
         specialRequest: 'Extra pillows',
-        roomType: 'Standard',
-        status: 'Pending',
-
+        roomType: 'Standard - Room 202',
+        status: 'In Progress',
     },
     {
-        id: 3,
+        id: 'RES789012',
         guest: 'Mike Johnson',
         orderDate: '2024-06-12',
         checkIn: '2024-06-19',
         checkOut: '2024-06-23',
         specialRequest: 'High floor',
-        roomType: 'Suite',
-        status: 'Cancelled',
-
+        roomType: 'Suite - Room 303',
+        status: 'Check Out',
     }
 ];
 
@@ -62,7 +58,14 @@ export const TableComponent = () => {
                     <Tr key={row.id}>
                         {columns.map((col, colIndex) => (
                             <Td key={colIndex}>
-                                {col.columnRenderer ? col.columnRenderer(row) : row[col.columnsData]}
+                                {col.columnsData === 'guest' ? (
+                                    <>
+                                        {row[col.columnsData]}<br />
+                                        <small>{row.id}</small>
+                                    </>
+                                ) : (
+                                    row[col.columnsData]
+                                )}
                             </Td>
                         ))}
                     </Tr>

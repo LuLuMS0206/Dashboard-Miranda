@@ -1,13 +1,12 @@
-// import { TableComponent } from "../../components/tableComponent/tableComponent"
 
+import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
 import { TableComponent } from "../../components/tableComponent/tableComponent"
 
 
 export const BookingPage = () => {
     return(
-        
-        <TableComponent/>
-        
-        
+        <NavbarComponent>
+            <TableComponent/>
+        </NavbarComponent>
     )
 }
