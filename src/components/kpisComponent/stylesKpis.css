@@ -1,4 +1,13 @@
 .icon{
     color: #E23428;
     font-size: 22px;
+
+
+}
+
+.icon:hover{
+    color: #FFFFFF;
+    font-size: 22px;
+
+
 }

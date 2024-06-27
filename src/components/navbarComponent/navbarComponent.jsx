@@ -1,4 +1,5 @@
-// src/components/navbarComponent/navbarComponent.jsx
+
+
 import { TfiAlignLeft } from "react-icons/tfi";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -39,14 +40,13 @@ import {
 import { useState } from "react";
 import "./stylesNavbar.css";
 import { ButtonStyles } from "../buttonComponent/buttonComponent";
-import { KpisComponent } from "../kpisComponent/kpisComponent";
 
-
-export const NavbarComponent = () => {
-    const [menuOpen, setIsMenulOpen] = useState(false);
+// eslint-disable-next-line react/prop-types
+export const NavbarComponent = ({ children }) => {
+    const [menuOpen, setIsMenuOpen] = useState(false);
 
     const handleClick = () => {
-        setIsMenulOpen(!menuOpen);
+        setIsMenuOpen(!menuOpen);
     };
 
     return (
@@ -116,11 +116,10 @@ export const NavbarComponent = () => {
                             <IoMdHeartEmpty className="icons" />
                             <MdOutlineMail className="icons" />
                             <TbMessage className="icons" />
-                            {/* <PhotoStyles src="src/assets/img/photo.jpg" alt=""/> */}
                         </IconStyles>
                     </NavbarTopStyles>
 
-                    <KpisComponent /> {/* Aquí va tu componente de KPIs */}
+                    {children}
                 </MainContentStyles>
             </NavbarStyles>
         </>

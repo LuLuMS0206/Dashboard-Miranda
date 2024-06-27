@@ -8,6 +8,8 @@ export const KpisComponentStyled = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1.5rem;
+
+    
     
 `;
 
@@ -24,6 +26,7 @@ export const KpisCardStyled = styled.div`
     gap: 1.5rem;
     transition: scale 0.3s ease 0s, box-shadow 0.2s ease 0s;
 
+
 `;
 
 
@@ -33,6 +36,10 @@ export const IconStyled = styled.div`
     background-color: rgb(255, 237, 236);
     padding: 1rem;
     border-radius: 0.5rem;
+
+    &:hover{
+     background-color: #E23428;
+    }
 
 `;
 
