@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 export const NavbarStyles = styled.nav`
@@ -55,6 +54,22 @@ export const LiStyles = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 3rem;
+  cursor: pointer;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: #E23428;
+    }
+
+    &.active {
+      color: #E23428;
+    }
+  }
 `;
 
 export const PLiStyles = styled.p`
@@ -82,7 +97,7 @@ export const DivLeftStyles = styled.div`
 export const MainContentStyles = styled.div`
   flex: 1;
   transition: margin-left 0.2s ease-in-out;
-      margin-top: 8rem;
+  margin-top: 8rem;
   margin-left: ${(props) => (props.isOpen ? "0" : "0")};
 `;
 
@@ -130,10 +145,8 @@ export const NameStyles = styled.p`
 export const EmailStyles = styled.p`
   color: rgb(136, 136, 136);
   font-size: 0.75rem;
-  font-weight: normal;
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
 `;
+
 
 export const TravelFooterStyles = styled.p`
   font-size: 0.8125rem;
