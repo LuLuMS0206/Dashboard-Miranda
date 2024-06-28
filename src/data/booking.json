@@ -1,0 +1,82 @@
+[
+    {
+        "id": "RES123456",
+        "guest": "John Doe",
+        "orderDate": "2024-06-15",
+        "checkIn": "2024-06-20",
+        "checkOut": "2024-06-25",
+        "specialRequest": "Late check-in",
+        "roomType": "Deluxe - Room 101",
+        "status": "Check In"
+    },
+    {
+        "id": "RES654321",
+        "guest": "Jane Smith",
+        "orderDate": "2024-06-10",
+        "checkIn": "2024-06-18",
+        "checkOut": "2024-06-22",
+        "specialRequest": "Extra pillows",
+        "roomType": "Standard - Room 202",
+        "status": "In Progress"
+    },
+    {
+        "id": "RES789012",
+        "guest": "Mike Johnson",
+        "orderDate": "2024-06-12",
+        "checkIn": "2024-06-19",
+        "checkOut": "2024-06-23",
+        "specialRequest": "High floor",
+        "roomType": "Suite - Room 303",
+        "status": "Check Out"
+    },
+    {
+        "id": "RES345678",
+        "guest": "Emily Davis",
+        "orderDate": "2024-06-18",
+        "checkIn": "2024-06-22",
+        "checkOut": "2024-06-27",
+        "specialRequest": "Early check-in",
+        "roomType": "Superior - Room 404",
+        "status": "In Progress"
+    },
+    {
+        "id": "RES987654",
+        "guest": "Chris Wilson",
+        "orderDate": "2024-06-20",
+        "checkIn": "2024-06-25",
+        "checkOut": "2024-06-30",
+        "specialRequest": "No special requests",
+        "roomType": "Standard - Room 205",
+        "status": "Pending"
+    },
+    {
+        "id": "RES567890",
+        "guest": "Laura Brown",
+        "orderDate": "2024-06-22",
+        "checkIn": "2024-06-28",
+        "checkOut": "2024-07-02",
+        "specialRequest": "Extra towels",
+        "roomType": "Deluxe - Room 102",
+        "status": "Confirmed"
+    },
+    {
+        "id": "RES345012",
+        "guest": "Robert Miller",
+        "orderDate": "2024-06-25",
+        "checkIn": "2024-07-01",
+        "checkOut": "2024-07-05",
+        "specialRequest": "Sea view",
+        "roomType": "Suite - Room 305",
+        "status": "Cancelled"
+    },
+    {
+        "id": "RES123789",
+        "guest": "Susan Taylor",
+        "orderDate": "2024-06-28",
+        "checkIn": "2024-07-03",
+        "checkOut": "2024-07-07",
+        "specialRequest": "Quiet room",
+        "roomType": "Superior - Room 406",
+        "status": "Confirmed"
+    }
+]
