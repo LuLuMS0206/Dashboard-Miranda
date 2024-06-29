@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const CardContentBackgroundStyles = styled.div`
     box-shadow: black 2px 2px 6px -4px;
-        padding: 0.5rem 1.2rem 1.2rem;
         background-color: white;
+        border-radius: 0.5rem;
+    padding: 1rem;
 `
 
 export const CardImgStyles = styled.img`
@@ -44,4 +45,9 @@ export const CardTimeStyles = styled.p`
 
 export const CardTextStyles = styled.p`
  color: #4E4E4E;
+`
+
+export const CardContainerStyles = styled.div`
+ display:flex;
+     gap: 2rem;
 `
