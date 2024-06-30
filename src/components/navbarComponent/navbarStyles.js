@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const NavbarStyles = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+     
 `;
 
 export const ImgLogoStyles = styled.img`
@@ -90,15 +88,16 @@ export const UserStyles = styled.div`
 `;
 
 export const DivLeftStyles = styled.div`
-  flex: ${(props) => (props.isOpen ? "0 0 16rem" : "0 0 0")};
+
   transition: flex 0.2s ease-in-out;
 `;
 
 export const MainContentStyles = styled.div`
-  flex: 1;
+
   transition: margin-left 0.2s ease-in-out;
   margin-top: 8rem;
-  margin-left: ${(props) => (props.isOpen ? "0" : "0")};
+  padding-left: ${(props) => (props.isOpen ? "18rem" : "2rem")};
+
 `;
 
 export const IconStyles = styled.div`
