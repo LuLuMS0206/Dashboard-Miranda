@@ -19,7 +19,7 @@ export const ContactPage = () => {
         },
         { headerColumn: 'Subject', columnsData: 'subject' },
         { headerColumn: 'Comment', columnsData: 'comment' },
-        { headerColumn: 'Action', columnsData: 'action'}
+        { headerColumn: 'Action', columnsData: 'action'  }
     ];
 
     return(
