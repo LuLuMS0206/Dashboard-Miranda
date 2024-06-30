@@ -32,3 +32,10 @@ export const Td = styled.td`
   padding: 1rem;
   border: 1px solid #dee2e6;
 `;
+
+
+export const PaginationTable = styled.div `
+    width: 15%;
+    display: flex;
+    gap: 2em;
+`
