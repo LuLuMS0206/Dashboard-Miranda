@@ -4,8 +4,6 @@ import styled from 'styled-components';
 export const KpisComponentStyled = styled.div`
     display: flex;
     width: 100%;
-    gap: 1.5rem;
-    flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
@@ -17,7 +15,6 @@ export const KpisComponentStyled = styled.div`
 export const KpisCardStyled = styled.div`
         all: unset;
     cursor: pointer;
-    width: 20%;
     display: flex;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 5px -4px;
