@@ -22,7 +22,7 @@ export const CardComponent = () => {
                 prevEl: ".swiper-button-prev",
             },
         });
-    }, []); // Se ejecuta solo una vez después del montaje inicial
+    }, []); 
 
     return (
         <CardContentBackgroundStyles>
