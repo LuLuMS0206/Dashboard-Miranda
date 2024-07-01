@@ -1,30 +1,49 @@
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
-import { TableComponent } from "../../components/tableComponent/tableComponent"
-import contactData from "./../../data/contact.json"
 
+
+import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
+import { TableComponent } from "../../components/tableComponent/tableComponent";
+import data from "../../data/contact.json";
+import { useState } from "react";
+import { SectionOrder, List, ItemList } from "../../components/styledGeneric/styledGeneric";
 
 export const ContactPage = () => {
-
     const contactColumns = [
         { headerColumn: 'Order ID', columnsData: 'id' },
         { headerColumn: 'Date', columnsData: 'date' },
-        { headerColumn: 'Customer',
-            
+        {
+            headerColumn: 'Customer',
             renderColumn: (rowData) => (
                 <div>
                     <div>{rowData.client.name}</div>
                     <div>{rowData.client.email}</div>
                 </div>
-            ), 
+            ),
         },
         { headerColumn: 'Subject', columnsData: 'subject' },
         { headerColumn: 'Comment', columnsData: 'comment' },
-        { headerColumn: 'Action', columnsData: 'action'  }
+        { headerColumn: 'Action', columnsData: 'action' }
     ];
 
-    return(
+    const [contact, setContact] = useState(data);
+
+    const handleClickAll = () => {
+        setContact(data);
+    };
+
+    const handleClickArchive = () => {
+        const filteredContact = data.filter(contact => contact.archived === true);
+        setContact(filteredContact);
+    };
+
+    return (
         <NavbarComponent>
-            <TableComponent columns={contactColumns} data={contactData} />
+            <SectionOrder>
+                <List>
+                    <ItemList onClick={handleClickAll}>All contacts</ItemList>
+                    <ItemList onClick={handleClickArchive}>Archived</ItemList>
+                </List>
+            </SectionOrder>
+            <TableComponent columns={contactColumns} data={contact} />
         </NavbarComponent>
-    )
-}
+    );
+};
