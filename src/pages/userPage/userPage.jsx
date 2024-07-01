@@ -77,7 +77,7 @@ export const UserPage = () => {
                     <ItemList onClick={handleClickActive}>Active Employee</ItemList>
                     <ItemList onClick={handleClickInactive}>Inactive Employee</ItemList>
                 </List>
-                <ButtonStyles styled='send'>+ New User</ButtonStyles>
+                <ButtonStyles styled='new'>+ New User</ButtonStyles>
                 <SelectStyled onChange={handleSortChange}>
                     <option value='startDate'>Start date</option>
                     <option value='name'>Full name</option>

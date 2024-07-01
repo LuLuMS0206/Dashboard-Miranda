@@ -68,7 +68,7 @@ export const RoomPage = () => {
                 <List>
                     <ItemList onClick={handleListClick}>All Rooms</ItemList>
                 </List>
-                <ButtonStyles styled='send'>+ New Room</ButtonStyles>
+                <ButtonStyles styled='new'>+ New Room</ButtonStyles>
                 <SelectStyled onChange={handleSortChange}>
                     <option value='roomNumber'>Room Number</option>
                     <option value='availability'>Available</option>

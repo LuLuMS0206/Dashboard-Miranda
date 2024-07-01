@@ -96,7 +96,7 @@ export const BookingPage = () => {
                     <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
                     <ItemList onClick={handleClickInProgress}>In progress</ItemList>
                 </List>
-                <ButtonStyles styled='send'>+ New Booking</ButtonStyles>
+                <ButtonStyles styled='new'>+ New Booking</ButtonStyles>
                 <SelectStyled onChange={handleBookingsChange}>
                     <option value='orderDate'>Order Date</option>
                     <option value='guest'>Guest</option>
