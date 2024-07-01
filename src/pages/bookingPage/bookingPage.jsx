@@ -1,11 +1,12 @@
 
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
-import { TableComponent } from "../../components/tableComponent/tableComponent"
+
+import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
+import { TableComponent } from "../../components/tableComponent/tableComponent";
 import { useState, useEffect } from "react";
-import data from "../../data/booking.json"
+import data from "../../data/booking.json";
 import { SectionOrder, List, ItemList, SelectStyled } from "../../components/styledGeneric/styledGeneric";
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
-
+import { BookingDetailComponent } from "../../components/bookingDetailComponent/bookingDetailComponent";
 
 export const BookingPage = () => {
     const bookingsColumns = [
@@ -15,10 +16,26 @@ export const BookingPage = () => {
         { headerColumn: 'Check Out', columnsData: 'checkOut' },
         { headerColumn: 'Special Request', columnsData: 'specialRequest' },
         { headerColumn: 'Room Type', columnsData: 'roomType' },
-        { headerColumn: 'Status', columnsData: 'status' },
+        { 
+            headerColumn: 'Status', 
+            columnsData: 'status', 
+            columnRenderer: (booking) => {
+                switch (booking.status) {
+                    case 'In Progress':
+                        return <ButtonStyles styled='progress'>In Progress</ButtonStyles>;
+                    case 'Check In':
+                        return <ButtonStyles styled='roomAvailable'>Check In</ButtonStyles>;
+                    case 'Check Out':
+                        return <ButtonStyles styled='roomBooked'>Check Out</ButtonStyles>;
+                    default:
+                        return booking.status;
+                }
+            }
+        },
     ];
 
     const [bookings, setBookings] = useState(data);
+    const [selectedBooking, setSelectedBooking] = useState(null);
 
     useEffect(() => {
         sortBookingsHandler('id');
@@ -65,6 +82,10 @@ export const BookingPage = () => {
         const filteredBookings = data.filter(booking => booking.status === 'In Progress');
         setBookings(filteredBookings);
     };
+
+    const handleRowClick = (booking) => {
+        setSelectedBooking(booking);
+    };
     
     return(
         <NavbarComponent>
@@ -83,7 +104,12 @@ export const BookingPage = () => {
                     <option value='checkOut'>Check Out</option>
                 </SelectStyled>
             </SectionOrder>
-            <TableComponent columns={bookingsColumns} data={bookings} />
+            <TableComponent 
+                columns={bookingsColumns} 
+                data={bookings} 
+                onRowClick={handleRowClick} 
+            />
+            {selectedBooking && <BookingDetailComponent booking={selectedBooking} />}
         </NavbarComponent>
     )
 }
