@@ -59,12 +59,12 @@ export const TableComponent = ({ columns, data, onRowClick }) => {
                 {num === 0 ? (
                     <ButtonStyles disabled styled='prev'>Prev</ButtonStyles>
                 ) : (
-                    <ButtonStyles onClick={handlePrev} styled='viewBorder'>Prev</ButtonStyles>
+                    <ButtonStyles onClick={handlePrev} styled='next'>Prev</ButtonStyles>
                 )}
                 {num + 1 >= pages.length ? (
-                    <ButtonStyles disabled styled='next'>Next</ButtonStyles>
+                    <ButtonStyles disabled styled='prev'>Next</ButtonStyles>
                 ) : (
-                    <ButtonStyles onClick={handleNext} styled='viewBorder'>Next</ButtonStyles>
+                    <ButtonStyles onClick={handleNext} styled='next'>Next</ButtonStyles>
                 )}
             </PaginationTable>
         </>
