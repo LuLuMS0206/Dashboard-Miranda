@@ -98,6 +98,7 @@ return `
     background-color : #FF9C3A;
     color: #FFF;
     width: 7.815em;
+    border:none;
 `
     }
   }}

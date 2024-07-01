@@ -16,7 +16,11 @@ export const RoomPage = () => {
         { headerColumn: 'Amenities', columnsData: 'amenities', columnRenderer: (row) => row.amenities.join(', ') },
         { headerColumn: 'Price', columnsData: 'price' },
         { headerColumn: 'Offer Price', columnsData: 'offerPrice' },
-        { headerColumn: 'Status', columnsData: 'status' }
+        { headerColumn: 'Status', columnsData: 'status', columnRenderer: (row) => (
+            <ButtonStyles styled={row.availability === 'available' ? 'roomAvailable' : 'roomBooked'}>
+                {row.availability === 'available' ? 'Available' : 'Booked'}
+            </ButtonStyles>
+        )}
     ];
 
     const [rooms, setRooms] = useState(data);

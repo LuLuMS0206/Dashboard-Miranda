@@ -1,8 +1,9 @@
+
 import { ButtonStyles } from '../buttonComponent/buttonComponent';
 import { Table, Thead, Th, Tbody, Tr, Td, PaginationTable } from './tableStyles';
 import { useState, useEffect } from "react";
 
-export const TableComponent = ({ columns, data }) => {
+export const TableComponent = ({ columns, data, onRowClick }) => {
     const pageSize = 4;
 
     const pagination = (array, size) => {
@@ -40,7 +41,11 @@ export const TableComponent = ({ columns, data }) => {
                 </Thead>
                 <Tbody>
                     {pages[num]?.map((row) => (
-                        <Tr key={row.id}>
+                        <Tr 
+                            key={row.id}
+                            onClick={onRowClick ? () => onRowClick(row) : undefined}
+                            style={{ cursor: onRowClick ? 'pointer' : 'default' }}
+                        >
                             {columns.map((col, colIndex) => (
                                 <Td key={colIndex}>
                                     {col.columnRenderer ? col.columnRenderer(row) : row[col.columnsData]}
