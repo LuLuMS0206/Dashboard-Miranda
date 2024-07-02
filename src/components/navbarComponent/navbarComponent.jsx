@@ -8,7 +8,8 @@ import { SlKey } from "react-icons/sl";
 import { TbCalendarCheck } from "react-icons/tb";
 import { BsPerson } from "react-icons/bs";
 import { GrContactInfo } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { HiLogin } from "react-icons/hi";
 
 import {
     MadebyFooterStyles,
@@ -43,9 +44,14 @@ import { ButtonStyles } from "../buttonComponent/buttonComponent";
 // eslint-disable-next-line react/prop-types
 export const NavbarComponent = ({ children }) => {
     const [menuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsMenuOpen(!menuOpen);
+    };
+
+    const handleLogoutClick = () => {
+        navigate('/login');
     };
 
     return (
@@ -125,6 +131,8 @@ export const NavbarComponent = ({ children }) => {
                             <IoMdHeartEmpty className="icons" />
                             <MdOutlineMail className="icons" />
                             <TbMessage className="icons" />
+                            <HiLogin className="icons" onClick={handleLogoutClick} />
+
                         </IconStyles>
                     </NavbarTopStyles>
 

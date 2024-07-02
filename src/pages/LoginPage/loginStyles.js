@@ -6,7 +6,6 @@ border:none;
 background: #f6f6f6;;
 border-radius: 0.75rem;
 
-
 `
 
 export const LoginStyles = styled.div`
