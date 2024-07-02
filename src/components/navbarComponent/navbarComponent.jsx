@@ -37,14 +37,19 @@ import {
     MainContentStyles
 } from "./navbarStyles";
 
-import { useState } from "react";
 import "./stylesNavbar.css";
 import { ButtonStyles } from "../buttonComponent/buttonComponent";
+import { PopupUserComponent } from "../popupUserComponent/popupUserComponent.jsx";
 
-// eslint-disable-next-line react/prop-types
+import { useContext, useState } from "react";
+import { UserContext } from '../../context/userContext.jsx'; 
+
+
 export const NavbarComponent = ({ children }) => {
     const [menuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const { state } = useContext(UserContext);
 
     const handleClick = () => {
         setIsMenuOpen(!menuOpen);
@@ -52,6 +57,14 @@ export const NavbarComponent = ({ children }) => {
 
     const handleLogoutClick = () => {
         navigate('/login');
+    };
+
+    const handleEditUserClick = () => {
+        setIsPopupOpen(true);
+    };
+
+    const handleClosePopup = () => {
+        setIsPopupOpen(false);
     };
 
     return (
@@ -104,9 +117,11 @@ export const NavbarComponent = ({ children }) => {
 
                                 <UserStyles>
                                     <PhotoStyles src="src/assets/img/photo.jpg" alt="" />
-                                    <NameStyles>Lucia Macho Sánchez</NameStyles>
-                                    <EmailStyles>luciamacho00@gmail.com</EmailStyles>
-                                    <ButtonStyles styled="contact">Edit User</ButtonStyles>
+                                    <NameStyles>{state.name}</NameStyles>
+                                    <EmailStyles>{state.email}</EmailStyles>
+                                    <ButtonStyles styled="contact" onClick={handleEditUserClick}>
+                                        Edit User
+                                    </ButtonStyles>
                                 </UserStyles>
                                 <FooterStyles>
                                     <TravelFooterStyles>
@@ -132,13 +147,14 @@ export const NavbarComponent = ({ children }) => {
                             <MdOutlineMail className="icons" />
                             <TbMessage className="icons" />
                             <HiLogin className="icons" onClick={handleLogoutClick} />
-
                         </IconStyles>
                     </NavbarTopStyles>
 
                     {children}
                 </MainContentStyles>
             </NavbarStyles>
+            <PopupUserComponent isOpen={isPopupOpen} onClose={handleClosePopup} />
         </>
     );
 };
+
