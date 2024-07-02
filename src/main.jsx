@@ -1,9 +1,10 @@
-
-
+// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import './styles.css';
+import { store } from './store/store';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { NavbarComponent } from './components/navbarComponent/navbarComponent';
 import { DashboardPage } from './pages/dashboardPage/dashboardPage';
@@ -19,19 +20,21 @@ export const MainApp = () => {
 
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<LoginPage />} />
-          <Route element={<ProtectedRoutes canActive={!user} redirectPath='/login' />}>
-            <Route path='/' element={<DashboardPage />} />
-            <Route path='/navbarComponent' element={<NavbarComponent />} />
-            <Route path='/bookings' element={<BookingPage />} />
-            <Route path='/users' element={<UserPage />} />
-            <Route path='/contact' element={<ContactPage />} />
-            <Route path='/rooms' element={<RoomPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/login' element={<LoginPage />} />
+            <Route element={<ProtectedRoutes canActive={!user} redirectPath='/login' />}>
+              <Route path='/' element={<DashboardPage />} />
+              <Route path='/navbarComponent' element={<NavbarComponent />} />
+              <Route path='/bookings' element={<BookingPage />} />
+              <Route path='/users' element={<UserPage />} />
+              <Route path='/contact' element={<ContactPage />} />
+              <Route path='/rooms' element={<RoomPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </React.StrictMode>
   );
 };
