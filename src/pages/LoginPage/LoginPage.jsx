@@ -1,14 +1,13 @@
-import { ButtonStyles } from "../../components/buttonComponent/buttonComponent.js"
-import { InputStyled } from "./loginStyles.js"
-import { LoginStyles } from "./loginStyles.js"
-import { FormStyles } from "./loginStyles.js"
-import { TitleStyles } from "./loginStyles.js"
-import { LabelStyles } from "./loginStyles.js"
+
+import { useContext } from "react";
+import { ButtonStyles } from "../../components/buttonComponent/buttonComponent.js";
+import { InputStyled, LoginStyles, FormStyles, TitleStyles, LabelStyles } from "./loginStyles.js";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from '../../context/userContext.jsx'; 
 
 export const LoginPage = () => {
-
     const navigate = useNavigate();
+    const { dispatch } = useContext(UserContext);
 
     const HandlerLogin = (event) => {
         event.preventDefault();
@@ -16,12 +15,12 @@ export const LoginPage = () => {
         let password = 'miranda00';
 
         if (username === event.target.username.value && password === event.target.password.value) {
-            localStorage.setItem('login', 'true');
+            dispatch({ type: "LOGIN", payload: { name: 'Admin', email: username } });
             navigate('/');
         } else {
             alert('username or password incorrect');
         } 
-    }
+    };
 
     return (
         <LoginStyles>
@@ -38,8 +37,5 @@ export const LoginPage = () => {
                 <p>| password: miranda00</p>
             </FormStyles>
         </LoginStyles>
-
-
-    )
-}
-
+    );
+};

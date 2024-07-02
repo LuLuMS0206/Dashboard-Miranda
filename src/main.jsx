@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { BookingPage } from './pages/bookingPage/bookingPage';
 import { UserPage } from './pages/userPage/userPage';
 import { ContactPage } from './pages/contactPage/contactPage';
 import { RoomPage } from './pages/roomPage/roomPage';
+import { UserContextProvider } from './context/userContext';
 
 export const MainApp = () => {
   const [user] = useLocalStorage('user');
@@ -21,19 +21,21 @@ export const MainApp = () => {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/login' element={<LoginPage />} />
-            <Route element={<ProtectedRoutes canActive={!user} redirectPath='/login' />}>
-              <Route path='/' element={<DashboardPage />} />
-              <Route path='/navbarComponent' element={<NavbarComponent />} />
-              <Route path='/bookings' element={<BookingPage />} />
-              <Route path='/users' element={<UserPage />} />
-              <Route path='/contact' element={<ContactPage />} />
-              <Route path='/rooms' element={<RoomPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <UserContextProvider> 
+          <BrowserRouter>
+            <Routes>
+              <Route path='/login' element={<LoginPage />} />
+              <Route element={<ProtectedRoutes canActive={!user} redirectPath='/login' />}>
+                <Route path='/' element={<DashboardPage />} />
+                <Route path='/navbarComponent' element={<NavbarComponent />} />
+                <Route path='/bookings' element={<BookingPage />} />
+                <Route path='/users' element={<UserPage />} />
+                <Route path='/contact' element={<ContactPage />} />
+                <Route path='/rooms' element={<RoomPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </UserContextProvider>
       </Provider>
     </React.StrictMode>
   );
