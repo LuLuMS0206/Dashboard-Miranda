@@ -8,7 +8,7 @@ import { NavbarComponent } from '../../components/navbarComponent/navbarComponen
 import { TableComponent } from '../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
-import { BookingDetailComponent } from '../../components/bookingDetailComponent/bookingDetailComponent';
+// import { BookingDetailComponent } from '../../components/bookingDetailComponent/bookingDetailComponent';
 import { BookingsThunk } from '../../assets/features/booking/bookingThunk';
 import { getBookingsStatus, getBookingSlice, getBookingsError } from '../../assets/features/booking/bookingSlice';
 
@@ -17,7 +17,7 @@ export const BookingPage = () => {
     const bookingStatus = useSelector(getBookingsStatus);
     const bookingSlice = useSelector(getBookingSlice);
     const bookingError = useSelector(getBookingsError);
-    const [bookingList, setBookingList] = useState([]); 
+    const [bookingList, setBookingList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -49,7 +49,7 @@ export const BookingPage = () => {
 
     const handleClickCheckIn = () => {
         const filteredBookings = data.filter(booking => booking.status === 'Check In');
-        dispatch(setBookings(filteredBookings)); 
+        dispatch(setBookings(filteredBookings));
     };
 
     const handleClickCheckOut = () => {
@@ -59,12 +59,12 @@ export const BookingPage = () => {
 
     const handleClickInProgress = () => {
         const filteredBookings = data.filter(booking => booking.status === 'In Progress');
-        dispatch(setBookings(filteredBookings)); 
+        dispatch(setBookings(filteredBookings));
     };
 
     const handleBookingsChange = (event) => {
         const value = event.target.value;
-        let sortedBookings = [...bookingList]; 
+        let sortedBookings = [...bookingList];
 
         if (value === 'orderDate') {
             sortedBookings = sortedBookings.sort((a, b) => new Date(a.orderDate) - new Date(b.orderDate));
@@ -78,7 +78,7 @@ export const BookingPage = () => {
             sortedBookings = sortedBookings.sort((a, b) => a.id - b.id);
         }
 
-        dispatch(setBookings(sortedBookings)); 
+        dispatch(setBookings(sortedBookings));
     };
 
     const bookingsColumns = [
@@ -121,7 +121,7 @@ export const BookingPage = () => {
     return (
         <NavbarComponent>
             {loading ? (
-                <div>Loading...</div> 
+                <div>Loading...</div>
             ) : error ? (
                 <div>Error: {error}</div>
             ) : (
@@ -141,8 +141,8 @@ export const BookingPage = () => {
                             <option value='checkOut'>Check Out</option>
                         </SelectStyled>
                     </SectionOrder>
-                    <TableComponent columns={bookingsColumns} data={bookingList} onRowClick={handleRowClick} />
-                    {bookingList && <BookingDetailComponent booking={bookingList} />}
+                    <TableComponent columns={bookingsColumns} data={bookingList} onRowClick={handleRowClick} redirectUrl='/bookingsDetail' />
+                    
                 </>
             )}
         </NavbarComponent>

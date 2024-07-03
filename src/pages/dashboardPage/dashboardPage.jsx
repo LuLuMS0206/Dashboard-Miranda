@@ -2,6 +2,7 @@ import { NavbarComponent } from "../../components/navbarComponent/navbarComponen
 import { KpisComponent } from "../../components/kpisComponent/kpisComponent";
 import { CardComponent } from "../../components/cardComponent/cardComponent";
 
+
 export const DashboardPage = () => {
     return (
         <NavbarComponent>

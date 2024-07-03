@@ -1,10 +1,13 @@
 
+
 import { ButtonStyles } from '../buttonComponent/buttonComponent';
 import { Table, Thead, Th, Tbody, Tr, Td, PaginationTable } from './tableStyles';
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
-export const TableComponent = ({ columns, data, onRowClick }) => {
+export const TableComponent = ({ columns, data, onRowClick, redirectUrl }) => {
     const pageSize = 4;
+    const navigate = useNavigate();
 
     const pagination = (array, size) => {
         const aux = [];
@@ -29,6 +32,11 @@ export const TableComponent = ({ columns, data, onRowClick }) => {
         setNum(0); 
     }, [data]);
 
+    const handleRowClick = (row) => {
+        if (onRowClick) onRowClick(row);
+        if (redirectUrl) navigate(`${redirectUrl}/${row.id}`); 
+    };
+
     return (
         <>
             <Table>
@@ -43,8 +51,8 @@ export const TableComponent = ({ columns, data, onRowClick }) => {
                     {pages[num]?.map((row) => (
                         <Tr 
                             key={row.id}
-                            onClick={onRowClick ? () => onRowClick(row) : undefined}
-                            style={{ cursor: onRowClick ? 'pointer' : 'default' }}
+                            onClick={() => handleRowClick(row)}
+                            style={{ cursor: 'pointer' }}
                         >
                             {columns.map((col, colIndex) => (
                                 <Td key={colIndex}>
