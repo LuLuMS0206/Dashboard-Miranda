@@ -1,30 +1,50 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { MdOutlineEdit } from "react-icons/md";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useState, useEffect } from 'react';
-import {setBookings} from '../../assets/features/booking/bookingSlice'
+import { setBookings, setSelectedBooking } from '../../assets/features/booking/bookingSlice';
 import data from '../../data/booking.json';
 import { NavbarComponent } from '../../components/navbarComponent/navbarComponent';
 import { TableComponent } from '../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
 import { BookingDetailComponent } from '../../components/bookingDetailComponent/bookingDetailComponent';
+import { BookingsThunk } from '../../assets/features/booking/bookingThunk';
+import { getBookingsStatus, getBookingSlice, getBookingsError } from '../../assets/features/booking/bookingSlice';
 
 export const BookingPage = () => {
     const dispatch = useDispatch();
-    const bookings = useSelector((state) => state.bookings.bookings); 
-    const [selectedBooking, setSelectedBooking] = useState(null); 
+    const bookingStatus = useSelector(getBookingsStatus);
+    const bookingSlice = useSelector(getBookingSlice);
+    const bookingError = useSelector(getBookingsError);
+    const [bookingList, setBookingList] = useState([]); 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        dispatch(setBookings(data)); 
-    }, [dispatch]);
+        if (bookingStatus === 'idle') {
+            dispatch(BookingsThunk());
+        } else if (bookingStatus === 'fulfilled') {
+            setLoading(false);
+            setBookingList(bookingSlice);
+        } else if (bookingStatus === 'rejected') {
+            setLoading(false);
+            setError(bookingError);
+        }
+    }, [bookingStatus, bookingSlice, bookingError, dispatch]);
 
     const handleRowClick = (booking) => {
-        setSelectedBooking(booking);
+        setBookingList(booking);
         dispatch(setSelectedBooking(booking));
+    };
+
+    const handleDeleteRow = (id) => {
+        const updatedBookings = bookingList.filter(booking => booking.id !== id);
+        dispatch(setBookings(updatedBookings));
     };
 
     const handleClickAll = () => {
         dispatch(setBookings(data));
-
     };
 
     const handleClickCheckIn = () => {
@@ -44,7 +64,7 @@ export const BookingPage = () => {
 
     const handleBookingsChange = (event) => {
         const value = event.target.value;
-        let sortedBookings = [...bookings]; 
+        let sortedBookings = [...bookingList]; 
 
         if (value === 'orderDate') {
             sortedBookings = sortedBookings.sort((a, b) => new Date(a.orderDate) - new Date(b.orderDate));
@@ -84,27 +104,47 @@ export const BookingPage = () => {
                 }
             }
         },
+        {
+            headerColumn: 'Action',
+            columnsData: 'action',
+            columnRenderer: (booking) => {
+                return (
+                    <>
+                        <MdOutlineEdit />
+                        <AiOutlineDelete onClick={() => handleDeleteRow(booking.id)} />
+                    </>
+                );
+            }
+        },
     ];
 
     return (
         <NavbarComponent>
-            <SectionOrder>
-                <List>
-                    <ItemList onClick={handleClickAll}>All Bookings</ItemList>
-                    <ItemList onClick={handleClickCheckIn}>Check In</ItemList>
-                    <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
-                    <ItemList onClick={handleClickInProgress}>In progress</ItemList>
-                </List>
-                <ButtonStyles styled='new'>+ New Booking</ButtonStyles>
-                <SelectStyled onChange={handleBookingsChange}>
-                    <option value='orderDate'>Order Date</option>
-                    <option value='guest'>Guest</option>
-                    <option value='checkIn'>Check In</option>
-                    <option value='checkOut'>Check Out</option>
-                </SelectStyled>
-            </SectionOrder>
-            <TableComponent columns={bookingsColumns} data={bookings} onRowClick={handleRowClick} />
-            {selectedBooking && <BookingDetailComponent booking={selectedBooking} />}
+            {loading ? (
+                <div>Loading...</div> 
+            ) : error ? (
+                <div>Error: {error}</div>
+            ) : (
+                <>
+                    <SectionOrder>
+                        <List>
+                            <ItemList onClick={handleClickAll}>All Bookings</ItemList>
+                            <ItemList onClick={handleClickCheckIn}>Check In</ItemList>
+                            <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
+                            <ItemList onClick={handleClickInProgress}>In progress</ItemList>
+                        </List>
+                        <ButtonStyles styled='new'>+ New Booking</ButtonStyles>
+                        <SelectStyled onChange={handleBookingsChange}>
+                            <option value='orderDate'>Order Date</option>
+                            <option value='guest'>Guest</option>
+                            <option value='checkIn'>Check In</option>
+                            <option value='checkOut'>Check Out</option>
+                        </SelectStyled>
+                    </SectionOrder>
+                    <TableComponent columns={bookingsColumns} data={bookingList} onRowClick={handleRowClick} />
+                    {bookingList && <BookingDetailComponent booking={bookingList} />}
+                </>
+            )}
         </NavbarComponent>
     );
 };
