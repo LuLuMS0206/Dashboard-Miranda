@@ -47,7 +47,7 @@
         "checkOut": "2024-06-30",
         "specialRequest": "No special requests",
         "roomType": "Standard - Room 205",
-        "status": "Pending"
+        "status": "In Progress"
     },
     {
         "id": "RES567890",
@@ -57,7 +57,7 @@
         "checkOut": "2024-07-02",
         "specialRequest": "Extra towels",
         "roomType": "Deluxe - Room 102",
-        "status": "Confirmed"
+        "status": "Check In"
     },
     {
         "id": "RES345012",
@@ -67,7 +67,7 @@
         "checkOut": "2024-07-05",
         "specialRequest": "Sea view",
         "roomType": "Suite - Room 305",
-        "status": "Cancelled"
+        "status": "Check Out"
     },
     {
         "id": "RES123789",
@@ -77,6 +77,6 @@
         "checkOut": "2024-07-07",
         "specialRequest": "Quiet room",
         "roomType": "Superior - Room 406",
-        "status": "Confirmed"
+        "status": "In Progress"
     }
 ]
