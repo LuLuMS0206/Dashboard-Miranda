@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -45,22 +44,22 @@ export const BookingPage = () => {
     };
 
     const handleClickAll = () => {
-        dispatch(setBookings(bookingSlice));
+        setBookingList(bookingSlice);
     };
 
     const handleClickCheckIn = () => {
         const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check In');
-        dispatch(setBookings(filteredBookings));
+        setBookingList(filteredBookings);
     };
 
     const handleClickCheckOut = () => {
         const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check Out');
-        dispatch(setBookings(filteredBookings));
+        setBookingList(filteredBookings);
     };
 
     const handleClickInProgress = () => {
         const filteredBookings = bookingSlice.filter(booking => booking.status === 'In Progress');
-        dispatch(setBookings(filteredBookings));
+        setBookingList(filteredBookings);
     };
 
     const handleBookingsChange = (event) => {
@@ -79,7 +78,7 @@ export const BookingPage = () => {
             sortedBookings = sortedBookings.sort((a, b) => a.id - b.id);
         }
 
-        dispatch(setBookings(sortedBookings));
+        setBookingList(sortedBookings);
     };
 
     const handleClickNewBooking = () => {
