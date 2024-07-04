@@ -15,6 +15,7 @@ import { ContactPage } from './pages/contactPage/contactPage';
 import { RoomPage } from './pages/roomPage/roomPage';
 import { UserContextProvider } from './context/userContext';
 import { BookingDetailPage } from './pages/bookingDetailPage/bookingDetailPage';
+import { BookingFormPage } from './pages/bookingFormPage/bookingFormPage';
 
 export const MainApp = () => {
   const [user] = useLocalStorage('user');
@@ -31,6 +32,7 @@ export const MainApp = () => {
                 <Route path='/navbarComponent' element={<NavbarComponent />} />
                 <Route path='/bookings' element={<BookingPage />} />
                 <Route path='/bookingsDetail/:id' element={<BookingDetailPage />} />
+                <Route path='/bookingsForm/:id' element={<BookingFormPage />} />
                 <Route path='/users' element={<UserPage />} />
                 <Route path='/contact' element={<ContactPage />} />
                 <Route path='/rooms' element={<RoomPage />} />

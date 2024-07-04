@@ -8,12 +8,13 @@ import { NavbarComponent } from '../../components/navbarComponent/navbarComponen
 import { TableComponent } from '../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
-// import { BookingDetailComponent } from '../../components/bookingDetailComponent/bookingDetailComponent';
 import { BookingsThunk } from '../../assets/features/booking/bookingThunk';
 import { getBookingsStatus, getBookingSlice, getBookingsError } from '../../assets/features/booking/bookingSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const BookingPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const bookingStatus = useSelector(getBookingsStatus);
     const bookingSlice = useSelector(getBookingSlice);
     const bookingError = useSelector(getBookingsError);
@@ -110,8 +111,8 @@ export const BookingPage = () => {
             columnRenderer: (booking) => {
                 return (
                     <>
-                        <MdOutlineEdit />
-                        <AiOutlineDelete onClick={() => handleDeleteRow(booking.id)} />
+                        <MdOutlineEdit onClick={(e) => { e.stopPropagation(); navigate(`/bookingsForm/${booking.id}`); }} />
+                        <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteRow(booking.id); }} />
                     </>
                 );
             }
@@ -141,8 +142,13 @@ export const BookingPage = () => {
                             <option value='checkOut'>Check Out</option>
                         </SelectStyled>
                     </SectionOrder>
-                    <TableComponent columns={bookingsColumns} data={bookingList} onRowClick={handleRowClick} redirectUrl='/bookingsDetail' />
-                    
+                    <TableComponent 
+                        columns={bookingsColumns} 
+                        data={bookingList} 
+                        onRowClick={handleRowClick} 
+                        redirectUrl='/bookingsDetail' 
+                        onEditClick={(id) => navigate(`/bookingsForm/${id}`)} 
+                    />
                 </>
             )}
         </NavbarComponent>
