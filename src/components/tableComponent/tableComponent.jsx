@@ -1,11 +1,9 @@
-
-
 import { ButtonStyles } from '../buttonComponent/buttonComponent';
 import { Table, Thead, Th, Tbody, Tr, Td, PaginationTable } from './tableStyles';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-export const TableComponent = ({ columns, data, onRowClick, redirectUrl }) => {
+export const TableComponent = ({ columns, data, onRowClick, redirectUrl, onEditClick }) => {
     const pageSize = 4;
     const navigate = useNavigate();
 
@@ -37,6 +35,10 @@ export const TableComponent = ({ columns, data, onRowClick, redirectUrl }) => {
         if (redirectUrl) navigate(`${redirectUrl}/${row.id}`); 
     };
 
+    const stopPropagation = (event) => {
+        event.stopPropagation();
+    };
+
     return (
         <>
             <Table>
@@ -55,7 +57,10 @@ export const TableComponent = ({ columns, data, onRowClick, redirectUrl }) => {
                             style={{ cursor: 'pointer' }}
                         >
                             {columns.map((col, colIndex) => (
-                                <Td key={colIndex}>
+                                <Td 
+                                    key={colIndex}
+                                    onClick={col.headerColumn === 'Actions' ? stopPropagation : undefined}
+                                >
                                     {col.columnRenderer ? col.columnRenderer(row) : row[col.columnsData]}
                                 </Td>
                             ))}

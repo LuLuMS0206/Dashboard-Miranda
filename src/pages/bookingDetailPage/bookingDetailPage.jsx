@@ -8,10 +8,10 @@ import { getBookingById } from '../../assets/features/booking/bookingSlice';
 
 export const BookingDetailPage = () => {
     const { id } = useParams();
-    const booking = useSelector(state => getBookingById(state, parseInt(id))); 
+    const booking = useSelector(state => getBookingById(state, id)); 
 
-    console.log("ID from params:", id);
-    console.log("Booking from state:", booking);
+    // console.log("ID from params:", id);
+    // console.log("Booking from state:", booking);
 
     return (
         <NavbarComponent>
