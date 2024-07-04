@@ -1,9 +1,9 @@
+
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState, useEffect } from 'react';
 import { setBookings, setSelectedBooking } from '../../assets/features/booking/bookingSlice';
-import data from '../../data/booking.json';
 import { NavbarComponent } from '../../components/navbarComponent/navbarComponent';
 import { TableComponent } from '../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../components/styledGeneric/styledGeneric';
@@ -35,8 +35,8 @@ export const BookingPage = () => {
     }, [bookingStatus, bookingSlice, bookingError, dispatch]);
 
     const handleRowClick = (booking) => {
-        setBookingList(booking);
         dispatch(setSelectedBooking(booking));
+        navigate(`/bookingsDetail/${booking.id}`);
     };
 
     const handleDeleteRow = (id) => {
@@ -45,21 +45,21 @@ export const BookingPage = () => {
     };
 
     const handleClickAll = () => {
-        dispatch(setBookings(data));
+        dispatch(setBookings(bookingSlice));
     };
 
     const handleClickCheckIn = () => {
-        const filteredBookings = data.filter(booking => booking.status === 'Check In');
+        const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check In');
         dispatch(setBookings(filteredBookings));
     };
 
     const handleClickCheckOut = () => {
-        const filteredBookings = data.filter(booking => booking.status === 'Check Out');
+        const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check Out');
         dispatch(setBookings(filteredBookings));
     };
 
     const handleClickInProgress = () => {
-        const filteredBookings = data.filter(booking => booking.status === 'In Progress');
+        const filteredBookings = bookingSlice.filter(booking => booking.status === 'In Progress');
         dispatch(setBookings(filteredBookings));
     };
 
@@ -80,6 +80,10 @@ export const BookingPage = () => {
         }
 
         dispatch(setBookings(sortedBookings));
+    };
+
+    const handleClickNewBooking = () => {
+        navigate('/newBooking');
     };
 
     const bookingsColumns = [
@@ -111,7 +115,7 @@ export const BookingPage = () => {
             columnRenderer: (booking) => {
                 return (
                     <>
-                        <MdOutlineEdit onClick={(e) => { e.stopPropagation(); navigate(`/bookingsForm/${booking.id}`); }} />
+                        <MdOutlineEdit onClick={(e) => { e.stopPropagation(); navigate(`/bookingsEdit/${booking.id}`); }} />
                         <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteRow(booking.id); }} />
                     </>
                 );
@@ -134,7 +138,7 @@ export const BookingPage = () => {
                             <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
                             <ItemList onClick={handleClickInProgress}>In progress</ItemList>
                         </List>
-                        <ButtonStyles styled='new'>+ New Booking</ButtonStyles>
+                        <ButtonStyles styled='new' onClick={handleClickNewBooking}>+ New Booking</ButtonStyles>
                         <SelectStyled onChange={handleBookingsChange}>
                             <option value='orderDate'>Order Date</option>
                             <option value='guest'>Guest</option>
@@ -147,7 +151,7 @@ export const BookingPage = () => {
                         data={bookingList} 
                         onRowClick={handleRowClick} 
                         redirectUrl='/bookingsDetail' 
-                        onEditClick={(id) => navigate(`/bookingsForm/${id}`)} 
+                        onEditClick={(id) => navigate(`/bookingsEdit/${id}`)} 
                     />
                 </>
             )}
