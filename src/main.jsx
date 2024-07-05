@@ -9,14 +9,14 @@ import { NavbarComponent } from './components/navbarComponent/navbarComponent';
 import { DashboardPage } from './pages/dashboardPage/dashboardPage';
 import { ProtectedRoutes } from './components/utils/protectedRoutes';
 import { useLocalStorage } from 'react-use';
-import { BookingPage } from './pages/bookingPage/bookingPage';
+import { BookingPage } from './pages/booking/bookingPage/bookingPage';
 import { UserPage } from './pages/userPage/userPage';
 import { ContactPage } from './pages/contactPage/contactPage';
 import { RoomPage } from './pages/roomPage/roomPage';
 import { UserContextProvider } from './context/userContext';
-import { BookingDetailPage } from './pages/bookingDetailPage/bookingDetailPage';
-import { BookingEditPage } from './pages/bookingFormPage/bookingFormPage';
-import { NewBookingPage } from './pages/newBookingPage/newBookingPage';
+import { BookingDetailPage } from './pages/booking/bookingDetailPage/bookingDetailPage';
+import { BookingEditPage } from './pages/booking/bookingFormPage/bookingFormPage';
+import { NewBookingPage } from './pages/booking/newBookingPage/newBookingPage';
 
 
 export const MainApp = () => {

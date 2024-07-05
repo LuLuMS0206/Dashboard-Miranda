@@ -1,5 +1,5 @@
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
+import { NavbarComponent } from "./../../components/navbarComponent/navbarComponent";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
 import data from "./../../data/users.json";
 import { useState, useEffect } from "react";
