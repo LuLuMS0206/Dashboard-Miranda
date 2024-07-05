@@ -17,6 +17,8 @@ import { UserContextProvider } from './context/userContext';
 import { BookingDetailPage } from './pages/booking/bookingDetailPage/bookingDetailPage';
 import { BookingEditPage } from './pages/booking/bookingFormPage/bookingFormPage';
 import { NewBookingPage } from './pages/booking/newBookingPage/newBookingPage';
+import { RoomEditPage } from './pages/roomPage/roomEditPage';
+import { NewRoomPage } from './pages/roomPage/newRoomPage';
 
 
 export const MainApp = () => {
@@ -39,6 +41,8 @@ export const MainApp = () => {
                 <Route path='/users' element={<UserPage />} />
                 <Route path='/contact' element={<ContactPage />} />
                 <Route path='/rooms' element={<RoomPage />} />
+                <Route path='/roomsEdit/:id' element={<RoomEditPage />} />
+                <Route path='/newRooms' element={<NewRoomPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
