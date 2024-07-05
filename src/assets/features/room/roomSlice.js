@@ -1,3 +1,4 @@
+
 import { createSlice } from '@reduxjs/toolkit';
 import { RoomsThunk } from './roomThunk';
 
@@ -45,3 +46,5 @@ export const getRoomsList = (state) => state.rooms.rooms;
 export const getRoom = (state) => state.rooms.room;
 export const getRoomsStatus = (state) => state.rooms.status;
 export const getRoomsError = (state) => state.rooms.error;
+export const selectRoomById = (state, id) =>
+    state.rooms.rooms.find(room => room.id === id);

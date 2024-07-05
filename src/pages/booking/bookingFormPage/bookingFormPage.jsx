@@ -1,5 +1,4 @@
 
-
 import { NavbarComponent } from "./../../../components/navbarComponent/navbarComponent";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,8 +26,6 @@ export const BookingEditPage = () => {
     const [formData, setFormData] = useState(initialFormData);
 
     useEffect(() => {
-        console.log(booking)
-        console.log("BookingEditPage - useEffect - booking:", booking);
         if (booking) {
             setFormData(booking);
         }
@@ -41,12 +38,9 @@ export const BookingEditPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("BookingEditPage - handleSubmit - formData:", formData);
         dispatch(updateBooking(formData)); 
         navigate('/bookings'); 
     };
-
-    console.log("BookingEditPage - formData:", formData);
 
     return (
         <div>

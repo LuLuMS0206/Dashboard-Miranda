@@ -37,3 +37,10 @@ export const SelectStyled = styled.select`
   padding: 0.5rem;
   border-radius: 0.4rem;
 `;
+
+export const TextAreaStyled = styled.textarea`
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+`;
