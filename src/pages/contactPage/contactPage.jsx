@@ -1,4 +1,4 @@
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
+import { NavbarComponent } from "./../../components/navbarComponent/navbarComponent";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
 import data from "../../data/contact.json";
 import { useState } from "react";

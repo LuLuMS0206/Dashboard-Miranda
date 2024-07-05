@@ -1,6 +1,6 @@
 
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
+import { NavbarComponent } from "./../../components/navbarComponent/navbarComponent"
 import { SectionOrder, List, ItemList, SelectStyled } from "../../components/styledGeneric/styledGeneric";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
 import { useEffect, useState } from "react";

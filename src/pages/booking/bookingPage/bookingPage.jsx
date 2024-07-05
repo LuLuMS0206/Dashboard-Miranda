@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState, useEffect } from 'react';
-import { setBookings, setSelectedBooking } from '../../assets/features/booking/bookingSlice';
-import { NavbarComponent } from '../../components/navbarComponent/navbarComponent';
-import { TableComponent } from '../../components/tableComponent/tableComponent';
-import { SectionOrder, List, ItemList, SelectStyled } from '../../components/styledGeneric/styledGeneric';
-import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
-import { BookingsThunk } from '../../assets/features/booking/bookingThunk';
-import { getBookingsStatus, getBookingSlice, getBookingsError } from '../../assets/features/booking/bookingSlice';
+import { setBookings, setSelectedBooking, getBookingsStatus, getBookingSlice, getBookingsError } from './../../../assets/features/booking/bookingSlice';
+import { NavbarComponent } from './../../../components/navbarComponent/navbarComponent';
+import { TableComponent } from './../../../components/tableComponent/tableComponent';
+import { SectionOrder, List, ItemList, SelectStyled } from './../../../components/styledGeneric/styledGeneric';
+import { ButtonStyles } from './../../../components/buttonComponent/buttonComponent';
+import { BookingsThunk } from './../../../assets/features/booking/bookingThunk';
 import { useNavigate } from 'react-router-dom';
 
 export const BookingPage = () => {

@@ -1,11 +1,11 @@
 
 
-import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
+import { NavbarComponent } from "./../../../components/navbarComponent/navbarComponent";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { updateBooking, getBookingById } from '../../assets/features/booking/bookingSlice';
-import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
+import { updateBooking, getBookingById } from './../../../assets/features/booking/bookingSlice';
+import { ButtonStyles } from './../../../components/buttonComponent/buttonComponent';
 
 export const BookingEditPage = () => {
     const { id } = useParams();
