@@ -1,12 +1,13 @@
 
-
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent"
 import { SectionOrder, List, ItemList, SelectStyled } from "../../components/styledGeneric/styledGeneric";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
-// import roomsData from "./../../data/rooms.json"
 import { useEffect, useState } from "react";
 import data from '../../data/rooms.json';
+import { RoomsThunk } from "../../assets/features/room/roomThunk";
+import { useSelector, useDispatch } from 'react-redux';
+import { getRoomsStatus, getRoomsList, getRoomsError } from "../../assets/features/room/roomSlice";
 
 export const RoomPage = () => {
     const roomsColumns = [
@@ -23,11 +24,30 @@ export const RoomPage = () => {
         )}
     ];
 
-    const [rooms, setRooms] = useState(data);
+    const [rooms, setRooms] = useState([data]);
+    const [isLoading, setIsLoading] = useState(true);
+    const roomStatus = useSelector(getRoomsStatus) || 'idle';
+    const roomsError = useSelector(getRoomsError) || null;
+    const roomsList = useSelector(getRoomsList) || [];
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (roomStatus === 'idle') {
+            dispatch(RoomsThunk());
+        } else if (roomStatus === 'fulfilled') {
+            setIsLoading(false);
+            setRooms(roomsList);
+        } else if (roomStatus === 'rejected') {
+            setIsLoading(false);
+            console.error('Error fetching rooms:', roomsError);
+        }
+    }, [dispatch, roomStatus, roomsList, roomsError]);
+
 
     useEffect(() => {
         sortRoomsHandler('roomNumber');
     }, []);
+
 
     const sortRoomsHandler = (value) => {
         let sortedRooms = [...data];
@@ -64,6 +84,8 @@ export const RoomPage = () => {
 
     return(
         <NavbarComponent>
+            {isLoading ? <p>...Loading...</p> :
+                <>
             <SectionOrder>
                 <List>
                     <ItemList onClick={handleListClick}>All Rooms</ItemList>
@@ -78,6 +100,9 @@ export const RoomPage = () => {
                 </SelectStyled>
             </SectionOrder>
             <TableComponent columns={roomsColumns} data={rooms} /> 
+            </>
+            }
         </NavbarComponent>
-    )
-}
+    )}
+
+

@@ -6,7 +6,7 @@ export const RoomSlice = createSlice({
     initialState: {
         status: 'idle',
         error: null,
-        rooms: [],  
+        rooms: [],
         room: null,
     },
     reducers: {
@@ -30,19 +30,18 @@ export const RoomSlice = createSlice({
             })
             .addCase(RoomsThunk.fulfilled, (state, action) => {
                 state.status = 'fulfilled';
-                state.rooms = action.payload; 
+                state.rooms = action.payload;
             })
             .addCase(RoomsThunk.rejected, (state, action) => {
                 state.status = 'rejected';
-                state.error = action.error;
+                state.error = action.error.message;
             });
     },
 });
 
 export const { addRoom, editRoom, deleteRoom } = RoomSlice.actions;
 
-export const getRoomSlice = (state) => state.rooms.rooms;
+export const getRoomsList = (state) => state.rooms.rooms;
 export const getRoom = (state) => state.rooms.room;
 export const getRoomsStatus = (state) => state.rooms.status;
 export const getRoomsError = (state) => state.rooms.error;
-

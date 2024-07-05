@@ -1,6 +1,4 @@
 
-
-
 import { createSlice } from '@reduxjs/toolkit';
 import { BookingsThunk } from './bookingThunk';
 
