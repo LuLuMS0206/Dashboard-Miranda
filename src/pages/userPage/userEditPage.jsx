@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editUser, selectUserById } from './../../assets/features/user/userSlice';
+import { IoArrowBackSharp } from "react-icons/io5";
+import {ButtonStyles} from './../../components/buttonComponent/buttonComponent'
 
 export const UserEditPage = () => {
     const { id } = useParams();
@@ -40,11 +42,17 @@ export const UserEditPage = () => {
         navigate('/users'); 
     };
 
+    const handleGoTo = () => {
+        navigate('/users');
+    };
+
+
     return (
         <NavbarComponent>
             <div>
                 <h2>Edit User</h2>
                 <form onSubmit={handleSubmit}>
+                <ButtonStyles styled='next' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
                     <div>
                         <label htmlFor="name">Full Name</label>
                         <input
