@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { BookingSlice } from './../assets/features/booking/bookingSlice';
 import {RoomSlice} from './../assets/features/room/roomSlice'
+import {ContactSlice} from './../assets/features/contact/contactSlice'
 
 
 export const store = configureStore({
@@ -9,7 +10,7 @@ export const store = configureStore({
         // auth: authReducer,
         bookings: BookingSlice.reducer,
         rooms: RoomSlice.reducer,
-        // contacts: contactsReducer,
+        contact: ContactSlice.reducer,
         // users: usersReducer,
         // dashboard: dashboardReducer,
     },

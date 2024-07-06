@@ -9,7 +9,7 @@
         "id": 0,
         "subject": "Reclamación de factura",
         "comment": "He recibido una factura incorrecta y necesito una corrección",
-        "archived": false
+        "status": "archived"
     },
     {
         "date": "12/07/2024",
@@ -21,7 +21,7 @@
         "id": 1,
         "subject": "Consulta sobre servicio",
         "comment": "Tengo dudas sobre los servicios ofrecidos y sus precios",
-        "archived": false
+        "status": "public"
     },
     {
         "date": "11/07/2024",
@@ -33,7 +33,7 @@
         "id": 2,
         "subject": "Problema con producto",
         "comment": "El producto que compré no funciona correctamente",
-        "archived": false
+        "status": "public"
     },
     {
         "date": "26/07/2024",
@@ -45,7 +45,7 @@
         "id": 3,
         "subject": "Solicitud de reembolso",
         "comment": "Quisiera solicitar un reembolso por el producto adquirido",
-        "archived": false
+        "status": "public"
     },
     {
         "date": "28/07/2024",
@@ -57,7 +57,7 @@
         "id": 4,
         "subject": "Queja sobre atención",
         "comment": "No estoy satisfecho con la atención recibida",
-        "archived": true
+        "status": "archived"
     },
     {
         "date": "20/07/2024",
@@ -69,7 +69,7 @@
         "id": 5,
         "subject": "Consulta de entrega",
         "comment": "Necesito información sobre el estado de mi entrega",
-        "archived": false
+        "status": "public"
     },
     {
         "date": "28/07/2024",
@@ -81,7 +81,7 @@
         "id": 6,
         "subject": "Actualización de datos",
         "comment": "Quiero actualizar mis datos de contacto",
-        "archived": true
+        "status": "archived"
     },
     {
         "date": "06/07/2024",
@@ -93,7 +93,7 @@
         "id": 7,
         "subject": "Consulta de cuenta",
         "comment": "Tengo una consulta sobre mi cuenta",
-        "archived": true
+        "status": "archived"
     },
     {
         "date": "20/07/2024",
@@ -105,7 +105,7 @@
         "id": 8,
         "subject": "Problema de facturación",
         "comment": "He detectado un error en mi factura",
-        "archived": false
+        "status": "public"
     },
     {
         "date": "14/07/2024",
@@ -117,7 +117,7 @@
         "id": 9,
         "subject": "Queja sobre producto",
         "comment": "El producto que recibí no cumple con lo esperado",
-        "archived": true
+        "status": "archived"
     },
     {
         "date": "19/07/2024",
@@ -129,6 +129,6 @@
         "id": 10,
         "subject": "Consulta técnica",
         "comment": "Necesito asistencia técnica para resolver un problema",
-        "archived": false
+        "status": "public"
     }
 ]
