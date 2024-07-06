@@ -1,5 +1,4 @@
 
-
 import { NavbarComponent } from "./../../components/navbarComponent/navbarComponent";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
 import { useState, useEffect } from "react";

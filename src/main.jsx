@@ -19,6 +19,8 @@ import { BookingEditPage } from './pages/booking/bookingFormPage/bookingFormPage
 import { NewBookingPage } from './pages/booking/newBookingPage/newBookingPage';
 import { RoomEditPage } from './pages/roomPage/roomEditPage';
 import { NewRoomPage } from './pages/roomPage/newRoomPage';
+import { UserEditPage } from './pages/userPage/userEditPage';
+import { UserNewPage } from './pages/userPage/userNewPage';
 
 
 export const MainApp = () => {
@@ -39,6 +41,8 @@ export const MainApp = () => {
                 <Route path='/bookingsEdit/:id' element={<BookingEditPage />} />
                 <Route path='/newBooking' element={<NewBookingPage />} />
                 <Route path='/users' element={<UserPage />} />
+                <Route path='/newUsers' element={<UserNewPage />} />
+                <Route path='/editUsers/:id' element={<UserEditPage />} />
                 <Route path='/contact' element={<ContactPage />} />
                 <Route path='/rooms' element={<RoomPage />} />
                 <Route path='/roomsEdit/:id' element={<RoomEditPage />} />
