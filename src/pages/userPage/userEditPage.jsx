@@ -5,8 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { editUser, selectUserById } from './../../assets/features/user/userSlice';
 
 export const UserEditPage = () => {
-    const { userId } = useParams();
-    const user = useSelector(state => selectUserById(state, userId));
+    const { id } = useParams();
+    const user = useSelector(state => selectUserById(state, id));
     const [formData, setFormData] = useState({
         name: '',
         id: '',
@@ -37,7 +37,7 @@ export const UserEditPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(editUser(formData));
-        navigate('/users'); // Navegar de nuevo a la página de usuarios
+        navigate('/users'); 
     };
 
     return (
@@ -65,7 +65,7 @@ export const UserEditPage = () => {
                             value={formData.id}
                             onChange={handleChange}
                             required
-                            readOnly // Hacer que el ID no sea editable
+                            readOnly 
                         />
                     </div>
                     <div>
