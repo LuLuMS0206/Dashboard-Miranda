@@ -115,7 +115,7 @@ export const UserPage = () => {
                             <ItemList onClick={handleClickActive}>Active Employees</ItemList>
                             <ItemList onClick={handleClickInactive}>Inactive Employees</ItemList>
                         </List>
-                        <ButtonStyles styled='new'>+ New User</ButtonStyles>
+                        <ButtonStyles styled='new' onClick={() => navigate('/newUsers')}>+ New User</ButtonStyles>
                         <SelectStyled onChange={handleSortChange}>
                             <option value='startDate'>Start date</option>
                             <option value='name'>Full name</option>
