@@ -1,5 +1,5 @@
 
-
+import { IoArrowBackSharp } from "react-icons/io5";
 import { useState } from 'react';
 import {useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -56,11 +56,17 @@ export const RoomEditPage = () => {
         navigate('/rooms');
     };
 
+    const handleGoTo = () => {
+        navigate('/rooms');
+    };
+
+
     
 
     return (
         <NavbarComponent>
             <form onSubmit={handleSubmit}>
+            <ButtonStyles  styled='next' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
                 <div>
                     <label>Image:</label>
                     <InputStyled type="file" name="image" accept="image/*" onChange={handleChange} />

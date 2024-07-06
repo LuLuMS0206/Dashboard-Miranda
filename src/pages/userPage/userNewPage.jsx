@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addUser } from './../../assets/features/user/userSlice';
+import { IoArrowBackSharp } from "react-icons/io5";
+import {ButtonStyles} from './../../components/buttonComponent/buttonComponent'
 
 export const UserNewPage = () => {
     const [formData, setFormData] = useState({
@@ -32,11 +34,16 @@ export const UserNewPage = () => {
         navigate('/users');
     };
 
+    const handleGoTo = () => {
+        navigate('/users');
+    };
+
     return (
         <NavbarComponent>
             <div>
                 <h2>Add New User</h2>
                 <form onSubmit={handleSubmit}>
+                <ButtonStyles styled='next' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
                     <div>
                         <label htmlFor="name">Full Name</label>
                         <input

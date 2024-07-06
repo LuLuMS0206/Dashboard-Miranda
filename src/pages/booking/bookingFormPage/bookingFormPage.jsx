@@ -1,6 +1,5 @@
-
 import { NavbarComponent } from "./../../../components/navbarComponent/navbarComponent";
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updateBooking, getBookingById } from './../../../assets/features/booking/bookingSlice';
@@ -11,7 +10,6 @@ export const BookingEditPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const booking = useSelector(state => getBookingById(state, id));
-
 
     const initialFormData = {
         guest: '',
@@ -80,6 +78,7 @@ export const BookingEditPage = () => {
                 </label>
                 <ButtonStyles type="submit">Save</ButtonStyles>
             </form>
+            <ButtonStyles onClick={() => navigate('/bookings')}>Go to Bookings</ButtonStyles>
         </div>
     );
 };
