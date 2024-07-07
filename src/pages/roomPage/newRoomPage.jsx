@@ -4,10 +4,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ButtonStyles } from './../../components/buttonComponent/buttonComponent';
-import { InputStyled } from './../../components/popupUserComponent/popupUserStyled';
 import { addRoom } from './../../assets/features/room/roomSlice';
-import { SelectStyled } from './../../components/styledGeneric/styledGeneric';
 import { IoArrowBackSharp } from "react-icons/io5";
+import { FormStyled, LabelFormStyled, SelectFormStyled, InputFormStyled } from './../../components/styledGeneric/styledGeneric'
 
 export const NewRoomPage = () => {
     const navigate = useNavigate();
@@ -43,7 +42,7 @@ export const NewRoomPage = () => {
         e.preventDefault();
         const newRoom = { ...formData, id: Date.now() };
         dispatch(addRoom(newRoom));
-        navigate('../rooms'); 
+        navigate('../rooms');
     };
 
     const handleGoTo = () => {
@@ -53,44 +52,40 @@ export const NewRoomPage = () => {
     return (
         <NavbarComponent>
 
-            <form onSubmit={handleSubmit}>
-            <ButtonStyles  styled='next' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
-                <div>
-                    <label>Image:</label>
-                    <InputStyled type="file" name="image" accept="image/*" onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Room Type:</label>
-                    <SelectStyled name="roomType" value={formData.roomType} onChange={handleChange}>
-                        <option value="single bed">Single Bed</option>
-                        <option value="double bed">Double Bed</option>
-                        <option value="double superior">Double Superior</option>
-                        <option value="suite">Suite</option>
-                    </SelectStyled>
-                </div>
-                <div>
-                    <label>Room Number:</label>
-                    <InputStyled type="text" name="roomNumber" value={formData.roomNumber} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <InputStyled type="number" name="price" value={formData.price} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Discount:</label>
-                    <InputStyled type="number" name="discount" value={formData.discount} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Amenities:</label>
-                    <SelectStyled name="amenities" multiple value={formData.amenities} onChange={handleAmenitiesChange}>
-                        <option value="air conditioning">Air Conditioning</option>
-                        <option value="wifi">Wi-Fi</option>
-                        <option value="tv">TV</option>
-                        <option value="minibar">Minibar</option>
-                    </SelectStyled>
-                </div>
-                <ButtonStyles type="submit">Add Room</ButtonStyles>
-            </form>
+            <FormStyled onSubmit={handleSubmit}>
+                <ButtonStyles styled='backForm' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
+
+                <LabelFormStyled>Image:</LabelFormStyled>
+                <InputFormStyled type="file" name="image" accept="image/*" onChange={handleChange} />
+
+
+                <LabelFormStyled>Room Type:</LabelFormStyled>
+                <SelectFormStyled name="roomType" value={formData.roomType} onChange={handleChange}>
+                    <option value="single bed">Single Bed</option>
+                    <option value="double bed">Double Bed</option>
+                    <option value="double superior">Double Superior</option>
+                    <option value="suite">Suite</option>
+                </SelectFormStyled>
+
+                <LabelFormStyled>Room Number:</LabelFormStyled>
+                <InputFormStyled type="text" name="roomNumber" value={formData.roomNumber} onChange={handleChange} />
+
+                <LabelFormStyled>Price:</LabelFormStyled>
+                <InputFormStyled type="number" name="price" value={formData.price} onChange={handleChange} />
+
+                <LabelFormStyled>Discount:</LabelFormStyled>
+                <InputFormStyled type="number" name="discount" value={formData.discount} onChange={handleChange} />
+
+                <LabelFormStyled>Amenities:</LabelFormStyled>
+                <SelectFormStyled name="amenities" multiple value={formData.amenities} onChange={handleAmenitiesChange}>
+                    <option value="air conditioning">Air Conditioning</option>
+                    <option value="wifi">Wi-Fi</option>
+                    <option value="tv">TV</option>
+                    <option value="minibar">Minibar</option>
+                </SelectFormStyled>
+
+                <ButtonStyles styled='contact' type="submit">Add Room</ButtonStyles>
+            </FormStyled>
         </NavbarComponent>
     );
 };

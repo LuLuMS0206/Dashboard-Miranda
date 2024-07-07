@@ -39,8 +39,53 @@ export const SelectStyled = styled.select`
 `;
 
 export const TextAreaStyled = styled.textarea`
-    padding: 8px;
-    margin: 5px 0;
-    width: 100%;
-    box-sizing: border-box;
+    border: 1px solid #135846;
+    color: #135846;
+    margin-left: 3em;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
 `;
+
+
+
+export const FormStyled = styled.form`
+        display: inline-grid;
+            background: white;
+    padding: 2rem 6rem;
+        border-radius: 0.4rem;
+box-shadow: -8px -2px 54px -11px rgba(201,201,201,0.64);
+`;
+
+export const LabelFormStyled = styled.label`
+    margin: 0px auto;
+        margin-top: 2rem;
+        color:  #135846;
+`;
+
+export const InputFormStyled = styled.input`
+        border: 1px solid #135846;
+    color: #135846;
+    margin-left: 3em;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+}
+
+`;
+
+export const SelectFormStyled = styled.select`
+        border: 1px solid #135846;
+    color: #135846;
+    margin-left: 3em;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+}
+
+`;
+
+
+// export const DivStyled = styled.div`
+//     transition: margin-left 0.2s ease-in-out;
+//     margin-top: 8rem;
+//     padding-left: ${(props) => (props.isOpen ? "18rem" : "2rem")};
+
+// `;

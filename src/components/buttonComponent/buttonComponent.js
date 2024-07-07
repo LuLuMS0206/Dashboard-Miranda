@@ -23,6 +23,7 @@ export const ButtonStyles = styled.button`
         color: #135846;
         border: none;
         width: 100%;
+        margin-top: 2rem;
         `;
 
       case "viewColor":
@@ -100,9 +101,9 @@ export const ButtonStyles = styled.button`
       case "prev":
         return `
     background-color: #FFFFFF;
-color: #135846;
-   border: 1px solid #135846;
-   width: 50%;
+    color: #135846;
+    border: 1px solid #135846;
+    width: 50%;
     `;
 
       case "next":
@@ -120,6 +121,14 @@ return `
     width: 7.815em;
     border:none;
     width: 100%;
+`
+
+case 'backForm': 
+return `
+   background-color: #135846;
+    color: #FFFFFF;
+    border: none;
+width: 15%;
 `
     }
   }}
