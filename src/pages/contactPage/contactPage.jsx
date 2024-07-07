@@ -1,4 +1,3 @@
-
 import { NavbarComponent } from "./../../components/navbarComponent/navbarComponent";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
 import { useState, useEffect } from "react";
@@ -6,8 +5,9 @@ import { SectionOrder, List, ItemList } from "../../components/styledGeneric/sty
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { deleteContact, getContactsStatus, getContactsError, getContactsList } from "./../../assets/features/contact/contactSlice";
-import {ContactThunk} from './../../assets/features/contact/contactThunk'
+import { ContactThunk } from './../../assets/features/contact/contactThunk';
 
 export const ContactPage = () => {
     const contactColumns = [
@@ -71,8 +71,25 @@ export const ContactPage = () => {
     };
 
     const handleDeleteContact = (contactId) => {
-        dispatch(deleteContact(contactId));
-        setFilteredContacts(prevContacts => prevContacts.filter(contact => contact.id !== contactId));
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteContact(contactId));
+                setFilteredContacts(prevContacts => prevContacts.filter(contact => contact.id !== contactId));
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The contact has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
     };
 
     return (

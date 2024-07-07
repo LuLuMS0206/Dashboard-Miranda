@@ -7,6 +7,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { deleteUser, getUsersStatus, getUsersError, getUsersList } from './../../assets/features/user/userSlice';
 import { UserThunk } from './../../assets/features/user/userThunk';
 
@@ -102,7 +103,25 @@ export const UserPage = () => {
     };
 
     const handleDeleteUser = (userId) => {
-        dispatch(deleteUser(userId));
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteUser(userId));
+                setFilteredUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The user has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
     };
 
     return (

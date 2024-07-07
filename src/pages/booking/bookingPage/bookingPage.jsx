@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { MdOutlineEdit } from "react-icons/md";
-import { AiOutlineDelete } from "react-icons/ai";
+// 
+import { NavbarComponent } from "./../../../components/navbarComponent/navbarComponent";
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { setBookings, setSelectedBooking, getBookingsStatus, getBookingSlice, getBookingsError } from './../../../assets/features/booking/bookingSlice';
-import { NavbarComponent } from './../../../components/navbarComponent/navbarComponent';
 import { TableComponent } from './../../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from './../../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from './../../../components/buttonComponent/buttonComponent';
 import { BookingsThunk } from './../../../assets/features/booking/bookingThunk';
-import { useNavigate } from 'react-router-dom';
+import { MdOutlineEdit } from "react-icons/md";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export const BookingPage = () => {
     const dispatch = useDispatch();
@@ -38,8 +40,25 @@ export const BookingPage = () => {
     };
 
     const handleDeleteRow = (id) => {
-        const updatedBookings = bookingList.filter(booking => booking.id !== id);
-        dispatch(setBookings(updatedBookings));
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const updatedBookings = bookingList.filter(booking => booking.id !== id);
+                dispatch(setBookings(updatedBookings));
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
     };
 
     const handleClickAll = () => {
