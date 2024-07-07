@@ -7,6 +7,7 @@ import { TableComponent } from "./../../components/tableComponent/tableComponent
 import { useEffect, useState } from "react";
 import { RoomsThunk } from "./../../assets/features/room/roomThunk";
 import { useSelector, useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { getRoomsStatus, getRoomsList, getRoomsError, deleteRoom } from "./../../assets/features/room/roomSlice";
 import { useNavigate } from 'react-router-dom'; 
 
@@ -92,7 +93,25 @@ export const RoomPage = () => {
     };
 
     const handleDeleteRoom = (roomId) => {
-        dispatch(deleteRoom(roomId));
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteRoom(roomId));
+                setFilteredRooms(prevRooms => prevRooms.filter(room => room.id !== roomId));
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "The room has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
     };
 
     const handleNewRoom = () => {
