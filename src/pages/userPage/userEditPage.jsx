@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editUser, selectUserById } from './../../assets/features/user/userSlice';
 import { IoArrowBackSharp } from "react-icons/io5";
-import {ButtonStyles} from './../../components/buttonComponent/buttonComponent'
+import { ButtonStyles } from './../../components/buttonComponent/buttonComponent'
+import { SelectFormStyled, FormStyled, LabelFormStyled, InputFormStyled } from './../../components/styledGeneric/styledGeneric'
 
 export const UserEditPage = () => {
     const { id } = useParams();
@@ -39,7 +40,7 @@ export const UserEditPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(editUser(formData));
-        navigate('/users'); 
+        navigate('/users');
     };
 
     const handleGoTo = () => {
@@ -50,91 +51,85 @@ export const UserEditPage = () => {
     return (
         <NavbarComponent>
             <div>
-                <h2>Edit User</h2>
-                <form onSubmit={handleSubmit}>
-                <ButtonStyles styled='next' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
-                    <div>
-                        <label htmlFor="name">Full Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="id">Employee ID</label>
-                        <input
-                            type="text"
-                            id="id"
-                            name="id"
-                            value={formData.id}
-                            onChange={handleChange}
-                            required
-                            readOnly 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="startDate">Start Date</label>
-                        <input
-                            type="date"
-                            id="startDate"
-                            name="startDate"
-                            value={formData.startDate}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="description">Description</label>
-                        <input
-                            type="text"
-                            id="description"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="contact">Contact</label>
-                        <input
-                            type="text"
-                            id="contact"
-                            name="contact"
-                            value={formData.contact}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="status">Status</label>
-                        <select
-                            id="status"
-                            name="status"
-                            value={formData.status}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                        </select>
-                    </div>
-                    <button type="submit">Save Changes</button>
-                </form>
+
+                <FormStyled onSubmit={handleSubmit}>
+                    <ButtonStyles styled='backForm' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
+
+                    <LabelFormStyled htmlFor="name">Full Name</LabelFormStyled>
+                    <InputFormStyled
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <LabelFormStyled htmlFor="id">Employee ID</LabelFormStyled>
+                    <InputFormStyled
+                        type="text"
+                        id="id"
+                        name="id"
+                        value={formData.id}
+                        onChange={handleChange}
+                        required
+                        readOnly
+                    />
+
+                    <LabelFormStyled htmlFor="startDate">Start Date</LabelFormStyled>
+                    <InputFormStyled
+                        type="date"
+                        id="startDate"
+                        name="startDate"
+                        value={formData.startDate}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <LabelFormStyled htmlFor="description">Description</LabelFormStyled>
+                    <InputFormStyled
+                        type="text"
+                        id="description"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <LabelFormStyled htmlFor="email">Email</LabelFormStyled>
+                    <InputFormStyled
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <LabelFormStyled htmlFor="contact">Contact</LabelFormStyled>
+                    <InputFormStyled
+                        type="text"
+                        id="contact"
+                        name="contact"
+                        value={formData.contact}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <LabelFormStyled htmlFor="status">Status</LabelFormStyled>
+                    <SelectFormStyled
+                        id="status"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="ACTIVE">Active</option>
+                        <option value="INACTIVE">Inactive</option>
+                    </SelectFormStyled>
+
+                    <ButtonStyles styled='contact' type="submit">Save Changes</ButtonStyles>
+                </FormStyled>
             </div>
         </NavbarComponent>
     );

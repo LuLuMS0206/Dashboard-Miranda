@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updateBooking, getBookingById } from './../../../assets/features/booking/bookingSlice';
 import { ButtonStyles } from './../../../components/buttonComponent/buttonComponent';
+import {FormStyled, LabelFormStyled, InputFormStyled, SelectFormStyled} from './../../../components/styledGeneric/styledGeneric'
+import { IoArrowBackSharp } from "react-icons/io5";
 
 export const BookingEditPage = () => {
     const { id } = useParams();
@@ -43,42 +45,43 @@ export const BookingEditPage = () => {
     return (
         <div>
             <NavbarComponent />
-            <form onSubmit={handleSubmit}>
-                <label>
+            <FormStyled onSubmit={handleSubmit}>
+            <ButtonStyles  styled='backForm' onClick={() => navigate('/bookings')}><IoArrowBackSharp /></ButtonStyles>
+                <LabelFormStyled>
                     Guest:
-                    <input type="text" name="guest" value={formData.guest} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="text" name="guest" value={formData.guest} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Order Date:
-                    <input type="date" name="orderDate" value={formData.orderDate} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="date" name="orderDate" value={formData.orderDate} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Check In:
-                    <input type="date" name="checkIn" value={formData.checkIn} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="date" name="checkIn" value={formData.checkIn} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Check Out:
-                    <input type="date" name="checkOut" value={formData.checkOut} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="date" name="checkOut" value={formData.checkOut} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Special Request:
-                    <input type="text" name="specialRequest" value={formData.specialRequest} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="text" name="specialRequest" value={formData.specialRequest} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Room Type:
-                    <input type="text" name="roomType" value={formData.roomType} onChange={handleChange} />
-                </label>
-                <label>
+                    <InputFormStyled type="text" name="roomType" value={formData.roomType} onChange={handleChange} />
+                </LabelFormStyled>
+                <LabelFormStyled>
                     Status:
-                    <select name="status" value={formData.status} onChange={handleChange}>
+                    <SelectFormStyled name="status" value={formData.status} onChange={handleChange}>
                         <option value="In Progress">In Progress</option>
                         <option value="Check In">Check In</option>
                         <option value="Check Out">Check Out</option>
-                    </select>
-                </label>
-                <ButtonStyles type="submit">Save</ButtonStyles>
-            </form>
-            <ButtonStyles onClick={() => navigate('/bookings')}>Go to Bookings</ButtonStyles>
+                    </SelectFormStyled>
+                </LabelFormStyled>
+                <ButtonStyles styled='contact' type="submit">Save</ButtonStyles>
+            </FormStyled>
+            
         </div>
     );
 };
