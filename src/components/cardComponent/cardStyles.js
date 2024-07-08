@@ -50,4 +50,5 @@ export const CardTextStyles = styled.p`
 export const CardContainerStyles = styled.div`
  display:flex;
      gap: 2rem;
+
 `

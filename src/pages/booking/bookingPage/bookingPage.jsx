@@ -132,7 +132,7 @@ export const BookingPage = () => {
             columnRenderer: (booking) => {
                 return (
                     <>
-                        <MdOutlineEdit onClick={(e) => { e.stopPropagation(); navigate(`/bookingsEdit/${booking.id}`); }} />
+                        <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation(); navigate(`/bookingsEdit/${booking.id}`); }} />
                         <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteRow(booking.id); }} />
                     </>
                 );

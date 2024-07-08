@@ -39,7 +39,7 @@ export const UserPage = () => {
             columnsData: 'action',
             columnRenderer: (row) => (
                 <>
-                    <MdOutlineEdit onClick={() => handleEditUser(row.id)} />
+                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditUser(row.id)} />
                     <AiOutlineDelete onClick={() => handleDeleteUser(row.id)} />
                 </>
             )
