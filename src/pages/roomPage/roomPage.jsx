@@ -33,7 +33,7 @@ export const RoomPage = () => {
             columnsData: 'action',
             columnRenderer: (row) => (
                 <>
-                    <MdOutlineEdit onClick={() => handleEditRoom(row.id)} />
+                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditRoom(row.id)} />
                     <AiOutlineDelete onClick={() => handleDeleteRoom(row.id)} />
                 </>
             )

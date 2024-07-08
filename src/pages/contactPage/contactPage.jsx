@@ -36,11 +36,12 @@ export const ContactPage = () => {
             headerColumn: 'Action',
             columnsData: 'action',
             columnRenderer: (row) => (
-                <>
+                <div style={{ textAlign: 'center' }}>
                     <AiOutlineDelete onClick={() => handleDeleteContact(row.id)} />
-                </>
+                </div>
             )
         },
+        
     ];
 
     const contactStatus = useSelector(getContactsStatus) || 'idle';
