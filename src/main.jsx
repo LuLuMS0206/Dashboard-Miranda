@@ -8,12 +8,11 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import { NavbarComponent } from './components/navbarComponent/navbarComponent';
 import { DashboardPage } from './pages/dashboardPage/dashboardPage';
 import { ProtectedRoutes } from './components/utils/protectedRoutes';
-import { useLocalStorage } from 'react-use';
 import { BookingPage } from './pages/booking/bookingPage/bookingPage';
 import { UserPage } from './pages/userPage/userPage';
 import { ContactPage } from './pages/contactPage/contactPage';
 import { RoomPage } from './pages/roomPage/roomPage';
-import { UserContextProvider } from './context/userContext';
+import {  UserContextProvider } from './context/userContext';
 import { BookingDetailPage } from './pages/booking/bookingDetailPage/bookingDetailPage';
 import { BookingEditPage } from './pages/booking/bookingFormPage/bookingFormPage';
 import { NewBookingPage } from './pages/booking/newBookingPage/newBookingPage';
@@ -24,7 +23,7 @@ import { UserNewPage } from './pages/userPage/userNewPage';
 
 
 export const MainApp = () => {
-  const [user] = useLocalStorage('user');
+  // const {user, userDispatch} = useContext(UserContext);
 
   return (
     <React.StrictMode>
@@ -33,7 +32,7 @@ export const MainApp = () => {
           <BrowserRouter>
             <Routes>
               <Route path='/login' element={<LoginPage />} />
-              <Route element={<ProtectedRoutes canActive={!user} redirectPath='/login' />}>
+              <Route element={<ProtectedRoutes/>}>
                 <Route path='/' element={<DashboardPage />} />
                 <Route path='/navbarComponent' element={<NavbarComponent />} />
                 <Route path='/bookings' element={<BookingPage />} />

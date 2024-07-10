@@ -15,7 +15,7 @@ export const LoginPage = () => {
         let password = 'miranda00';
 
         if (username === event.target.username.value && password === event.target.password.value) {
-            dispatch({ type: "LOGIN", payload: { name: 'Admin', email: username } });
+            dispatch({ type: "LOGIN", payload: { name: 'Admin', email: username, isLoggedIn:true } });
             navigate('/');
         } else {
             alert('username or password incorrect');

@@ -2,8 +2,9 @@
 import { createContext, useEffect, useReducer } from "react";
 
 const getInitialState = () => {
-    const initialState = localStorage.getItem('auth');
+    const initialState = (localStorage.getItem('auth'));
     if (initialState) {
+        console.log(initialState)
         return JSON.parse(initialState);
     }
     return {
@@ -40,7 +41,7 @@ const userReducer = (state, action) => {
     }
 };
 
-export const UserContext = createContext(null);
+export const UserContext = createContext(getInitialState);
 
 export const UserContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, getInitialState());
