@@ -1,4 +1,4 @@
-// userSlice.ts
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserThunk } from './userThunk';
 import { RootState } from './../../../store/store';

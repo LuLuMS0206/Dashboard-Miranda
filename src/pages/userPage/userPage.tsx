@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { deleteUser, getUsersStatus, getUsersError, getUsersList } from '../../assets/features/user/userSlice';
-import { UserThunk } from './../../assets/features/user/userThunk'; // Asegúrate de que la ruta sea correcta
+import { UserThunk } from './../../assets/features/user/userThunk';
+import { AppDispatch } from './../../store/store'; 
 
-// Define types for User
 interface User {
     id: number;
     name: string;
@@ -23,48 +23,15 @@ interface User {
     foto: string;
 }
 
-// Define the Column interface
 interface Column {
     headerColumn: string;
-    columnsData?: string;
+    columnsData?: string; 
     renderColumn?: (rowData: User) => JSX.Element;
     columnRenderer?: (row: User) => JSX.Element;
 }
 
 export const UserPage: React.FC = () => {
-    const userColumns: Column[] = [
-        { 
-            headerColumn: 'Foto', 
-            renderColumn: (rowData: User) => <img src={rowData.foto} alt="User" style={{ width: '50px', height: 'auto' }} /> 
-        },
-        { headerColumn: 'Nombre completo', columnsData: 'name' },
-        { headerColumn: 'ID de empleado', columnsData: 'id' },
-        { headerColumn: 'Email', columnsData: 'email' },
-        { headerColumn: 'Fecha de inicio', columnsData: 'startDate' },
-        { headerColumn: 'Descripción', columnsData: 'description' },
-        { headerColumn: 'Contacto', columnsData: 'contact' },
-        { 
-            headerColumn: 'Estado', 
-            columnsData: 'status', 
-            columnRenderer: (row: User) => (
-                <ButtonStyles styled={row.status === 'ACTIVE' ? 'roomAvailable' : 'roomBooked'}>
-                    {row.status}
-                </ButtonStyles>
-            )
-        },
-        {
-            headerColumn: 'Acción',
-            columnsData: 'action',
-            columnRenderer: (row: User) => (
-                <>
-                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditUser(row.id)} />
-                    <AiOutlineDelete onClick={() => handleDeleteUser(row.id)} />
-                </>
-            )
-        },
-    ];
-
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const userStatus = useSelector(getUsersStatus) || 'idle';
     const usersError = useSelector(getUsersError) || null;
@@ -73,7 +40,7 @@ export const UserPage: React.FC = () => {
 
     useEffect(() => {
         if (userStatus === 'idle') {
-            dispatch(UserThunk()); // Asegúrate de que UserThunk esté correctamente importado
+            dispatch(UserThunk());
         } else if (userStatus === 'rejected') {
             console.error('Error fetching users:', usersError);
         }
@@ -107,13 +74,11 @@ export const UserPage: React.FC = () => {
     };
 
     const handleClickActive = () => {
-        const filteredUsers = usersList.filter(user => user.status === 'ACTIVE');
-        setFilteredUsers(filteredUsers);
+        setFilteredUsers(usersList.filter(user => user.status === 'ACTIVE'));
     };
 
     const handleClickInactive = () => {
-        const filteredUsers = usersList.filter(user => user.status === 'INACTIVE');
-        setFilteredUsers(filteredUsers);
+        setFilteredUsers(usersList.filter(user => user.status === 'INACTIVE'));
     };
 
     const handleEditUser = (userId: number) => {
@@ -133,14 +98,42 @@ export const UserPage: React.FC = () => {
             if (result.isConfirmed) {
                 dispatch(deleteUser(userId));
                 setFilteredUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-                Swal.fire({
-                    title: "¡Eliminado!",
-                    text: "El usuario ha sido eliminado.",
-                    icon: "success"
-                });
+                Swal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
             }
         });
     };
+
+    const userColumns: Column[] = [
+        { 
+            headerColumn: 'Foto', 
+            renderColumn: (rowData: User) => <img src={rowData.foto} alt="User" style={{ width: '50px', height: 'auto' }} /> 
+        },
+        { headerColumn: 'Nombre completo', columnsData: 'name' },
+        { headerColumn: 'ID de empleado', columnsData: 'id' },
+        { headerColumn: 'Email', columnsData: 'email' },
+        { headerColumn: 'Fecha de inicio', columnsData: 'startDate' },
+        { headerColumn: 'Descripción', columnsData: 'description' },
+        { headerColumn: 'Contacto', columnsData: 'contact' },
+        { 
+            headerColumn: 'Estado', 
+            columnsData: 'status', 
+            columnRenderer: (row: User) => (
+                <ButtonStyles styled={row.status === 'ACTIVE' ? 'roomAvailable' : 'roomBooked'}>
+                    {row.status}
+                </ButtonStyles>
+            )
+        },
+        {
+            headerColumn: 'Acción',
+            columnsData: 'action',
+            columnRenderer: (row: User) => (
+                <>
+                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditUser(row.id)} />
+                    <AiOutlineDelete onClick={() => handleDeleteUser(row.id)} />
+                </>
+            )
+        },
+    ];
 
     return (
         <NavbarComponent>
