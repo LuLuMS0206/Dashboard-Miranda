@@ -8,44 +8,57 @@ import { useEffect, useState } from "react";
 import { RoomsThunk } from "../../assets/features/room/roomThunk";
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
-import { getRoomsStatus, getRoomsList, getRoomsError, deleteRoom } from "../../assets/features/room/roomSlice";
+import { getRoomsStatus, getRoomsList, getRoomsError, deleteRoom, Room } from "../../assets/features/room/roomSlice";
 import { useNavigate } from 'react-router-dom'; 
+import { AppDispatch } from './../../store/store';
 
-export const RoomPage = () => {
+export const RoomPage: React.FC = () => {
     const roomsColumns = [
-        { headerColumn: 'Image', columnsData: 'image', columnRenderer: (row) => <img src={row.image} width="100" alt="Room" /> },
-        { headerColumn: 'Information', columnsData: 'information', columnRenderer: (row) => `Room ${row.roomNumber} - ID: ${row.id}` },
+        {
+            headerColumn: 'Image',
+            columnsData: 'image',
+            columnRenderer: (row: Room) => <img src={row.image} width="100" alt="Room" />,
+        },
+        {
+            headerColumn: 'Information',
+            columnsData: 'information',
+            columnRenderer: (row: Room) => `Room ${row.roomNumber} - ID: ${row.id}`,
+        },
         { headerColumn: 'Room Type', columnsData: 'roomType' },
-        { headerColumn: 'Amenities', columnsData: 'amenities', columnRenderer: (row) => row.amenities.join(', ') },
+        {
+            headerColumn: 'Amenities',
+            columnsData: 'amenities',
+            columnRenderer: (row: Room) => row.amenities.join(', '),
+        },
         { headerColumn: 'Price', columnsData: 'price' },
         { headerColumn: 'Offer Price', columnsData: 'offerPrice' },
         {
             headerColumn: 'Status',
-            columnsData: 'status',
-            columnRenderer: (row) => (
+            columnsData: 'availability',
+            columnRenderer: (row: Room) => (
                 <ButtonStyles styled={row.availability === 'available' ? 'roomAvailable' : 'roomBooked'}>
                     {row.availability === 'available' ? 'Available' : 'Booked'}
                 </ButtonStyles>
-            )
+            ),
         },
         {
             headerColumn: 'Action',
             columnsData: 'action',
-            columnRenderer: (row) => (
+            columnRenderer: (row: Room) => (
                 <>
                     <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditRoom(row.id)} />
                     <AiOutlineDelete onClick={() => handleDeleteRoom(row.id)} />
                 </>
-            )
+            ),
         },
     ];
 
     const roomStatus = useSelector(getRoomsStatus) || 'idle';
     const roomsError = useSelector(getRoomsError) || null;
-    const roomsList = useSelector(getRoomsList) || [];
-    const dispatch = useDispatch();
+    const roomsList: Room[] = useSelector(getRoomsList) || [];
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const [filteredRooms, setFilteredRooms] = useState([]);
+    const [filteredRooms, setFilteredRooms] = useState<Room[]>([]);
 
     useEffect(() => {
         if (roomStatus === 'idle') {
@@ -59,27 +72,36 @@ export const RoomPage = () => {
         setFilteredRooms(roomsList);
     }, [roomsList]);
 
-    const sortRoomsHandler = (value) => {
+    const sortRoomsHandler = (value: string) => {
         let sortedRooms = [...roomsList];
 
-        if (value === 'roomNumber') {
-            sortedRooms.sort((a, b) => a.roomNumber.toString().localeCompare(b.roomNumber.toString()));
-        } else if (value === 'availability') {
-            sortedRooms = sortedRooms.filter(room => room.availability === 'available');
-        } else if (value === 'booked') {
-            sortedRooms = sortedRooms.filter(room => room.availability === 'booked');
-        } else if (value === 'lowestPrice') {
-            sortedRooms.sort((a, b) => a.price - b.price);
-        } else if (value === 'highestPrice') {
-            sortedRooms.sort((a, b) => b.price - a.price);
-        } else if (value === 'id') {
-            sortedRooms.sort((a, b) => a.id - b.id);
+        switch (value) {
+            case 'roomNumber':
+                sortedRooms.sort((a, b) => a.roomNumber.localeCompare(b.roomNumber));
+                break;
+            case 'availability':
+                sortedRooms = sortedRooms.filter(room => room.availability === 'available');
+                break;
+            case 'booked':
+                sortedRooms = sortedRooms.filter(room => room.availability === 'booked');
+                break;
+            case 'lowestPrice':
+                sortedRooms.sort((a, b) => a.price - b.price);
+                break;
+            case 'highestPrice':
+                sortedRooms.sort((a, b) => b.price - a.price);
+                break;
+            case 'id':
+                sortedRooms.sort((a, b) => a.id.localeCompare(b.id));
+                break;
+            default:
+                break;
         }
 
         setFilteredRooms(sortedRooms);
     };
 
-    const handleSortChange = (event) => {
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         sortRoomsHandler(value);
     };
@@ -88,11 +110,11 @@ export const RoomPage = () => {
         sortRoomsHandler('id');
     };
 
-    const handleEditRoom = (roomId) => {
+    const handleEditRoom = (roomId: string) => {
         navigate(`/roomsEdit/${roomId}`);
     };
 
-    const handleDeleteRoom = (roomId) => {
+    const handleDeleteRoom = (roomId: string) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -100,7 +122,7 @@ export const RoomPage = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteRoom(roomId));
@@ -108,7 +130,7 @@ export const RoomPage = () => {
                 Swal.fire({
                     title: "Deleted!",
                     text: "The room has been deleted.",
-                    icon: "success"
+                    icon: "success",
                 });
             }
         });

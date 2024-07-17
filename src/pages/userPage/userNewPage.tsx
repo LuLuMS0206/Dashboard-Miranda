@@ -1,37 +1,38 @@
+import React, { useState } from "react";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
-import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addUser } from '../../assets/features/user/userSlice';
+import { addUser, User } from '../../assets/features/user/userSlice'; // Importa User
 import { IoArrowBackSharp } from "react-icons/io5";
-import { ButtonStyles } from '../../components/buttonComponent/buttonComponent'
-import { FormStyled, InputFormStyled, LabelFormStyled, SelectFormStyled } from '../../components/styledGeneric/styledGeneric'
+import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
+import { FormStyled, InputFormStyled, LabelFormStyled, SelectFormStyled } from '../../components/styledGeneric/styledGeneric';
 
-export const UserNewPage = () => {
-    const [formData, setFormData] = useState({
+export const UserNewPage: React.FC = () => {
+    const [formData, setFormData] = useState<User>({
         name: '',
-        id: '',
+        id: 0,
         startDate: '',
         description: '',
         email: '',
         contact: '',
         status: 'ACTIVE',
+        foto: '', // Incluye todas las propiedades de la interfaz User
     });
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: name === 'id' ? Number(value) : value,
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(addUser(formData));
+        dispatch(addUser(formData)); 
         navigate('/users');
     };
 
@@ -43,7 +44,9 @@ export const UserNewPage = () => {
         <NavbarComponent>
             <div>
                 <FormStyled onSubmit={handleSubmit}>
-                    <ButtonStyles styled='backForm' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
+                    <ButtonStyles styled='backForm' onClick={handleGoTo}>
+                        <IoArrowBackSharp />
+                    </ButtonStyles>
 
                     <LabelFormStyled htmlFor="name">Full Name</LabelFormStyled>
                     <InputFormStyled
@@ -57,7 +60,7 @@ export const UserNewPage = () => {
 
                     <LabelFormStyled htmlFor="id">Employee ID</LabelFormStyled>
                     <InputFormStyled
-                        type="text"
+                        type="number"
                         id="id"
                         name="id"
                         value={formData.id}

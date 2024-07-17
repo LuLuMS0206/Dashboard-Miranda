@@ -1,26 +1,26 @@
-// 
+import React, { useState, useEffect } from 'react';
 import { NavbarComponent } from "../../../components/navbarComponent/navbarComponent";
-import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { setBookings, setSelectedBooking, getBookingsStatus, getBookingSlice, getBookingsError } from '../../../assets/features/booking/bookingSlice';
+import { setBookings, setSelectedBooking, getBookingsStatus, getBookingSlice, getBookingsError, Booking } from '../../../assets/features/booking/bookingSlice';
 import { TableComponent } from '../../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from '../../../components/buttonComponent/buttonComponent';
 import { BookingsThunk } from '../../../assets/features/booking/bookingThunk';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
+import { AppDispatch } from './../../../store/store'; // Ajusta según tu estructura
 
-export const BookingPage = () => {
-    const dispatch = useDispatch();
+export const BookingPage: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const bookingStatus = useSelector(getBookingsStatus);
-    const bookingSlice = useSelector(getBookingSlice);
+    const bookingSlice: Booking[] = useSelector(getBookingSlice);
     const bookingError = useSelector(getBookingsError);
-    const [bookingList, setBookingList] = useState([]);
+    const [bookingList, setBookingList] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (bookingStatus === 'idle') {
@@ -34,12 +34,12 @@ export const BookingPage = () => {
         }
     }, [bookingStatus, bookingSlice, bookingError, dispatch]);
 
-    const handleRowClick = (booking) => {
+    const handleRowClick = (booking: Booking) => {
         dispatch(setSelectedBooking(booking));
         navigate(`/bookingsDetail/${booking.id}`);
     };
 
-    const handleDeleteRow = (id) => {
+    const handleDeleteRow = (id: number) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -80,20 +80,20 @@ export const BookingPage = () => {
         setBookingList(filteredBookings);
     };
 
-    const handleBookingsChange = (event) => {
+    const handleBookingsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         let sortedBookings = [...bookingList];
 
         if (value === 'orderDate') {
-            sortedBookings = sortedBookings.sort((a, b) => new Date(a.orderDate) - new Date(b.orderDate));
+            sortedBookings.sort((a, b) => new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime());
         } else if (value === 'guest') {
-            sortedBookings = sortedBookings.sort((a, b) => a.guest.localeCompare(b.guest));
+            sortedBookings.sort((a, b) => a.guest.localeCompare(b.guest));
         } else if (value === 'checkIn') {
-            sortedBookings = sortedBookings.sort((a, b) => new Date(a.checkIn) - new Date(b.checkIn));
+            sortedBookings.sort((a, b) => new Date(a.checkIn).getTime() - new Date(b.checkIn).getTime());
         } else if (value === 'checkOut') {
-            sortedBookings = sortedBookings.sort((a, b) => new Date(a.checkOut) - new Date(b.checkOut));
+            sortedBookings.sort((a, b) => new Date(a.checkOut).getTime() - new Date(b.checkOut).getTime());
         } else {
-            sortedBookings = sortedBookings.sort((a, b) => a.id - b.id);
+            sortedBookings.sort((a, b) => a.id - b.id);
         }
 
         setBookingList(sortedBookings);
@@ -113,7 +113,7 @@ export const BookingPage = () => {
         {
             headerColumn: 'Status',
             columnsData: 'status',
-            columnRenderer: (booking) => {
+            columnRenderer: (booking: Booking) => {
                 switch (booking.status) {
                     case 'In Progress':
                         return <ButtonStyles styled='progress'>In Progress</ButtonStyles>;
@@ -129,7 +129,7 @@ export const BookingPage = () => {
         {
             headerColumn: 'Action',
             columnsData: 'action',
-            columnRenderer: (booking) => {
+            columnRenderer: (booking: Booking) => {
                 return (
                     <>
                         <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation(); navigate(`/bookingsEdit/${booking.id}`); }} />
@@ -153,7 +153,7 @@ export const BookingPage = () => {
                             <ItemList onClick={handleClickAll}>All Bookings</ItemList>
                             <ItemList onClick={handleClickCheckIn}>Check In</ItemList>
                             <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
-                            <ItemList onClick={handleClickInProgress}>In progress</ItemList>
+                            <ItemList onClick={handleClickInProgress}>In Progress</ItemList>
                         </List>
                         <ButtonStyles styled='new' onClick={handleClickNewBooking}>+ New Booking</ButtonStyles>
                         <SelectStyled onChange={handleBookingsChange}>

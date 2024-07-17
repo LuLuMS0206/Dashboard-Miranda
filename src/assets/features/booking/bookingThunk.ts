@@ -14,15 +14,7 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import data from '../../../data/booking.json';
-
-interface Booking {
-    id: number;
-    guest: string;
-    checkIn: string;
-    checkOut: string;
-    roomType: string;
-    specialRequest: string;
-}
+import { Booking } from './bookingSlice'; // Asegúrate de importar Booking
 
 export const BookingsThunk = createAsyncThunk<Booking[]>('bookings/getBookings', async () => {
     return new Promise<Booking[]>((resolve) => {

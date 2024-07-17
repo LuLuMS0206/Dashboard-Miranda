@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
 import { TableComponent } from "../../components/tableComponent/tableComponent";
-import { useState, useEffect } from "react";
 import { SectionOrder, List, ItemList, SelectStyled } from "../../components/styledGeneric/styledGeneric";
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -9,35 +9,53 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { deleteUser, getUsersStatus, getUsersError, getUsersList } from '../../assets/features/user/userSlice';
-import { UserThunk } from '../../assets/features/user/userThunk';
+import { UserThunk } from './../../assets/features/user/userThunk'; // Asegúrate de que la ruta sea correcta
 
-export const UserPage = () => {
-    const userColumns = [
+// Define types for User
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    startDate: string;
+    description: string;
+    contact: string;
+    status: 'ACTIVE' | 'INACTIVE';
+    foto: string;
+}
+
+// Define the Column interface
+interface Column {
+    headerColumn: string;
+    columnsData?: string;
+    renderColumn?: (rowData: User) => JSX.Element;
+    columnRenderer?: (row: User) => JSX.Element;
+}
+
+export const UserPage: React.FC = () => {
+    const userColumns: Column[] = [
         { 
             headerColumn: 'Foto', 
-            renderColumn: (rowData) => <img src={rowData.foto} alt="User" style={{ width: '50px', height: 'auto' }} /> 
+            renderColumn: (rowData: User) => <img src={rowData.foto} alt="User" style={{ width: '50px', height: 'auto' }} /> 
         },
         { headerColumn: 'Nombre completo', columnsData: 'name' },
         { headerColumn: 'ID de empleado', columnsData: 'id' },
         { headerColumn: 'Email', columnsData: 'email' },
-        { headerColumn: 'Start Date', columnsData: 'startDate' },
-        { headerColumn: 'Description', columnsData: 'description' },
-        { headerColumn: 'Contact', columnsData: 'contact' },
+        { headerColumn: 'Fecha de inicio', columnsData: 'startDate' },
+        { headerColumn: 'Descripción', columnsData: 'description' },
+        { headerColumn: 'Contacto', columnsData: 'contact' },
         { 
-            headerColumn: 'Status', 
+            headerColumn: 'Estado', 
             columnsData: 'status', 
-            columnRenderer: (row) => (
-                row.status.trim().toUpperCase() === 'ACTIVE' ? (
-                    <ButtonStyles styled='roomAvailable'>{row.status}</ButtonStyles>
-                ) : (
-                    <ButtonStyles styled='roomBooked'>{row.status}</ButtonStyles>
-                )
+            columnRenderer: (row: User) => (
+                <ButtonStyles styled={row.status === 'ACTIVE' ? 'roomAvailable' : 'roomBooked'}>
+                    {row.status}
+                </ButtonStyles>
             )
         },
         {
-            headerColumn: 'Action',
+            headerColumn: 'Acción',
             columnsData: 'action',
-            columnRenderer: (row) => (
+            columnRenderer: (row: User) => (
                 <>
                     <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditUser(row.id)} />
                     <AiOutlineDelete onClick={() => handleDeleteUser(row.id)} />
@@ -50,12 +68,12 @@ export const UserPage = () => {
     const navigate = useNavigate();
     const userStatus = useSelector(getUsersStatus) || 'idle';
     const usersError = useSelector(getUsersError) || null;
-    const usersList = useSelector(getUsersList) || [];
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    const usersList: User[] = useSelector(getUsersList) || [];
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
     useEffect(() => {
         if (userStatus === 'idle') {
-            dispatch(UserThunk());
+            dispatch(UserThunk()); // Asegúrate de que UserThunk esté correctamente importado
         } else if (userStatus === 'rejected') {
             console.error('Error fetching users:', usersError);
         }
@@ -65,11 +83,11 @@ export const UserPage = () => {
         setFilteredUsers(usersList);
     }, [usersList]);
 
-    const sortUsersHandler = (value) => {
-        let sortedUsers = [...filteredUsers];
+    const sortUsersHandler = (value: string) => {
+        const sortedUsers = [...filteredUsers];
 
         if (value === 'startDate') {
-            sortedUsers.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+            sortedUsers.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
         } else if (value === 'name') {
             sortedUsers.sort((a, b) => a.name.localeCompare(b.name));
         } else {
@@ -79,7 +97,7 @@ export const UserPage = () => {
         setFilteredUsers(sortedUsers);
     };
 
-    const handleSortChange = (event) => {
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         sortUsersHandler(value);
     };
@@ -98,26 +116,26 @@ export const UserPage = () => {
         setFilteredUsers(filteredUsers);
     };
 
-    const handleEditUser = (userId) => {
+    const handleEditUser = (userId: number) => {
         navigate(`/editUsers/${userId}`);
     };
 
-    const handleDeleteUser = (userId) => {
+    const handleDeleteUser = (userId: number) => {
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "¿Estás seguro?",
+            text: "¡No podrás revertir esto!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Sí, elimínalo"
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUser(userId));
                 setFilteredUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
                 Swal.fire({
-                    title: "Deleted!",
-                    text: "The user has been deleted.",
+                    title: "¡Eliminado!",
+                    text: "El usuario ha sido eliminado.",
                     icon: "success"
                 });
             }
@@ -126,18 +144,18 @@ export const UserPage = () => {
 
     return (
         <NavbarComponent>
-            {userStatus === 'pending' ? <p>Loading...</p> : userStatus === 'rejected' ? <p>Error loading users...</p> :
+            {userStatus === 'pending' ? <p>Cargando...</p> : userStatus === 'rejected' ? <p>Error al cargar usuarios...</p> :
                 <>
                     <SectionOrder>
                         <List>
-                            <ItemList onClick={handleClickAll}>All Employees</ItemList>
-                            <ItemList onClick={handleClickActive}>Active Employees</ItemList>
-                            <ItemList onClick={handleClickInactive}>Inactive Employees</ItemList>
+                            <ItemList onClick={handleClickAll}>Todos los empleados</ItemList>
+                            <ItemList onClick={handleClickActive}>Empleados activos</ItemList>
+                            <ItemList onClick={handleClickInactive}>Empleados inactivos</ItemList>
                         </List>
-                        <ButtonStyles styled='new' onClick={() => navigate('/newUsers')}>+ New User</ButtonStyles>
+                        <ButtonStyles styled='new' onClick={() => navigate('/newUsers')}>+ Nuevo Usuario</ButtonStyles>
                         <SelectStyled onChange={handleSortChange}>
-                            <option value='startDate'>Start date</option>
-                            <option value='name'>Full name</option>
+                            <option value='startDate'>Fecha de inicio</option>
+                            <option value='name'>Nombre completo</option>
                         </SelectStyled>
                     </SectionOrder>
                     <TableComponent columns={userColumns} data={filteredUsers} />

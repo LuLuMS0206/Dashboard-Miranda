@@ -1,23 +1,25 @@
+import React, { useEffect, useState } from "react";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { editUser, selectUserById } from '../../assets/features/user/userSlice';
+import { editUser, selectUserById, User } from '../../assets/features/user/userSlice'; // Importa User
 import { IoArrowBackSharp } from "react-icons/io5";
-import { ButtonStyles } from '../../components/buttonComponent/buttonComponent'
-import { SelectFormStyled, FormStyled, LabelFormStyled, InputFormStyled } from '../../components/styledGeneric/styledGeneric'
+import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
+import { SelectFormStyled, FormStyled, LabelFormStyled, InputFormStyled } from '../../components/styledGeneric/styledGeneric';
 
-export const UserEditPage = () => {
-    const { id } = useParams();
-    const user = useSelector(state => selectUserById(state, id));
-    const [formData, setFormData] = useState({
+export const UserEditPage: React.FC = () => {
+    const { id } = useParams<{ id: string | undefined }>();
+    const user = useSelector((state: any) => selectUserById(state, id ? Number(id) : 0)) as User | null;
+
+    const [formData, setFormData] = useState<User>({
         name: '',
-        id: '',
+        id: 0,
         startDate: '',
         description: '',
         email: '',
         contact: '',
         status: 'ACTIVE',
+        foto: '', // Asegúrate de que todas las propiedades estén definidas
     });
 
     const dispatch = useDispatch();
@@ -25,19 +27,19 @@ export const UserEditPage = () => {
 
     useEffect(() => {
         if (user) {
-            setFormData(user);
+            setFormData(user); // Establece directamente el usuario en formData
         }
     }, [user]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+        setFormData(prev => ({
+            ...prev,
+            [name]: name === "id" ? Number(value) : value,
+        }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(editUser(formData));
         navigate('/users');
@@ -47,13 +49,13 @@ export const UserEditPage = () => {
         navigate('/users');
     };
 
-
     return (
         <NavbarComponent>
             <div>
-
                 <FormStyled onSubmit={handleSubmit}>
-                    <ButtonStyles styled='backForm' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
+                    <ButtonStyles styled='backForm' onClick={handleGoTo}>
+                        <IoArrowBackSharp />
+                    </ButtonStyles>
 
                     <LabelFormStyled htmlFor="name">Full Name</LabelFormStyled>
                     <InputFormStyled
