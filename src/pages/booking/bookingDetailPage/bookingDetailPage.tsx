@@ -9,6 +9,7 @@ import { RootState } from './../../../store/store';
 export const BookingDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     
+    // Asegúrate de que id sea un número
     const booking = useSelector((state: RootState) => {
         if (id) {
             return getBookingById(state, Number(id)); 
@@ -18,7 +19,11 @@ export const BookingDetailPage: React.FC = () => {
 
     return (
         <NavbarComponent>
-            <BookingDetailComponent booking={booking || undefined} />
+            {booking ? (
+                <BookingDetailComponent booking={booking} />
+            ) : (
+                <div>No booking data available</div>
+            )}
         </NavbarComponent>
     );
 };

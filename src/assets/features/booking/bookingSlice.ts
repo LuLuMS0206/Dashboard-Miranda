@@ -76,4 +76,5 @@ export const getBookingsError = (state: { bookings: BookingState }) => state.boo
 export const getBookingById = (state: { bookings: BookingState }, id: number) =>
     state.bookings.bookings.find(booking => booking.id === id);
 
+
 export default BookingSlice.reducer;

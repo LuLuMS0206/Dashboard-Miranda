@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { NavbarComponent } from "../../../components/navbarComponent/navbarComponent";
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { ButtonStyles } from '../../../components/buttonComponent/buttonComponen
 import { BookingsThunk } from '../../../assets/features/booking/bookingThunk';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
-import { AppDispatch } from './../../../store/store'; // Ajusta según tu estructura
+import { AppDispatch } from './../../../store/store';
 
 export const BookingPage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -28,16 +29,20 @@ export const BookingPage: React.FC = () => {
         } else if (bookingStatus === 'fulfilled') {
             setLoading(false);
             setBookingList(bookingSlice);
+            console.log('BookingList updated:', bookingSlice);
         } else if (bookingStatus === 'rejected') {
             setLoading(false);
             setError(bookingError);
+            console.log('Error:', bookingError);
         }
     }, [bookingStatus, bookingSlice, bookingError, dispatch]);
 
     const handleRowClick = (booking: Booking) => {
+        console.log('Selected booking:', booking);
         dispatch(setSelectedBooking(booking));
         navigate(`/bookingsDetail/${booking.id}`);
     };
+    
 
     const handleDeleteRow = (id: number) => {
         Swal.fire({
@@ -139,7 +144,6 @@ export const BookingPage: React.FC = () => {
             }
         },
     ];
-
     return (
         <NavbarComponent>
             {loading ? (
@@ -163,12 +167,12 @@ export const BookingPage: React.FC = () => {
                             <option value='checkOut'>Check Out</option>
                         </SelectStyled>
                     </SectionOrder>
+                    {console.log('BookingList being passed to TableComponent:', bookingList)}
                     <TableComponent 
                         columns={bookingsColumns} 
                         data={bookingList} 
                         onRowClick={handleRowClick} 
                         redirectUrl='/bookingsDetail' 
-                        onEditClick={(id) => navigate(`/bookingsEdit/${id}`)} 
                     />
                 </>
             )}
