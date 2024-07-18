@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { NavbarComponent } from "../../../components/navbarComponent/navbarComponent";
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +25,8 @@ export const BookingPage: React.FC = () => {
     useEffect(() => {
         if (bookingStatus === 'idle') {
             dispatch(BookingsThunk());
+        } else if (bookingStatus === 'pending'){
+            setLoading(true);
         } else if (bookingStatus === 'fulfilled') {
             setLoading(false);
             setBookingList(bookingSlice);
@@ -35,14 +36,13 @@ export const BookingPage: React.FC = () => {
             setError(bookingError);
             console.log('Error:', bookingError);
         }
-    }, [bookingStatus, bookingSlice, bookingError, dispatch]);
+    }, [bookingStatus]);
 
     const handleRowClick = (booking: Booking) => {
         console.log('Selected booking:', booking);
         dispatch(setSelectedBooking(booking));
         navigate(`/bookingsDetail/${booking.id}`);
     };
-    
 
     const handleDeleteRow = (id: number) => {
         Swal.fire({
@@ -66,23 +66,13 @@ export const BookingPage: React.FC = () => {
         });
     };
 
-    const handleClickAll = () => {
-        setBookingList(bookingSlice);
-    };
-
-    const handleClickCheckIn = () => {
-        const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check In');
-        setBookingList(filteredBookings);
-    };
-
-    const handleClickCheckOut = () => {
-        const filteredBookings = bookingSlice.filter(booking => booking.status === 'Check Out');
-        setBookingList(filteredBookings);
-    };
-
-    const handleClickInProgress = () => {
-        const filteredBookings = bookingSlice.filter(booking => booking.status === 'In Progress');
-        setBookingList(filteredBookings);
+    const filterBookings = (status: string) => {
+        if (status === 'All') {
+            setBookingList(bookingSlice);
+        } else {
+            const filteredBookings = bookingSlice.filter(booking => booking.status === status);
+            setBookingList(filteredBookings);
+        }
     };
 
     const handleBookingsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -100,7 +90,6 @@ export const BookingPage: React.FC = () => {
         } else {
             sortedBookings.sort((a, b) => a.id - b.id);
         }
-
         setBookingList(sortedBookings);
     };
 
@@ -137,13 +126,14 @@ export const BookingPage: React.FC = () => {
             columnRenderer: (booking: Booking) => {
                 return (
                     <>
-                        <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation(); navigate(`/bookingsEdit/${booking.id}`); }} />
+                        <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation();dispatch(setSelectedBooking(booking)); navigate(`/bookingsEdit/${booking.id}`); }} />
                         <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteRow(booking.id); }} />
                     </>
                 );
             }
         },
     ];
+
     return (
         <NavbarComponent>
             {loading ? (
@@ -154,10 +144,10 @@ export const BookingPage: React.FC = () => {
                 <>
                     <SectionOrder>
                         <List>
-                            <ItemList onClick={handleClickAll}>All Bookings</ItemList>
-                            <ItemList onClick={handleClickCheckIn}>Check In</ItemList>
-                            <ItemList onClick={handleClickCheckOut}>Check Out</ItemList>
-                            <ItemList onClick={handleClickInProgress}>In Progress</ItemList>
+                            <ItemList onClick={() => filterBookings('All')}>All Bookings</ItemList>
+                            <ItemList onClick={() => filterBookings('Check In')}>Check In</ItemList>
+                            <ItemList onClick={() => filterBookings('Check Out')}>Check Out</ItemList>
+                            <ItemList onClick={() => filterBookings('In Progress')}>In Progress</ItemList>
                         </List>
                         <ButtonStyles styled='new' onClick={handleClickNewBooking}>+ New Booking</ButtonStyles>
                         <SelectStyled onChange={handleBookingsChange}>

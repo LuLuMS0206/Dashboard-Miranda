@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { createBooking, getBookingById } from '../../../assets/features/booking/bookingSlice';
+import { createBooking } from '../../../assets/features/booking/bookingSlice';
 import { ButtonStyles } from '../../../components/buttonComponent/buttonComponent';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { FormStyled, LabelFormStyled, InputFormStyled, SelectFormStyled } from '../../../components/styledGeneric/styledGeneric';
 import {NavbarComponent} from './../../../components/navbarComponent/navbarComponent'
 
 interface Booking {
+    id: number;
     guest: string;
     orderDate: string;
     checkIn: string;
@@ -18,11 +19,11 @@ interface Booking {
 }
 
 export const NewBookingPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const initialFormData: Booking = {
+        id: -1, 
         guest: '',
         orderDate: '',
         checkIn: '',
@@ -34,17 +35,6 @@ export const NewBookingPage: React.FC = () => {
 
     const [formData, setFormData] = useState<Booking>(initialFormData);
 
-    const booking = useSelector((state: any) => getBookingById(state, parseInt(id!))) || initialFormData;
-
-    useEffect(() => {
-        if (booking) {
-            setFormData(prevData => ({
-                ...prevData,
-                ...booking,
-            }));
-        }
-    }, [booking]);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -52,9 +42,8 @@ export const NewBookingPage: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!id) {
-            dispatch(createBooking(formData));
-        } 
+        console.log(formData.id)
+        dispatch(createBooking(formData));
         navigate('/bookings');
     };
 

@@ -2,7 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BookingsThunk } from './bookingThunk';
 
-
 export interface Booking {
     id: number;
     guest: string;
@@ -34,6 +33,7 @@ export const BookingSlice = createSlice({
     reducers: {
         addBookings: (state, action: PayloadAction<Booking>) => {
             state.bookings.push(action.payload);
+            console.log(state)
         },
         setBookings: (state, action: PayloadAction<Booking[]>) => {
             state.bookings = action.payload;
@@ -46,9 +46,11 @@ export const BookingSlice = createSlice({
             state.bookings = state.bookings.map(booking =>
                 booking.id === updatedBooking.id ? updatedBooking : booking
             );
+            console.log(state.bookings)
         },
         createBooking: (state, action: PayloadAction<Omit<Booking, 'id'>>) => {
-            state.bookings.push({ ...action.payload, id: state.bookings.length + 1 });
+            const newBooking: Booking = { ...action.payload, id: state.bookings.length + 1 };
+            state.bookings.push(newBooking);
         },
     },
     extraReducers: (builder) => {
@@ -73,8 +75,7 @@ export const getBookingSlice = (state: { bookings: BookingState }) => state.book
 export const getBooking = (state: { bookings: BookingState }) => state.bookings.booking;
 export const getBookingsStatus = (state: { bookings: BookingState }) => state.bookings.status;
 export const getBookingsError = (state: { bookings: BookingState }) => state.bookings.error;
-export const getBookingById = (state: { bookings: BookingState }, id: number) =>
-    state.bookings.bookings.find(booking => booking.id === id);
+    
 
 
 export default BookingSlice.reducer;

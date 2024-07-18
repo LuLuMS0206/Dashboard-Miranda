@@ -128,12 +128,16 @@ export const UserPage: React.FC = () => {
             columnsData: 'action',
             columnRenderer: (row: User) => (
                 <>
-                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={() => handleEditUser(row.id)} />
-                    <AiOutlineDelete onClick={() => handleDeleteUser(row.id)} />
+                    <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation(); handleEditUser(row.id); }} />
+                    <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteUser(row.id); }} />
                 </>
             )
         },
     ];
+
+    const handleRowClick = (row: User) => {
+        navigate(`/editUsers/${row.id}`);
+    };
 
     return (
         <NavbarComponent>
@@ -151,7 +155,7 @@ export const UserPage: React.FC = () => {
                             <option value='name'>Nombre completo</option>
                         </SelectStyled>
                     </SectionOrder>
-                    <TableComponent columns={userColumns} data={filteredUsers} />
+                    <TableComponent columns={userColumns} data={filteredUsers} onRowClick={handleRowClick} />
                 </>
             }
         </NavbarComponent>

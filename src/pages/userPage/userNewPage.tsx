@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addUser, User } from '../../assets/features/user/userSlice'; // Importa User
+import { addUser, User } from '../../assets/features/user/userSlice'; 
 import { IoArrowBackSharp } from "react-icons/io5";
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
 import { FormStyled, InputFormStyled, LabelFormStyled, SelectFormStyled } from '../../components/styledGeneric/styledGeneric';
@@ -16,7 +16,7 @@ export const UserNewPage: React.FC = () => {
         email: '',
         contact: '',
         status: 'ACTIVE',
-        foto: '', // Incluye todas las propiedades de la interfaz User
+        foto: '', 
     });
 
     const dispatch = useDispatch();

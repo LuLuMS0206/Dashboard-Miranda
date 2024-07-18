@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { editUser, selectUserById, User } from '../../assets/features/user/userSlice'; // Importa User
+import { editUser, selectUserById, User } from '../../assets/features/user/userSlice'; 
 import { IoArrowBackSharp } from "react-icons/io5";
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
 import { SelectFormStyled, FormStyled, LabelFormStyled, InputFormStyled } from '../../components/styledGeneric/styledGeneric';
@@ -19,7 +19,7 @@ export const UserEditPage: React.FC = () => {
         email: '',
         contact: '',
         status: 'ACTIVE',
-        foto: '', // Asegúrate de que todas las propiedades estén definidas
+        foto: '', 
     });
 
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const UserEditPage: React.FC = () => {
 
     useEffect(() => {
         if (user) {
-            setFormData(user); // Establece directamente el usuario en formData
+            setFormData(user); 
         }
     }, [user]);
 

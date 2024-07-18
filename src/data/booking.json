@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "guest": "John Doe",
         "orderDate": "2024-06-15",
         "checkIn": "2024-06-20",
@@ -10,7 +10,7 @@
         "status": "Check In"
     },
     {
-        "id": "2",
+        "id": 2,
         "guest": "Jane Smith",
         "orderDate": "2024-06-10",
         "checkIn": "2024-06-18",
@@ -20,7 +20,7 @@
         "status": "In Progress"
     },
     {
-        "id": "3",
+        "id": 3,
         "guest": "Mike Johnson",
         "orderDate": "2024-06-12",
         "checkIn": "2024-06-19",
@@ -30,7 +30,7 @@
         "status": "Check Out"
     },
     {
-        "id": "4",
+        "id": 4,
         "guest": "Emily Davis",
         "orderDate": "2024-06-18",
         "checkIn": "2024-06-22",
@@ -40,7 +40,7 @@
         "status": "In Progress"
     },
     {
-        "id": "5",
+        "id": 5,
         "guest": "Chris Wilson",
         "orderDate": "2024-06-20",
         "checkIn": "2024-06-25",
@@ -50,7 +50,7 @@
         "status": "In Progress"
     },
     {
-        "id": "6",
+        "id": 6,
         "guest": "Laura Brown",
         "orderDate": "2024-06-22",
         "checkIn": "2024-06-28",
@@ -60,7 +60,7 @@
         "status": "Check In"
     },
     {
-        "id": "7",
+        "id": 7,
         "guest": "Robert Miller",
         "orderDate": "2024-06-25",
         "checkIn": "2024-07-01",
@@ -70,7 +70,7 @@
         "status": "Check Out"
     },
     {
-        "id": "8",
+        "id": 8,
         "guest": "Susan Taylor",
         "orderDate": "2024-06-28",
         "checkIn": "2024-07-03",

@@ -3,19 +3,13 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { NavbarComponent } from "../../../components/navbarComponent/navbarComponent";
 import { BookingDetailComponent } from "../../../components/bookingDetailComponent/bookingDetailComponent";
-import { getBookingById } from '../../../assets/features/booking/bookingSlice';
+import { getBooking } from '../../../assets/features/booking/bookingSlice';
 import { RootState } from './../../../store/store'; 
 
 export const BookingDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     
-    // Asegúrate de que id sea un número
-    const booking = useSelector((state: RootState) => {
-        if (id) {
-            return getBookingById(state, Number(id)); 
-        }
-        return null; 
-    });
+    const booking = useSelector(getBooking);
 
     return (
         <NavbarComponent>

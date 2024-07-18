@@ -12,6 +12,7 @@ export interface Room {
     offerPrice: number;
     status: string;
     availability: string;
+    type: string;
 }
 
 interface RoomState {
