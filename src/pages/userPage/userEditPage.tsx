@@ -2,28 +2,28 @@ import React, { useEffect, useState } from "react";
 import { NavbarComponent } from "../../components/navbarComponent/navbarComponent";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { editUser, selectUserById, User } from '../../assets/features/user/userSlice'; 
+import { editUser, selectUserById, User } from '../../assets/features/user/userSlice';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
 import { SelectFormStyled, FormStyled, LabelFormStyled, InputFormStyled } from '../../components/styledGeneric/styledGeneric';
 
 export const UserEditPage: React.FC = () => {
-    const { id } = useParams<{ id: string | undefined }>();
+    const { id } = useParams<{ id: string }>();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
     const user = useSelector((state: any) => selectUserById(state, id ? Number(id) : 0)) as User | null;
 
     const [formData, setFormData] = useState<User>({
-        name: '',
         id: 0,
+        name: '',
+        email: '',
         startDate: '',
         description: '',
-        email: '',
         contact: '',
         status: 'ACTIVE',
-        foto: '', 
+        foto: '',
     });
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {

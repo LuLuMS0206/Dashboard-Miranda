@@ -13,7 +13,7 @@ interface RoomFormData {
     roomNumber: string;
     description: string;
     price: string;
-    discount: string;
+    offerPrice: string; 
     amenities: string[];
     name: string;  
     type: string;  
@@ -29,7 +29,7 @@ export const NewRoomPage = () => {
         roomNumber: '',
         description: '',
         price: '',
-        discount: '',
+        offerPrice: '', 
         amenities: [],
         name: '',  
         type: ''   
@@ -59,12 +59,13 @@ export const NewRoomPage = () => {
             image: formData.image,
             roomNumber: formData.roomNumber,
             roomType: formData.roomType,
+            description: formData.description,
             amenities: formData.amenities,
             price: parseFloat(formData.price),
-            offerPrice: parseFloat(formData.discount), // Cambia esto si el nombre es diferente
-            status: 'available', // O el estado que necesites
-            availability: 'available', // O el estado que necesites
-            type: formData.type, // Asegúrate de que 'type' esté en formData
+            offerPrice: parseFloat(formData.offerPrice), 
+            status: 'available', 
+            availability: 'available', 
+            type: formData.type, 
         };
     
         dispatch(addRoom(newRoom));
@@ -98,7 +99,7 @@ export const NewRoomPage = () => {
                 <InputFormStyled type="number" name="price" value={formData.price} onChange={handleChange} />
 
                 <LabelFormStyled>Discount:</LabelFormStyled>
-                <InputFormStyled type="number" name="discount" value={formData.discount} onChange={handleChange} />
+                <InputFormStyled type="number" name="offerPrice" value={formData.offerPrice} onChange={handleChange} />
 
                 <LabelFormStyled>Amenities:</LabelFormStyled>
                 <SelectFormStyled name="amenities" multiple value={formData.amenities} onChange={handleAmenitiesChange}>

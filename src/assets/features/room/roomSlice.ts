@@ -7,6 +7,7 @@ export interface Room {
     image: string;
     roomNumber: string;
     roomType: string;
+    description: string;
     amenities: string[];
     price: number;
     offerPrice: number;
@@ -36,6 +37,12 @@ export const RoomSlice = createSlice({
         addRoom: (state, action: PayloadAction<Room>) => {
             state.rooms.push(action.payload);
         },
+        setRooms: (state, action: PayloadAction<Room[]>) => {
+            state.rooms = action.payload;
+        },
+        setSelectedRoom: (state, action: PayloadAction<Room>) => {
+            state.room = action.payload;
+        },
         editRoom: (state, action: PayloadAction<Room>) => {
             const index = state.rooms.findIndex(room => room.id === action.payload.id);
             if (index !== -1) {
@@ -44,6 +51,10 @@ export const RoomSlice = createSlice({
         },
         deleteRoom: (state, action: PayloadAction<string>) => {
             state.rooms = state.rooms.filter(room => room.id !== action.payload);
+        },
+        createRoom: (state, action: PayloadAction<Omit<Room, 'id'>>) => {
+            const newRoom: Room = { ...action.payload, id: (state.rooms.length + 1).toString() };
+            state.rooms.push(newRoom);
         },
     },
     extraReducers: (builder) => {
@@ -62,13 +73,11 @@ export const RoomSlice = createSlice({
     },
 });
 
-export const { addRoom, editRoom, deleteRoom } = RoomSlice.actions;
+export const { addRoom, setRooms, setSelectedRoom, editRoom, deleteRoom, createRoom } = RoomSlice.actions;
 
 export const getRoomsList = (state: RootState) => state.rooms.rooms;
 export const getRoom = (state: RootState) => state.rooms.room;
 export const getRoomsStatus = (state: RootState) => state.rooms.status;
 export const getRoomsError = (state: RootState) => state.rooms.error;
-export const selectRoomById = (state: RootState, id: string) =>
-    state.rooms.rooms.find(room => room.id === id);
 
 export default RoomSlice.reducer;
