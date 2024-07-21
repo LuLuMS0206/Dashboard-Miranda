@@ -2,46 +2,44 @@ import React, { useEffect, useState } from 'react';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editRoom, getRoom, Room } from '../../assets/features/room/roomSlice';
+import { editRoom, getRoomById } from '../../assets/features/room/roomSlice';
 import { ButtonStyles } from '../../components/buttonComponent/buttonComponent';
 import { NavbarComponent } from '../../components/navbarComponent/navbarComponent';
 import { FormStyled, SelectFormStyled, LabelFormStyled, InputFormStyled, TextAreaStyled } from '../../components/styledGeneric/styledGeneric';
-import { RootState } from '../../store/store'; 
+import { RootState } from '../../store/store';
+import { Room } from './../../assets/features/room/roomSlice';
 
 export const RoomEditPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const room = useSelector((state: RootState) => getRoom(state));
+    const room = useSelector((state: RootState) => id ? getRoomById(state, id) : null); 
 
     const initialFormData: Room = {
         id: '',
-        type: '',
         image: '',
-        roomType: '',
         roomNumber: '',
+        roomType: '',
         description: '',
         price: 0,
         offerPrice: 0,
         amenities: [],
         status: 'available',
         availability: 'available',
+        type: ''
     };
 
     const [formData, setFormData] = useState<Room>(initialFormData);
 
     useEffect(() => {
         if (room) {
-            setFormData(room as Room);
+            setFormData(room);
         }
     }, [room]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setFormData(prevState => ({ ...prevState, [name]: value }));
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +69,10 @@ export const RoomEditPage: React.FC = () => {
     const handleGoTo = () => {
         navigate('/rooms');
     };
+
+    if (!room) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <NavbarComponent>

@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './../../../store/store';
 import { RoomsThunk } from './roomThunk';
 
+
+
 export interface Room {
     id: string;
     image: string;
@@ -15,7 +17,6 @@ export interface Room {
     availability: string;
     type: string;
 }
-
 interface RoomState {
     status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
     error: string | null;
@@ -44,10 +45,10 @@ export const RoomSlice = createSlice({
             state.room = action.payload;
         },
         editRoom: (state, action: PayloadAction<Room>) => {
-            const index = state.rooms.findIndex(room => room.id === action.payload.id);
-            if (index !== -1) {
-                state.rooms[index] = action.payload;
-            }
+            const editRoom = action.payload;
+            state.rooms = state.rooms.map(room =>
+                room.id === editRoom.id ? editRoom : room
+            );
         },
         deleteRoom: (state, action: PayloadAction<string>) => {
             state.rooms = state.rooms.filter(room => room.id !== action.payload);
@@ -79,5 +80,9 @@ export const getRoomsList = (state: RootState) => state.rooms.rooms;
 export const getRoom = (state: RootState) => state.rooms.room;
 export const getRoomsStatus = (state: RootState) => state.rooms.status;
 export const getRoomsError = (state: RootState) => state.rooms.error;
+
+export const getRoomById = (state: RootState, id: string) =>
+    state.rooms.rooms.find(room => room.id === id) || null;
+
 
 export default RoomSlice.reducer;

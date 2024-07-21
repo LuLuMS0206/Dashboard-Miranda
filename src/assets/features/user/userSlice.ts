@@ -36,10 +36,10 @@ export const UserSlice = createSlice({
             state.users.push(action.payload);
         },
         editUser: (state, action: PayloadAction<User>) => {
-            const index = state.users.findIndex(user => user.id === action.payload.id);
-            if (index !== -1) {
-                state.users[index] = action.payload;
-            }
+            const updatedUser = action.payload;
+            state.users = state.users.map(user =>
+                user.id === updatedUser.id ? updatedUser : user
+            );
         },
         deleteUser: (state, action: PayloadAction<number>) => {
             state.users = state.users.filter(user => user.id !== action.payload);
@@ -67,7 +67,7 @@ export const getUsersList = (state: RootState) => state.users.users;
 export const getUser = (state: RootState) => state.users.user;
 export const getUsersStatus = (state: RootState) => state.users.status;
 export const getUsersError = (state: RootState) => state.users.error;
-export const selectUserById = (state: RootState, id: number) =>
-    state.users.users.find(user => user.id === id);
+// export const selectUserById = (state: RootState, id: number) =>
+//     state.users.users.find(user => user.id === id);
 
 export default UserSlice.reducer;
