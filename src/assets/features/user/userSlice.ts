@@ -4,7 +4,7 @@ import { UserThunk } from './userThunk';
 import { RootState } from './../../../store/store';
 
 export interface User {
-    id: number;
+    id: string;
     name: string;
     email: string;
     startDate: string;
@@ -41,9 +41,10 @@ export const UserSlice = createSlice({
                 user.id === updatedUser.id ? updatedUser : user
             );
         },
-        deleteUser: (state, action: PayloadAction<number>) => {
+        deleteUser: (state, action: PayloadAction<string>) => {
             state.users = state.users.filter(user => user.id !== action.payload);
         },
+        
     },
     extraReducers: (builder) => {
         builder
@@ -67,7 +68,8 @@ export const getUsersList = (state: RootState) => state.users.users;
 export const getUser = (state: RootState) => state.users.user;
 export const getUsersStatus = (state: RootState) => state.users.status;
 export const getUsersError = (state: RootState) => state.users.error;
-// export const selectUserById = (state: RootState, id: number) =>
-//     state.users.users.find(user => user.id === id);
+export const getUserById = (state: RootState, id: string) =>
+    state.users.users.find(user => user.id === id) || null;
+
 
 export default UserSlice.reducer;
