@@ -1,6 +1,4 @@
 
-
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -34,7 +32,7 @@ export const MainApp = () => {
               <Route path='/login' element={<LoginPage />} />
               <Route element={<ProtectedRoutes />}>
                 <Route path='/' element={<DashboardPage />} />
-                <Route path='/navbarComponent' element={<NavbarComponent />} />
+                <Route path='/navbarComponent' element={<NavbarComponent children={undefined} />} />
                 <Route path='/bookings' element={<BookingPage />} />
                 <Route path='/bookingsDetail/:id' element={<BookingDetailPage />} />
                 <Route path='/bookingsEdit/:id' element={<BookingEditPage />} />
