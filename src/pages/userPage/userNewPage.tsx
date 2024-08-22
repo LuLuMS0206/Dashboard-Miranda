@@ -10,7 +10,7 @@ import { FormStyled, InputFormStyled, LabelFormStyled, SelectFormStyled } from '
 export const UserNewPage: React.FC = () => {
     const [formData, setFormData] = useState<User>({
         name: '',
-        id: 0,
+        id: "0",
         startDate: '',
         description: '',
         email: '',

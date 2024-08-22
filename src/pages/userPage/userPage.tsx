@@ -13,7 +13,7 @@ import { UserThunk } from './../../assets/features/user/userThunk';
 import { AppDispatch } from './../../store/store'; 
 
 interface User {
-    id: number;
+    id: string;
     name: string;
     email: string;
     startDate: string;
@@ -58,7 +58,7 @@ export const UserPage: React.FC = () => {
         } else if (value === 'name') {
             sortedUsers.sort((a, b) => a.name.localeCompare(b.name));
         } else {
-            sortedUsers.sort((a, b) => a.id - b.id);
+            sortedUsers.sort((a, b) =>  Number(a.id) - Number(b.id));
         }
 
         setFilteredUsers(sortedUsers);
@@ -81,11 +81,11 @@ export const UserPage: React.FC = () => {
         setFilteredUsers(usersList.filter(user => user.status === 'INACTIVE'));
     };
 
-    const handleEditUser = (userId: number) => {
+    const handleEditUser = (userId: string) => {
         navigate(`/editUsers/${userId}`);
     };
 
-    const handleDeleteUser = (userId: number) => {
+    const handleDeleteUser = (userId: string) => {
         Swal.fire({
             title: "¿Estás seguro?",
             text: "¡No podrás revertir esto!",

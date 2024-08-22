@@ -1,28 +1,50 @@
-import React, { useContext, FormEvent } from "react";
+
+import React, { FormEvent } from "react";
 import { ButtonStyles } from "../../components/buttonComponent/buttonComponent";
 import { InputStyled, LoginStyles, FormStyles, TitleStyles, LabelStyles } from "./loginStyles";
 import { useNavigate } from "react-router-dom";
-import { UserContext, useUserContext } from '../../context/userContext'; 
+import { useUserContext } from '../../context/userContext'; 
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
-    const { state, dispatch } = useUserContext();
+    const { dispatch } = useUserContext();
 
-    const HandlerLogin = (event: FormEvent<HTMLFormElement>) => {
+    const HandlerLogin = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const username = 'dashboardMiranda@admin.com';
-        const password = 'miranda00';
 
         const form = event.currentTarget;
         const enteredUsername = (form.elements.namedItem('username') as HTMLInputElement).value;
         const enteredPassword = (form.elements.namedItem('password') as HTMLInputElement).value;
 
-        if (username === enteredUsername && password === enteredPassword) {
-            dispatch({ type: "LOGIN", payload: { name: 'Admin', email: username } });
-            navigate('/');
-        } else {
+        try {
+            const response = await fetch('http://localhost:3001/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userName: enteredUsername,
+                    password: enteredPassword
+                })
+            });
+            if (!response.ok) {
+                throw new Error('Error en la autenticación');
+            }
+
+            const data = await response.json();
+
+            if (data.token) {
+                localStorage.setItem('authToken', data.token);
+
+                dispatch({ type: "LOGIN", payload: { name: 'Admin', email: enteredUsername } });
+
+                navigate('/');
+            } else {
+                alert('Error al recibir el token');
+            }
+        } catch (error) {
             alert('Username or password incorrect');
-        } 
+        }
     };
 
     return (

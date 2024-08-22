@@ -16,7 +16,7 @@ export const BookingPage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const bookingStatus = useSelector(getBookingsStatus);
-    const bookingSlice: Booking[] = useSelector(getBookingSlice);
+    const bookingSlice= useSelector(getBookingSlice);
     const bookingError = useSelector(getBookingsError);
     const [bookingList, setBookingList] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
@@ -30,11 +30,10 @@ export const BookingPage: React.FC = () => {
         } else if (bookingStatus === 'fulfilled') {
             setLoading(false);
             setBookingList(bookingSlice);
-            console.log('BookingList updated:', bookingSlice);
+            console.log('BookingSlice in useEffect:', bookingSlice); 
         } else if (bookingStatus === 'rejected') {
             setLoading(false);
             setError(bookingError);
-            console.log('Error:', bookingError);
         }
     }, [bookingStatus]);
 

@@ -1,26 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import data from "../../../data/booking.json";
 import { Booking } from "./bookingSlice";
+import { getAuthToken } from './../../../auth/auth';
 
-export const BookingsThunk = createAsyncThunk<Booking[]>(
-  "bookings/getBookings",
-  async () =>
-    new Promise<Booking[]>(async (resolve) => {
-      const request = new Request("http://localhost:3001/bookings", {
+export const BookingsThunk = createAsyncThunk<Booking[]>("bookings/getBookings",async() => {
+      const token = getAuthToken();
+      const request = await fetch("http://localhost:3001/bookings", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          //   "Authorization": `Bearer ${token}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikx1Y2lhIiwiaWF0IjoxNzI0MTczMzk1LCJleHAiOjE3MjQxNzY5OTV9.AEUuCzjr_7g3dn4A4a-rtbl8Y-kTxadhGZ-bzoGtrR4`,
+          'Authorization': `Bearer ${token}`,
         },
       });
-
-      const response = await fetch(request);
-      
-      const bookings: Booking[] = await response.json();
-
-      console.log('STATUS ========', response.status);
-      console.log('BOOKINGS ========', bookings);
-      resolve(response.body as any);
-    })
-);
+      const response = await request.json()
+      console.log(response);
+      return response
+    });
