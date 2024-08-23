@@ -6,7 +6,7 @@ import { Table, Thead, Th, Tbody, Tr, Td, PaginationTable } from './tableStyles'
 
 interface Column {
     headerColumn: string;
-    columnsData?: string; 
+    columnsData?: string;
     columnRenderer?: (row: any) => React.ReactNode;
 }
 
@@ -24,7 +24,7 @@ export const TableComponent: React.FC<TableComponentProps> = ({ columns, data, o
     const pagination = (array: any[], size: number): any[][] => {
         const aux = []
         console.log(array.length);
-        for (let i = 0; i < array.length; i+= size)
+        for (let i = 0; i < array.length; i += size)
             aux.push(array.slice(i, i + size));
         return aux
     }
@@ -43,7 +43,7 @@ export const TableComponent: React.FC<TableComponentProps> = ({ columns, data, o
 
     useEffect(() => {
         setPages(pagination(data, pageSize));
-        setNum(0); 
+        setNum(0);
         console.log('Data received by TableComponent:', data);
     }, [data]);
 
@@ -52,6 +52,7 @@ export const TableComponent: React.FC<TableComponentProps> = ({ columns, data, o
         if (onRowClick) onRowClick(row);
         if (redirectUrl) navigate(`${redirectUrl}/${row.id}`); 
     };
+    
 
     const stopPropagation = (event: React.MouseEvent) => {
         event.stopPropagation();
@@ -69,13 +70,13 @@ export const TableComponent: React.FC<TableComponentProps> = ({ columns, data, o
                 </Thead>
                 <Tbody>
                     {pages[num]?.map((row) => (
-                        <Tr 
+                        <Tr
                             key={row.id}
                             onClick={() => handleRowClick(row)}
                             style={{ cursor: 'pointer' }}
                         >
                             {columns.map((col, colIndex) => (
-                                <Td 
+                                <Td
                                     key={colIndex}
                                     onClick={col.headerColumn === 'Action' ? stopPropagation : undefined}
                                 >
@@ -84,6 +85,7 @@ export const TableComponent: React.FC<TableComponentProps> = ({ columns, data, o
                             ))}
                         </Tr>
                     ))}
+
                 </Tbody>
             </Table>
             <PaginationTable>

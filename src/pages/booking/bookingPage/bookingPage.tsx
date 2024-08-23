@@ -39,8 +39,8 @@ export const BookingPage: React.FC = () => {
 
     const handleRowClick = (booking: Booking) => {
         console.log('Selected booking:', booking);
-        dispatch(getBookingThunk(booking.id.toString()));
-        navigate(`/bookingsDetail/${booking.id}`);
+        dispatch(getBookingThunk(booking._id.toString()));
+        navigate(`/bookingsDetail/${booking._id}`);
     };
 
     const handleDeleteRow = (id: number) => {
@@ -54,7 +54,7 @@ export const BookingPage: React.FC = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                const updatedBookings = bookingList.filter(booking => booking.id !== id);
+                const updatedBookings = bookingList.filter(booking => booking._id !== id);
                 setBookingList(updatedBookings);
                 Swal.fire({
                     title: "Deleted!",
@@ -87,7 +87,7 @@ export const BookingPage: React.FC = () => {
         } else if (value === 'checkOut') {
             sortedBookings.sort((a, b) => new Date(a.checkOut).getTime() - new Date(b.checkOut).getTime());
         } else {
-            sortedBookings.sort((a, b) => a.id - b.id);
+            sortedBookings.sort((a, b) => a._id - b._id);
         }
         setBookingList(sortedBookings);
     };
@@ -129,14 +129,14 @@ export const BookingPage: React.FC = () => {
                             style={{ marginRight: '1rem' }} 
                             onClick={(e) => {
                                 e.stopPropagation();
-                                dispatch(getBookingThunk(booking.id.toString())); 
-                                navigate(`/bookingsEdit/${booking.id}`);
+                                dispatch(getBookingThunk(booking._id.toString())); 
+                                navigate(`/bookingsEdit/${booking._id}`);
                             }} 
                         />
                         <AiOutlineDelete 
                             onClick={(e) => { 
                                 e.stopPropagation(); 
-                                handleDeleteRow(booking.id); 
+                                handleDeleteRow(booking._id); 
                             }} 
                         />
                     </>

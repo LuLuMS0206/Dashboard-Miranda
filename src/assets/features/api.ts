@@ -6,37 +6,27 @@ export async function backendAPIcall(path: string, method = 'GET', data: any = n
         const response = await fetch(`${apiBack}${path}`, {
             method,
             headers: {
-                'Authorization': `Token ${token}`,
+                'Authorization': `Bearer ${token}`, 
                 'Content-Type': 'application/json',
             },
             body: data ? JSON.stringify(data) : undefined
         });
- console.log(response)
+
+        console.log("Response status:", response.status);
+        console.log("Response body:", await response.clone().text()); 
+
         if ([401, 403].includes(response.status)) {
-            // localStorage.clear();
-            // location.reload();
-            return;
+    
+            throw new Error("Unauthorized or forbidden");
         } else if (!response.ok) {
-            throw new Error("Network response was not ok");
+
+            const errorText = await response.text();
+            throw new Error(`Network response was not ok: ${errorText}`);
         }
 
         return await response.json();
     } catch (e) {
-        console.log(e)
+        console.error("Error in backendAPIcall:", e);
         throw e;
-    }
-}
-
-export async function login(user: { email: string, password: string }) {
-    try {
-        const response = await backendAPIcall('/login', 'POST', user);
-
-        localStorage.setItem('TOKEN_KEY', response.Token);
-        localStorage.setItem('user', JSON.stringify(response.User));
-        
-        return response.User;
-    } catch (error) {
-        window.alert(error);
-        throw error;
     }
 }

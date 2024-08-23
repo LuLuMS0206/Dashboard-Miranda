@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BookingsThunk, getBookingThunk, removeBookingThunk, addBookingThunk, updateBookingThunk } from './bookingThunk';
 
 export interface Booking {
-    id: number;
+    _id: number;
     guest: string;
     checkIn: string;
     checkOut: string;
@@ -59,9 +59,10 @@ export const BookingSlice = createSlice({
             .addCase(removeBookingThunk.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(removeBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
+            .addCase(removeBookingThunk.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = 'fulfilled';
-                state.bookings = state.bookings.filter(booking => booking.id !== action.payload.id);
+                state.bookings = state.bookings.filter(booking => booking._id !== Number(action.payload));
+
             })
             .addCase(removeBookingThunk.rejected, (state, action) => {
                 state.status = 'rejected';
@@ -86,7 +87,7 @@ export const BookingSlice = createSlice({
             .addCase(updateBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
                 state.status = 'fulfilled';
                 state.bookings = state.bookings.map(booking =>
-                    booking.id === action.payload.id ? action.payload : booking
+                    booking._id === action.payload._id ? action.payload : booking
                 );
             })
             .addCase(updateBookingThunk.rejected, (state, action) => {

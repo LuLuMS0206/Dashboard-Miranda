@@ -17,7 +17,7 @@ export const BookingEditPage: React.FC = () => {
     const booking = useSelector((state: RootState) => getBooking(state));
 
     const initialFormData: Booking = {
-        id: -1,
+        _id: -1,
         guest: '',
         orderDate: '',
         checkIn: '',

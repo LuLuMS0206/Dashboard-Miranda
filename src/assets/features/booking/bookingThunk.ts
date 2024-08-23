@@ -34,21 +34,28 @@ export const BookingsThunk = createAsyncThunk('booking/getBookings', async () =>
 });
 
 // para eliminar
-export const removeBookingThunk = createAsyncThunk<Booking, string>("booking/removeBooking", async (id) => {
-        const booking: Booking = await backendAPIcall(`/bookings/delete/${id}`, "DELETE");
-        return booking;
-});
+export const removeBookingThunk = createAsyncThunk<string, string>(
+    "booking/removeBooking",
+    async (id) => {
+        await backendAPIcall(`/bookings${id}`, "DELETE");
+        return id; 
+    }
+);
+
 
 // para añadir
 export const addBookingThunk = createAsyncThunk<Booking, Partial<Booking>>("booking/addBooking", async (bookingData) => {
-        const booking: Booking = await backendAPIcall(`/bookings/add`, "POST", bookingData);
+        const booking: Booking = await backendAPIcall(`/bookings`, "POST", bookingData);
         return booking;
 
 });
-
-// para actualizar
-export const updateBookingThunk = createAsyncThunk<Booking, Booking>("booking/updateBooking", async (bookingData) => {
-        const booking: Booking = await backendAPIcall(`/bookings/update/${bookingData.id}`, "PUT", bookingData);
+// Para actualizar un booking
+export const updateBookingThunk = createAsyncThunk<Booking, Booking>(
+    "booking/updateBooking",
+    async (bookingData) => {
+        const url = `/bookings/update/${bookingData._id}`;
+        const booking: Booking = await backendAPIcall(url, "PUT", bookingData);
         return booking;
+    }
+);
 
-});
