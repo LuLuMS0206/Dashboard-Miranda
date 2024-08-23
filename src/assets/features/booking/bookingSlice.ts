@@ -1,6 +1,5 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BookingsThunk } from './bookingThunk';
+import { BookingsThunk, getBookingThunk, removeBookingThunk, addBookingThunk, updateBookingThunk } from './bookingThunk';
 
 export interface Booking {
     id: number;
@@ -30,29 +29,7 @@ const initialState: BookingState = {
 export const BookingSlice = createSlice({
     name: 'bookings',
     initialState,
-    reducers: {
-        addBookings: (state, action: PayloadAction<Booking>) => {
-            state.bookings.push(action.payload);
-            console.log(state)
-        },
-        setBookings: (state, action: PayloadAction<Booking[]>) => {
-            state.bookings = action.payload;
-        },
-        setSelectedBooking: (state, action: PayloadAction<Booking>) => {
-            state.booking = action.payload;
-        },
-        updateBooking: (state, action: PayloadAction<Booking>) => {
-            const updatedBooking = action.payload;
-            state.bookings = state.bookings.map(booking =>
-                booking.id === updatedBooking.id ? updatedBooking : booking
-            );
-            console.log(state.bookings)
-        },
-        createBooking: (state, action: PayloadAction<Omit<Booking, 'id'>>) => {
-            const newBooking: Booking = { ...action.payload, id: state.bookings.length + 1 };
-            state.bookings.push(newBooking);
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(BookingsThunk.pending, (state) => {
@@ -65,17 +42,63 @@ export const BookingSlice = createSlice({
             .addCase(BookingsThunk.rejected, (state, action) => {
                 state.status = 'rejected';
                 state.error = action.error.message || null;
+            })
+            // para obtener un booking
+            .addCase(getBookingThunk.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(getBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
+                state.status = 'fulfilled';
+                state.booking = action.payload;
+            })
+            .addCase(getBookingThunk.rejected, (state, action) => {
+                state.status = 'rejected';
+                state.error = action.error.message || null;
+            })
+            // para eliminar un booking
+            .addCase(removeBookingThunk.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(removeBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
+                state.status = 'fulfilled';
+                state.bookings = state.bookings.filter(booking => booking.id !== action.payload.id);
+            })
+            .addCase(removeBookingThunk.rejected, (state, action) => {
+                state.status = 'rejected';
+                state.error = action.error.message || null;
+            })
+            // para añadir un booking
+            .addCase(addBookingThunk.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(addBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
+                state.status = 'fulfilled';
+                state.bookings.push(action.payload);
+            })
+            .addCase(addBookingThunk.rejected, (state, action) => {
+                state.status = 'rejected';
+                state.error = action.error.message || null;
+            })
+            // para actualizar un booking
+            .addCase(updateBookingThunk.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(updateBookingThunk.fulfilled, (state, action: PayloadAction<Booking>) => {
+                state.status = 'fulfilled';
+                state.bookings = state.bookings.map(booking =>
+                    booking.id === action.payload.id ? action.payload : booking
+                );
+            })
+            .addCase(updateBookingThunk.rejected, (state, action) => {
+                state.status = 'rejected';
+                state.error = action.error.message || null;
             });
     },
 });
-
-export const { setBookings, setSelectedBooking, updateBooking, createBooking } = BookingSlice.actions;
 
 export const getBookingSlice = (state: { bookings: BookingState }) => state.bookings.bookings;
 export const getBooking = (state: { bookings: BookingState }) => state.bookings.booking;
 export const getBookingsStatus = (state: { bookings: BookingState }) => state.bookings.status;
 export const getBookingsError = (state: { bookings: BookingState }) => state.bookings.error;
-    
-
 
 export default BookingSlice.reducer;

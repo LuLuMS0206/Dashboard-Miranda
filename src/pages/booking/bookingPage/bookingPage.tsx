@@ -3,11 +3,11 @@ import { NavbarComponent } from "../../../components/navbarComponent/navbarCompo
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { setBookings, setSelectedBooking, getBookingsStatus, getBookingSlice, getBookingsError, Booking } from '../../../assets/features/booking/bookingSlice';
+import { getBookingsStatus, getBookingSlice, getBookingsError, Booking } from '../../../assets/features/booking/bookingSlice';
 import { TableComponent } from '../../../components/tableComponent/tableComponent';
 import { SectionOrder, List, ItemList, SelectStyled } from '../../../components/styledGeneric/styledGeneric';
 import { ButtonStyles } from '../../../components/buttonComponent/buttonComponent';
-import { BookingsThunk } from '../../../assets/features/booking/bookingThunk';
+import { BookingsThunk, getBookingThunk } from '../../../assets/features/booking/bookingThunk';
 import { MdOutlineEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AppDispatch } from './../../../store/store';
@@ -39,7 +39,7 @@ export const BookingPage: React.FC = () => {
 
     const handleRowClick = (booking: Booking) => {
         console.log('Selected booking:', booking);
-        dispatch(setSelectedBooking(booking));
+        dispatch(getBookingThunk(booking.id.toString())); // Convertir ID a string si es necesario
         navigate(`/bookingsDetail/${booking.id}`);
     };
 
@@ -55,7 +55,7 @@ export const BookingPage: React.FC = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 const updatedBookings = bookingList.filter(booking => booking.id !== id);
-                dispatch(setBookings(updatedBookings));
+                setBookingList(updatedBookings);
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
@@ -125,8 +125,20 @@ export const BookingPage: React.FC = () => {
             columnRenderer: (booking: Booking) => {
                 return (
                     <>
-                        <MdOutlineEdit style={{ marginRight: '1rem' }} onClick={(e) => { e.stopPropagation();dispatch(setSelectedBooking(booking)); navigate(`/bookingsEdit/${booking.id}`); }} />
-                        <AiOutlineDelete onClick={(e) => { e.stopPropagation(); handleDeleteRow(booking.id); }} />
+                        <MdOutlineEdit 
+                            style={{ marginRight: '1rem' }} 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                dispatch(getBookingThunk(booking.id.toString())); // Pasar el ID
+                                navigate(`/bookingsEdit/${booking.id}`);
+                            }} 
+                        />
+                        <AiOutlineDelete 
+                            onClick={(e) => { 
+                                e.stopPropagation(); 
+                                handleDeleteRow(booking.id); 
+                            }} 
+                        />
                     </>
                 );
             }
