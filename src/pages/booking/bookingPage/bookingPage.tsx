@@ -39,7 +39,7 @@ export const BookingPage: React.FC = () => {
 
     const handleRowClick = (booking: Booking) => {
         console.log('Selected booking:', booking);
-        dispatch(getBookingThunk(booking.id.toString())); // Convertir ID a string si es necesario
+        dispatch(getBookingThunk(booking.id.toString()));
         navigate(`/bookingsDetail/${booking.id}`);
     };
 
@@ -129,7 +129,7 @@ export const BookingPage: React.FC = () => {
                             style={{ marginRight: '1rem' }} 
                             onClick={(e) => {
                                 e.stopPropagation();
-                                dispatch(getBookingThunk(booking.id.toString())); // Pasar el ID
+                                dispatch(getBookingThunk(booking.id.toString())); 
                                 navigate(`/bookingsEdit/${booking.id}`);
                             }} 
                         />
