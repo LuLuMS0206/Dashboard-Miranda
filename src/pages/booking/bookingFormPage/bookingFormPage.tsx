@@ -2,31 +2,22 @@ import { NavbarComponent } from "./../../../components/navbarComponent/navbarCom
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getBooking, updateBooking } from '../../../assets/features/booking/bookingSlice';
+import { getBookingThunk, updateBookingThunk } from '../../../assets/features/booking/bookingThunk';
 import { ButtonStyles } from '../../../components/buttonComponent/buttonComponent';
 import { FormStyled, LabelFormStyled, InputFormStyled, SelectFormStyled } from '../../../components/styledGeneric/styledGeneric';
 import { IoArrowBackSharp } from "react-icons/io5";
-import { RootState } from '../../../store/store';
-
-interface Booking {
-    id: number;
-    guest: string;
-    orderDate: string;
-    checkIn: string;
-    checkOut: string;
-    specialRequest: string;
-    roomType: string;
-    status: string;
-}
+import { RootState, AppDispatch } from '../../../store/store';
+import { Booking } from '../../../assets/features/booking/bookingSlice';
+import { getBooking } from '../../../assets/features/booking/bookingSlice';
 
 export const BookingEditPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const booking = useSelector(getBooking)
+    const booking = useSelector((state: RootState) => getBooking(state));
 
     const initialFormData: Booking = {
-        id: -1, 
+        id: -1,
         guest: '',
         orderDate: '',
         checkIn: '',
@@ -37,20 +28,38 @@ export const BookingEditPage: React.FC = () => {
     };
 
     const [formData, setFormData] = useState<Booking>(initialFormData);
-    
+
     useEffect(() => {
-        setFormData(booking as Booking)
-    }, []);
+        if (id) {
+            dispatch(getBookingThunk(id))
+                .unwrap()
+                .then((bookingData) => {
+                    setFormData(bookingData);
+                })
+                .catch((error) => {
+                    console.error('Failed to fetch booking:', error);
+                });
+        }
+    }, [id, dispatch]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(updateBooking(formData));
-        navigate('/bookings');
+        dispatch(updateBookingThunk(formData))
+            .unwrap()
+            .then(() => {
+                navigate('/bookings');
+            })
+            .catch((error) => {
+                console.error('Failed to update booking:', error);
+            });
     };
 
     return (
@@ -121,7 +130,7 @@ export const BookingEditPage: React.FC = () => {
                             value={formData.status}
                             onChange={handleChange}
                         >
-                            <option value="En Progreso">En Progreso</option>
+                            <option value="In Progress">En Progreso</option>
                             <option value="Check In">Check In</option>
                             <option value="Check Out">Check Out</option>
                         </SelectFormStyled>

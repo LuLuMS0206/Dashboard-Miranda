@@ -23,12 +23,8 @@ import { backendAPIcall } from "./../api";
 
 // para mostrar 1
 export const getBookingThunk = createAsyncThunk<Booking, string>("booking/getBooking", async (id) => {
-    try {
         const booking: Booking = await backendAPIcall(`/bookings/${id}`);
         return booking;
-    } catch (error) {
-        throw new Error('Failed to fetch booking');
-    }
 });
 
 //para mostrar todas 
@@ -39,30 +35,20 @@ export const BookingsThunk = createAsyncThunk('booking/getBookings', async () =>
 
 // para eliminar
 export const removeBookingThunk = createAsyncThunk<Booking, string>("booking/removeBooking", async (id) => {
-    try {
         const booking: Booking = await backendAPIcall(`/bookings/delete/${id}`, "DELETE");
         return booking;
-    } catch (error) {
-        throw new Error('Failed to delete booking');
-    }
 });
 
 // para añadir
 export const addBookingThunk = createAsyncThunk<Booking, Partial<Booking>>("booking/addBooking", async (bookingData) => {
-    try {
         const booking: Booking = await backendAPIcall(`/bookings/add`, "POST", bookingData);
         return booking;
-    } catch (error) {
-        throw new Error('Failed to add booking');
-    }
+
 });
 
 // para actualizar
 export const updateBookingThunk = createAsyncThunk<Booking, Booking>("booking/updateBooking", async (bookingData) => {
-    try {
         const booking: Booking = await backendAPIcall(`/bookings/update/${bookingData.id}`, "PUT", bookingData);
         return booking;
-    } catch (error) {
-        throw new Error('Failed to update booking');
-    }
+
 });

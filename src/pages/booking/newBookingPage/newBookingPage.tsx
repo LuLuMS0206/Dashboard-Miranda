@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { createBooking } from '../../../assets/features/booking/bookingSlice';
 import { ButtonStyles } from '../../../components/buttonComponent/buttonComponent';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { FormStyled, LabelFormStyled, InputFormStyled, SelectFormStyled } from '../../../components/styledGeneric/styledGeneric';
 import {NavbarComponent} from './../../../components/navbarComponent/navbarComponent'
-
+import { addBookingThunk } from '../../../assets/features/booking/bookingThunk';
+import { AppDispatch } from './../../../store/store';
 interface Booking {
     id: number;
     guest: string;
@@ -19,7 +19,7 @@ interface Booking {
 }
 
 export const NewBookingPage: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     
     const initialFormData: Booking = {
@@ -43,7 +43,7 @@ export const NewBookingPage: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(formData.id)
-        dispatch(createBooking(formData));
+        dispatch(addBookingThunk(formData));
         navigate('/bookings');
     };
 

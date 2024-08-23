@@ -1,7 +1,7 @@
 const apiBack = import.meta.env.VITE_BACKEND_URL;
 
 export async function backendAPIcall(path: string, method = 'GET', data: any = null) {
-    const token = localStorage.getItem("TOKEN_KEY");
+    const token = localStorage.getItem("authToken");
     try {
         const response = await fetch(`${apiBack}${path}`, {
             method,
@@ -11,10 +11,10 @@ export async function backendAPIcall(path: string, method = 'GET', data: any = n
             },
             body: data ? JSON.stringify(data) : undefined
         });
-
+ console.log(response)
         if ([401, 403].includes(response.status)) {
-            localStorage.clear();
-            location.reload();
+            // localStorage.clear();
+            // location.reload();
             return;
         } else if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -22,6 +22,7 @@ export async function backendAPIcall(path: string, method = 'GET', data: any = n
 
         return await response.json();
     } catch (e) {
+        console.log(e)
         throw e;
     }
 }
