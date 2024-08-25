@@ -58,8 +58,8 @@ export const LoginPage: React.FC = () => {
                 <LabelStyles>Password</LabelStyles>
                 <InputStyled type="password" id="password" name="password" placeholder="Your password" autoComplete="true" />
                 <ButtonStyles styled="login" type="submit">Login</ButtonStyles>
-                <p>username: dashboardMiranda@admin.com</p>
-                <p>| password: miranda00</p>
+                <p>username: Lucia</p>
+                <p>| password: 12345</p>
             </FormStyles>
         </LoginStyles>
     );
