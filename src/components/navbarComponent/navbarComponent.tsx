@@ -240,7 +240,7 @@ export const NavbarComponent: React.FC<NavbarComponentProps> = ({ children }) =>
                         <MenuLeftStyles>
                             <div>
                                 <LogoContentStyles>
-                                    <ImgLogoStyles src="src/assets/img/logo.png" alt="" />
+                                    <ImgLogoStyles src="../logo.png" alt="" />
                                     <div>
                                         <TravelStyles>travl</TravelStyles>
                                         <HotelStyles>Hotel Admin Dashboard</HotelStyles>
@@ -296,7 +296,7 @@ export const NavbarComponent: React.FC<NavbarComponentProps> = ({ children }) =>
                                 </UlStyles>
 
                                 <UserStyles>
-                                    <PhotoStyles src="src/assets/img/photo.jpg" alt="" />
+                                    <PhotoStyles src="../photo.jpg" alt="" />
                                     <NameStyles>{state.name}</NameStyles>
                                     <EmailStyles>{state.email}</EmailStyles>
                                     <ButtonStyles styled="contact" onClick={handleEditUserClick}>

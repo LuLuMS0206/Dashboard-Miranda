@@ -17,7 +17,7 @@ export const LoginPage: React.FC = () => {
         const enteredPassword = (form.elements.namedItem('password') as HTMLInputElement).value;
 
         try {
-            const response = await fetch('http://localhost:3001/auth', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export const LoginPage: React.FC = () => {
 
     return (
         <LoginStyles>
-            <img src="src/assets/img/logo.png" alt="Logo" />
+            <img src="../logo.png" alt="Logo" />
             <TitleStyles>Login</TitleStyles>
 
             <FormStyles onSubmit={HandlerLogin}>

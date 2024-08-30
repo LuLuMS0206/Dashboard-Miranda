@@ -137,7 +137,7 @@ export const CardComponent: React.FC = () => {
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
                                     </CardTextStyles>
                                     <CardContentStyles>
-                                        <CardImgStyles src="src/assets/img/person.jpg" alt="Persona" />
+                                        <CardImgStyles src="../person.jpg" alt="Persona" />
                                         <div>
                                             <CardNameStyles>Kusnaidi Anderson</CardNameStyles>
                                             <CardTimeStyles>4m ago</CardTimeStyles>

@@ -53,7 +53,7 @@ export const addBookingThunk = createAsyncThunk<Booking, Partial<Booking>>("book
 export const updateBookingThunk = createAsyncThunk<Booking, Booking>(
     "booking/updateBooking",
     async (bookingData) => {
-        const url = `/bookings/update/${bookingData._id}`;
+        const url = `/bookings/${bookingData._id}`;
         const booking: Booking = await backendAPIcall(url, "PUT", bookingData);
         return booking;
     }

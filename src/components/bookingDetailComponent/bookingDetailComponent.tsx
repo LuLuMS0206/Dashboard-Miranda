@@ -12,7 +12,7 @@ import {
 import { IoArrowBackSharp } from "react-icons/io5";
 
 interface Booking {
-    id: number;
+    _id: number;
     guest: string;
     checkIn: string;
     checkOut: string;
@@ -42,7 +42,7 @@ export const BookingDetailComponent: React.FC<BookingDetailComponentProps> = ({ 
                     <IoArrowBackSharp />
                 </ButtonStyles>
                 <BookingDetailContent>
-                <BookingDetailText><strong>Id:</strong> {booking.id}</BookingDetailText>
+                <BookingDetailText><strong>Id:</strong> {booking._id}</BookingDetailText>
                     <BookingDetailText><strong>Guest:</strong> {booking.guest}</BookingDetailText>
                     <BookingDetailText><strong>Check In:</strong> {booking.checkIn}</BookingDetailText>
                     <BookingDetailText><strong>Check Out:</strong> {booking.checkOut}</BookingDetailText>
