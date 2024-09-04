@@ -20,7 +20,8 @@ export const ButtonStyles = styled.button<{styled:'login'|'contact'|'backForm' |
         color: #EBF1EF;
         border: none;
         width: 100%;
-            
+                margin-top: 1rem;
+    margin-bottom: 1rem;
         `;
       case "contact":
         return `

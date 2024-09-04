@@ -16,26 +16,34 @@ export const BookingPage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const bookingStatus = useSelector(getBookingsStatus);
-    const bookingSlice= useSelector(getBookingSlice);
+    const bookingSlice = useSelector(getBookingSlice);
     const bookingError = useSelector(getBookingsError);
     const [bookingList, setBookingList] = useState<Booking[]>([]);
+    const [filteredBookingList, setFilteredBookingList] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (bookingStatus === 'idle') {
             dispatch(BookingsThunk());
-        } else if (bookingStatus === 'pending'){
+        } else if (bookingStatus === 'pending') {
             setLoading(true);
         } else if (bookingStatus === 'fulfilled') {
             setLoading(false);
             setBookingList(bookingSlice);
-            console.log('BookingSlice in useEffect:', bookingSlice); 
+            setFilteredBookingList(bookingSlice); 
         } else if (bookingStatus === 'rejected') {
             setLoading(false);
             setError(bookingError);
         }
-    }, [bookingStatus]);
+    }, [bookingStatus, dispatch, bookingSlice]);
+
+    useEffect(() => {
+        if (bookingStatus === 'fulfilled' && bookingSlice.length > 0) {
+            setBookingList(bookingSlice);
+            setFilteredBookingList(bookingSlice); 
+        }
+    }, [bookingSlice]);
 
     const handleRowClick = (booking: Booking) => {
         console.log('Selected booking:', booking);
@@ -56,6 +64,7 @@ export const BookingPage: React.FC = () => {
             if (result.isConfirmed) {
                 const updatedBookings = bookingList.filter(booking => booking._id !== id);
                 setBookingList(updatedBookings);
+                setFilteredBookingList(updatedBookings); 
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
@@ -67,16 +76,16 @@ export const BookingPage: React.FC = () => {
 
     const filterBookings = (status: string) => {
         if (status === 'All') {
-            setBookingList(bookingSlice);
+            setFilteredBookingList(bookingSlice); 
         } else {
             const filteredBookings = bookingSlice.filter(booking => booking.status === status);
-            setBookingList(filteredBookings);
+            setFilteredBookingList(filteredBookings); 
         }
     };
 
     const handleBookingsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
-        let sortedBookings = [...bookingList];
+        let sortedBookings = [...filteredBookingList];
 
         if (value === 'orderDate') {
             sortedBookings.sort((a, b) => new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime());
@@ -89,7 +98,7 @@ export const BookingPage: React.FC = () => {
         } else {
             sortedBookings.sort((a, b) => a._id - b._id);
         }
-        setBookingList(sortedBookings);
+        setFilteredBookingList(sortedBookings);
     };
 
     const handleClickNewBooking = () => {
@@ -168,10 +177,10 @@ export const BookingPage: React.FC = () => {
                             <option value='checkOut'>Check Out</option>
                         </SelectStyled>
                     </SectionOrder>
-                    {console.log('BookingList being passed to TableComponent:', bookingList)}
+                    {console.log('BookingList being passed to TableComponent:', filteredBookingList)}
                     <TableComponent 
                         columns={bookingsColumns} 
-                        data={bookingList} 
+                        data={filteredBookingList} 
                         onRowClick={handleRowClick} 
                         redirectUrl='/bookingsDetail' 
                     />
