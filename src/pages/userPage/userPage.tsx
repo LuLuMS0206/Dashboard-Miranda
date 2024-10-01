@@ -58,7 +58,7 @@ export const UserPage: React.FC = () => {
         } else if (value === 'name') {
             sortedUsers.sort((a, b) => a.name.localeCompare(b.name));
         } else {
-            sortedUsers.sort((a, b) =>  Number(a.id) - Number(b.id));
+            sortedUsers.sort((a, b) => Number(a.id) - Number(b.id));
         }
 
         setFilteredUsers(sortedUsers);
@@ -87,35 +87,35 @@ export const UserPage: React.FC = () => {
 
     const handleDeleteUser = (userId: string) => {
         Swal.fire({
-            title: "¿Estás seguro?",
-            text: "¡No podrás revertir esto!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, elimínalo"
+            confirmButtonText: "Yes, delete it"
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUser(userId));
                 setFilteredUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-                Swal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
+                Swal.fire("Deleted!", "The user has been deleted.", "success");
             }
         });
     };
 
     const userColumns: Column[] = [
         { 
-            headerColumn: 'Foto', 
+            headerColumn: 'Photo', 
             renderColumn: (rowData: User) => <img src={rowData.foto} alt="User" style={{ width: '50px', height: 'auto' }} /> 
         },
-        { headerColumn: 'Nombre completo', columnsData: 'name' },
-        { headerColumn: 'ID de empleado', columnsData: 'id' },
+        { headerColumn: 'Full Name', columnsData: 'name' },
+        { headerColumn: 'Employee ID', columnsData: 'id' },
         { headerColumn: 'Email', columnsData: 'email' },
-        { headerColumn: 'Fecha de inicio', columnsData: 'startDate' },
-        { headerColumn: 'Descripción', columnsData: 'description' },
-        { headerColumn: 'Contacto', columnsData: 'contact' },
+        { headerColumn: 'Start Date', columnsData: 'startDate' },
+        { headerColumn: 'Description', columnsData: 'description' },
+        { headerColumn: 'Contact', columnsData: 'contact' },
         { 
-            headerColumn: 'Estado', 
+            headerColumn: 'Status', 
             columnsData: 'status', 
             columnRenderer: (row: User) => (
                 <ButtonStyles styled={row.status === 'ACTIVE' ? 'roomAvailable' : 'roomBooked'}>
@@ -124,7 +124,7 @@ export const UserPage: React.FC = () => {
             )
         },
         {
-            headerColumn: 'Acción',
+            headerColumn: 'Action',
             columnsData: 'action',
             columnRenderer: (row: User) => (
                 <>
@@ -141,18 +141,18 @@ export const UserPage: React.FC = () => {
 
     return (
         <NavbarComponent>
-            {userStatus === 'pending' ? <p>Cargando...</p> : userStatus === 'rejected' ? <p>Error al cargar usuarios...</p> :
+            {userStatus === 'pending' ? <p>Loading...</p> : userStatus === 'rejected' ? <p>Error loading users...</p> :
                 <>
                     <SectionOrder>
                         <List>
-                            <ItemList onClick={handleClickAll}>Todos los empleados</ItemList>
-                            <ItemList onClick={handleClickActive}>Empleados activos</ItemList>
-                            <ItemList onClick={handleClickInactive}>Empleados inactivos</ItemList>
+                            <ItemList onClick={handleClickAll}>All Employees</ItemList>
+                            <ItemList onClick={handleClickActive}>Active Employees</ItemList>
+                            <ItemList onClick={handleClickInactive}>Inactive Employees</ItemList>
                         </List>
-                        <ButtonStyles styled='new' onClick={() => navigate('/newUsers')}>+ Nuevo Usuario</ButtonStyles>
+                        <ButtonStyles styled='new' onClick={() => navigate('/newUsers')}>+ New User</ButtonStyles>
                         <SelectStyled onChange={handleSortChange}>
-                            <option value='startDate'>Fecha de inicio</option>
-                            <option value='name'>Nombre completo</option>
+                            <option value='startDate'>Start Date</option>
+                            <option value='name'>Full Name</option>
                         </SelectStyled>
                     </SectionOrder>
                     <TableComponent columns={userColumns} data={filteredUsers} onRowClick={handleRowClick} />

@@ -11,10 +11,9 @@ import { RootState, AppDispatch } from './../../store/store';
 
 export const UserEditPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const dispatch = useDispatch<AppDispatch>(); // Tipo correcto para dispatch
+    const dispatch = useDispatch<AppDispatch>(); 
     const navigate = useNavigate();
     const user = useSelector((state: RootState) => id ? getUserById(state, id) : null);
-
 
     const initialFormData: UserType = {
         id: '',
@@ -50,19 +49,24 @@ export const UserEditPage: React.FC = () => {
         navigate('/users');
     };
 
-
     return (
         <NavbarComponent>
             <FormStyled onSubmit={handleSubmit}>
-                <ButtonStyles styled='backForm' onClick={handleGoTo}><IoArrowBackSharp /></ButtonStyles>
+                <ButtonStyles styled='backForm' onClick={handleGoTo}>
+                    <IoArrowBackSharp />
+                </ButtonStyles>
 
                 {formData.foto && (
                     <div>
-                        <img src={formData.foto} alt={formData.name} style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+                        <img 
+                            src={formData.foto} 
+                            alt={formData.name} 
+                            style={{ width: '150px', height: '150px', borderRadius: '50%' }} 
+                        />
                     </div>
                 )}
                 
-                <LabelFormStyled>Nombre Completo:</LabelFormStyled>
+                <LabelFormStyled>Full Name:</LabelFormStyled>
                 <InputFormStyled
                     type="text"
                     name="name"
@@ -71,7 +75,7 @@ export const UserEditPage: React.FC = () => {
                     required
                 />
 
-                <LabelFormStyled>ID de Empleado:</LabelFormStyled>
+                <LabelFormStyled>Employee ID:</LabelFormStyled>
                 <InputFormStyled
                     type="text"
                     name="id"
@@ -81,7 +85,7 @@ export const UserEditPage: React.FC = () => {
                     readOnly
                 />
 
-                <LabelFormStyled>Fecha de Inicio:</LabelFormStyled>
+                <LabelFormStyled>Start Date:</LabelFormStyled>
                 <InputFormStyled
                     type="date"
                     name="startDate"
@@ -90,7 +94,7 @@ export const UserEditPage: React.FC = () => {
                     required
                 />
 
-                <LabelFormStyled>Descripción:</LabelFormStyled>
+                <LabelFormStyled>Description:</LabelFormStyled>
                 <TextAreaStyled
                     name="description"
                     value={formData.description}
@@ -98,7 +102,7 @@ export const UserEditPage: React.FC = () => {
                     required
                 />
 
-                <LabelFormStyled>Correo Electrónico:</LabelFormStyled>
+                <LabelFormStyled>Email:</LabelFormStyled>
                 <InputFormStyled
                     type="email"
                     name="email"
@@ -107,7 +111,7 @@ export const UserEditPage: React.FC = () => {
                     required
                 />
 
-                <LabelFormStyled>Contacto:</LabelFormStyled>
+                <LabelFormStyled>Contact:</LabelFormStyled>
                 <InputFormStyled
                     type="text"
                     name="contact"
@@ -116,18 +120,18 @@ export const UserEditPage: React.FC = () => {
                     required
                 />
 
-                <LabelFormStyled>Estado:</LabelFormStyled>
+                <LabelFormStyled>Status:</LabelFormStyled>
                 <SelectFormStyled
                     name="status"
                     value={formData.status}
                     onChange={handleChange}
                     required
                 >
-                    <option value="ACTIVE">Activo</option>
-                    <option value="INACTIVE">Inactivo</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
                 </SelectFormStyled>
 
-                <ButtonStyles styled='contact' type="submit">Guardar Cambios</ButtonStyles>
+                <ButtonStyles styled='contact' type="submit">Save Changes</ButtonStyles>
             </FormStyled>
         </NavbarComponent>
     );
