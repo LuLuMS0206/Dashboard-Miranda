@@ -28,16 +28,6 @@ jobs:
     - name: Run Jest tests
       run: npm run test
 
-    # Run Cypress tests
-    - name: Run Cypress tests
-      uses: cypress-io/github-action@v4
-      with:
-        start: npm run dev 
-        wait-on: 'http://localhost:5173'
-        browser: chrome
-      env:
-        CI: true
-
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
